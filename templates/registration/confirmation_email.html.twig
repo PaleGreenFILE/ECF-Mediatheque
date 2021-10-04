@@ -1,0 +1,21 @@
+<h1>Confirmation de votre adresse e-mail !</h1>
+
+<p class="lead">
+    Bonjour et merci pour votre inscription sur le site de la médiathèque de la Chapelle-Curaux, veuillez confirmer votre adresse électronique en cliquant sur le lien suivant :
+    <br><br>
+    <a href="{{ signedUrl }}">Confirmer mon courriel</a>. </br>
+    Ce lien expirera dans
+    <span class="text-bold text-success">
+        {{ expiresAtMessageKey|trans(expiresAtMessageData, 'VerifyEmailBundle') }}.
+    </span>
+</p>
+
+<div class="alert alert-warning">
+<p class="lead">
+    Un agent en charge de la validation d'accès va analyser votre demande très prochainement.
+</p>
+</div>
+
+<p>
+    Sincères Salutations!
+</p>

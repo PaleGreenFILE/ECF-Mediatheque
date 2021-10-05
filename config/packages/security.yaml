@@ -26,6 +26,10 @@ security:
                 path: app_logout
                 # where to redirect after logout
                 # target: app_any_route
+            two_factor:
+                auth_form_path: 2fa_login         # The route name you have used in the routes.yaml
+                check_path: 2fa_login_check       # The route name you have used in the routes.yaml
+                trusted_parameter_name: _trusted  # Name of the parameter for the trusted device option
 
             # activate different ways to authenticate
             # https://symfony.com/doc/current/security.html#firewalls-authentication
@@ -36,5 +40,8 @@ security:
     # Easy way to control access for large sections of your site
     # Note: Only the *first* access control that matches will be used
     access_control:
-        # - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/home, roles: ROLE_USER }
+        - { path: ^/admin, roles: ROLE_ADMIN }
+        - { path: ^/libraire, roles: ROLE_LIBRAIRE }
+        - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }

@@ -4,6 +4,7 @@ namespace App\Entity;
 
 use App\Repository\AdherentRepository;
 use Doctrine\ORM\Mapping as ORM;
+use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
@@ -12,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @ORM\Entity(repositoryClass=AdherentRepository::class)
  * @UniqueEntity(fields={"email"}, message="There is already an account with this email")
  */
-class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
+class Adherent implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
 {
     /**
      * @ORM\Id
@@ -41,6 +42,11 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="string", nullable=true)
+     */
+    private $authCode;
 
     public function getId(): ?int
     {
@@ -142,4 +148,29 @@ class Adherent implements UserInterface, PasswordAuthenticatedUserInterface
 
         return $this;
     }
+
+    public function isEmailAuthEnabled(): bool
+    {
+        return true;
+    }
+
+    public function getEmailAuthRecipient(): string
+    {
+        return $this->email;
+    }
+
+    public function getEmailAuthCode(): string
+    {
+        if (null === $this->authCode) {
+            throw new \LogicException('L\'email de vérification n\'a pas été envoyé.');
+        }
+
+        return $this->authCode;
+    }
+
+    public function setEmailAuthCode(string $authCode): void
+    {
+        $this->authCode = $authCode;
+    }
+
 }

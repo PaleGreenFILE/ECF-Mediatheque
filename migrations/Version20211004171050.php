@@ -20,12 +20,12 @@ final class Version20211004171050 extends AbstractMigration
     public function up(Schema $schema): void
     {
         // this up() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE adherent ADD is_verified TINYINT(1) NOT NULL');
+        $this->addSql('ALTER TABLE user ADD is_verified TINYINT(1) NOT NULL');
     }
 
     public function down(Schema $schema): void
     {
         // this down() migration is auto-generated, please modify it to your needs
-        $this->addSql('ALTER TABLE adherent DROP is_verified');
+        $this->addSql('ALTER TABLE user DROP is_verified');
     }
 }

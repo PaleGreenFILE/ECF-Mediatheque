@@ -23,3 +23,6 @@ trusted_device:
 ```
 </div>
 
+### Choix
+
+Au départ j'ai créé une entity Libraire pour gérer les employés après réflexion cette entity est inutile j'ai décidé de renommé mon entity Adherent en User et et de supprimer l'entity Libraire, un libraire est un User avec un rôle spécifique, je passerai donc un attribut isGranted sur les routes réservés.

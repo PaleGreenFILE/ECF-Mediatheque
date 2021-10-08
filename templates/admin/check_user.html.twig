@@ -1,22 +1,24 @@
-<section class="row container"> <h2 class="my-5 text-danger fw-bold">Liste des utilisateurs non autorisés :</h2>
-	{% for user in users %}
-		{% if not user.isAutorise %}
-			<div class="col-md-3">
-            	<div class="col">
-                    <div class="card h-200 mb-3">
-                        <div class="card-header">
-                            <h2 class="card-title">{{user.prenom}} {{user.nom}}</h2>
-                        </div>
-                        <div class="card-body d-flex align-items-center" style="min-width: 18rem; height: 10rem;">
-                            <p class="card-text">{{user.adresse}}</p>
-                        </div>
-                         <div class="card-footer mt-0 pyt0 d-flex justify-content-between">
-                            <small class="text-muted">{{user.email}}</small>
-                            {# <button href="#" class="btn btn-sm btn-success px-3">Autoriser</button> #}
+{% if is_granted ("ROLE_LIBRAIRE") %}
+    <section class="row container"> <h2 class="my-5 text-danger fw-bold">Liste des utilisateurs non autorisés :</h2>
+        {% for user in users %}
+            {% if not user.isAutorise %}
+                <div class="col-md-3">
+                    <div class="col">
+                        <div class="card h-200 mb-3">
+                            <div class="card-header">
+                                <h2 class="card-title">{{user.prenom}} {{user.nom}}</h2>
+                            </div>
+                            <div class="card-body d-flex align-items-center" style="min-width: 18rem; height: 10rem;">
+                                <p class="card-text">{{user.adresse}}</p>
+                            </div>
+                            <div class="card-footer mt-0 pyt0 d-flex justify-content-between">
+                                <small class="text-muted">{{user.email}}</small>
+                                {# <button href="#" class="btn btn-sm btn-success px-3">Autoriser</button> #}
+                            </div>
                         </div>
                     </div>
                 </div>
-			</div>
-		{% endif %}
-	{% endfor %}
-</section>
+            {% endif %}
+        {% endfor %}
+    </section>
+{% endif %}

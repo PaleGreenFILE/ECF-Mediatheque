@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
@@ -27,9 +28,9 @@ class UserCrudController extends AbstractCrudController
 
             TextField::new('fullName', 'Nom Complet')->hideOnForm()->setColumns('col-12'),
 
-            TextField::new('prenom', "Prénom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
+            TextField::new('prenom', "Prénom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')->hideOnIndex(),
             
-            TextField::new('nom', "Nom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'), 
+            TextField::new('nom', "Nom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')->hideOnIndex(), 
 
             DateField::new('date_naissance', 'Date de naissance')->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
@@ -46,7 +47,7 @@ class UserCrudController extends AbstractCrudController
                 'ROLE_USER' => 'ROLE_ADMIN',
                 'ROLE_LIBRAIRE' => 'ROLE_LIBRAIRE',
                 'ROLE_USER' => 'ROLE_USER',
-            ])->allowMultipleChoices()->setColumns('col-6'),
+            ])->allowMultipleChoices()->setColumns('col-6')->hideOnIndex(),
 
             BooleanField::new('isAutorise', "Autoriser"),
 
@@ -56,9 +57,19 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setDefaultSort(['nom' => 'ASC'])
             ->setPageTitle('index', 'Liste des inscrits')
-            ->setPageTitle('new', fn () => 'Inscription');
-
+            ->setPageTitle('new', fn () => 'Inscription')
+            ->setPageTitle('detail',
+                fn (User $user) => $user->getFullName()
+            );
     }
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->add(Crud::PAGE_INDEX, 'detail');
+    }
+
+    
     
 }

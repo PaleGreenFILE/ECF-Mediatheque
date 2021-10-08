@@ -5,6 +5,8 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Libraire;
 use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -15,6 +17,9 @@ class AdminController extends AbstractDashboardController
 {
     private $userRepository;
     
+    /**
+     * @Route("/admin", name="admin")
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -41,6 +46,7 @@ class AdminController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
+        // yield MenuItem::linkToRoute('Utilisateur non autorisés', 'fas fa-check', 'admin_check_user');
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
     }
 }

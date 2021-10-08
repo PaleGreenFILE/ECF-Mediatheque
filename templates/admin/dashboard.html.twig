@@ -1,50 +1,21 @@
 {% extends '@EasyAdmin/layout.html.twig' %}
 
 {% block content %}
-<section class="row conatiner">
-    <div class="col-12 mb-5">
-        <div class="jumbotron">
-            <h1 class="display-4">Administration</h1>
-            <p class="lead">Bienvenue dans l'interface d'administration de l' ECF-Mediatheque de <b>Studi</b> 2021.</p>
+    <section class="row container">
+        <div class="col-12 mb-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Administration</h1>
+                <p class="lead">Bienvenue dans l'interface d'administration de l' ECF-Mediatheque de <b>Studi</b> 2021.</p>
+            </div>
         </div>
-    </div>
+
     <hr>
 
-    <h2 class="my-5 text-danger fw-bold">Liste des utilisateurs non autorisés :</h2>
-        <d class="col-md-3">
-        {% for user in users %}
-            {% if not user.isAutorise %}
-            <div class="card border border-info p-2">
-                <h1 class="text-center fw-bold mb-2">{{user.prenom}} {{user.nom}}</h1>
-                <ul class="list-group list-group-flush mt-2">
-                    <li class="list-group-item">{{user.adresse}}</li>
-                    <li class="list-group-item">{{user.email}}</li>
-                </ul>
-                <p class="title"></p>
-                <p class="title"></p>
-                <div class="d-flex justify-content-around">
-                    <button type="submit" class="btn btn-success btn-sm w-50 me-1">Autoriser</button> 
-                    <button type="submit" class="btn btn-danger btn-sm w-50 me-1">Interdire</button> 
-                </div>
-            </div>
-                 
-            {% endif %}
-        {% endfor %}
-        {# {% for role in users.roles %}
-            {% if role == 'ROLE_ADMIN' %}
-               Administrateur
-            {% endif %}
-            <br>
-
-            <p>{{app.user.prenom|capitalize}} {{app.user.nom|capitalize}} n'est pas autorisé. </p>
-        {% endfor %} #}
-        </div>
-    </section>
-
-    {#
-        1. Récupérer le nombre d'oeuvre total de la bibliothèque
-        2. Comptabiliser le nombres d'oeuvre prété
-        3. Comptabiliser le nombres d'oeuvre disponible au prêt
-        4. Afficher la liste des adhérents qui sont en retard
-    #}
+    {{ include("admin/check_user.html.twig") }}
+        {#
+            1. Récupérer le nombre d'oeuvre total de la bibliothèque
+            2. Comptabiliser le nombres d'oeuvre prété
+            3. Comptabiliser le nombres d'oeuvre disponible au prêt
+            4. Afficher la liste des adhérents qui sont en retard
+        #}
 {% endblock %}

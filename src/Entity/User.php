@@ -74,6 +74,16 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     private $authCode;
 
+    /**
+     * Retourne le nom compet d'un utilisateur
+     *
+     * @return string
+     */
+    public function getFullName()
+    {
+        return $this->getPrenom().' '.$this->getNom();
+    }
+
     public function getId(): ?int
     {
         return $this->id;

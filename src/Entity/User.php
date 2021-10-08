@@ -24,14 +24,29 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $id;
 
     /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $nom;
+
+    /**
+     * @ORM\Column(type="string", length=50)
+     */
+    private $prenom;
+
+    /**
+     * @ORM\Column(type="date")
+     */
+    private $date_naissance;
+
+    /**
+     * @ORM\Column(type="text")
+     */
+    private $adresse;
+
+    /**
      * @ORM\Column(type="string", length=180, unique=true)
      */
     private $email;
-
-    /**
-     * @ORM\Column(type="json")
-     */
-    private $roles = [];
 
     /**
      * @var string The hashed password
@@ -40,9 +55,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $password;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles = [];
+
+    /**
      * @ORM\Column(type="boolean")
      */
     private $isVerified = false;
+
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $isAutorise;
 
     /**
      * @ORM\Column(type="string", nullable=true)
@@ -172,6 +197,66 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setEmailAuthCode(string $authCode): void
     {
         $this->authCode = $authCode;
+    }
+
+    public function getNom(): ?string
+    {
+        return $this->nom;
+    }
+
+    public function setNom(string $nom): self
+    {
+        $this->nom = $nom;
+
+        return $this;
+    }
+
+    public function getPrenom(): ?string
+    {
+        return $this->prenom;
+    }
+
+    public function setPrenom(string $prenom): self
+    {
+        $this->prenom = $prenom;
+
+        return $this;
+    }
+
+    public function getDateNaissance(): ?\DateTimeInterface
+    {
+        return $this->date_naissance;
+    }
+
+    public function setDateNaissance(\DateTimeInterface $date_naissance): self
+    {
+        $this->date_naissance = $date_naissance;
+
+        return $this;
+    }
+
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+
+    public function getIsAutorise(): ?bool
+    {
+        return $this->isAutorise;
+    }
+
+    public function setIsAutorise(bool $isAutorise): self
+    {
+        $this->isAutorise = $isAutorise;
+
+        return $this;
     }
 
 }

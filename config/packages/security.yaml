@@ -45,3 +45,6 @@ security:
         - { path: ^/libraire, roles: ROLE_LIBRAIRE }
         - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
         - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+
+    role_hierarchy:
+        ROLE_ADMIN: ROLE_USER

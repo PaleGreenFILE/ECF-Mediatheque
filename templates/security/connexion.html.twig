@@ -3,51 +3,79 @@
 
 {% block title %}Connexion{% endblock %}
 
+{% block stylesheets %}
+	<link rel="stylesheet" href="./styles/login.css">
+{% endblock %}
+
 {% block body %}
 
-<form method="post">
-    {% if error %}
-        <div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
-    {% endif %}
+	<section id="connexion">
+		<div class="login-page bg-light rounded">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-12 col-lg-12">
+						<h1 class="mb-3 text-center" data-text="technistore">Médiathèque de Chapelle-Cureaux</h1>
+						<div class="shadow rounded bg-white">
+							<div class="row">
+								<div class="col-md-6">
+									<div class="form-left h-100 py-5 px-5">
+										<form action="" class="row g-4" method="post">
+											{# ? Affichage de l'erreur #}
+											{% if error %}
+												<div class="alert alert-danger">
+													{{ error.messageKey | trans(error.messageData, 'security') }}
+												</div>
+											{% endif %}
 
-    {% if app.user %}
-        <div class="alert alert-warning mb-3">
-            Vous êtes connecté en tant que {{ app.user.username }}, <a href="{{ path('app_logout') }}">se déconnecter</a>
-        </div>
-    {% endif %}
+											<div class="col-12">
+												<label for="email" class="control-label">Email<span class="text-danger">*</span>
+												</label>
+												<div class="input-group">
+													<div class="input-group-text">
+														<i class="bi bi-person-fill"></i>
+													</div>
+													<input type="email" id="inputEmail" name="email" class="form-control" value="{{ last_username }}" placeholder="Entrez votre adresse e-mail" required autofocus>
+												</div>
+											</div>
 
-<div class="row">
-    <h1 class="h3 mb-3 font-weight-normal text-center">Formulaire de connexion</h1>
-    <div class="col-md-6">
-        <label for="inputEmail">Email</label>
-        <input type="email" value="{{ last_username }}" name="email" id="inputEmail" class="form-control" autocomplete="email" placeholder="email@exemple.com" required autofocus>
-    </div>
+											<div class="col-12">
+												<label for="password">Mot de passe<span class="text-danger">*</span>
+												</label>
+												<div class="input-group">
+													<div class="input-group-text">
+														<i class="bi bi-lock-fill"></i>
+													</div>
+													<input type="password" id="inputPassword " class="form-control" name="password" placeholder="Entrez votre mot de passe" required>
+												</div>
+											</div>
 
-    <div class="col-md-6">
-        <label for="inputPassword">Mot de passe</label>
-        <input type="password" name="password" id="inputPassword" class="form-control" autocomplete="current-password" required>
-    </div>
+											<div class="col-12">
+												<button type="submit" class="btn btn-lg btn-outline-success d-block mx-auto mt-4 w-50">
+													<i class="fas fa-sign-in-alt"></i>
+													Connexion
+												</button>
+											</div>
 
-        <input type="hidden" name="_csrf_token"
-            value="{{ csrf_token('authenticate') }}"
-        >
+											{# ! Le csrf token #}
+											<input hidden type="text" name="_csrf_token" value="{{csrf_token('authenticate')}}">
+										</form>
 
-        {#
-            Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
-            See https://symfony.com/doc/current/security/remember_me.html
-
-            <div class="checkbox mb-3">
-                <label>
-                    <input type="checkbox" name="_remember_me"> Remember me
-                </label>
-            </div>
-        #}
-
-        <button class="mt-3 btn btn-outline-success w-50 d-block mx-auto" type="submit">
-            Se connecter
-        </button>
-    </div>
-</div>
-
-</form>
+									</div>
+								</div>
+									<div class="col-md-6 ">
+										<div class="form-right w-100 h-100 perso_bg-primary text-white text-center pt-5" id="right-side">
+											<img class="mx-auto rounded" src="./assets/images/connect-image.jpg" alt="ECF Studi">
+										</div>
+									</div>
+								</div>
+							</div>
+							<i>
+								<p class="text-end text-secondary mt-1 me-1">#ECF Studi 12/2021</p>
+							</i>
+						</div>
+					</div>
+				</div>
+			</div>
+		</section>
+	</form>
 {% endblock %}

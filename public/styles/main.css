@@ -1,0 +1,61 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Dynalight&display=swap');
+
+body {
+    font-family: 'Poppins', sans-serif;
+}
+
+:root {
+    --main-bg-color: #169;
+    --main-dark-color: #8491c7;
+    --main-dark-bg : #171933;
+}
+
+.perso_dark_color {
+    color: var(--main-dark-color);
+}
+
+
+.perso_bg_dark {
+    background-color: var(--main-dark-bg)
+}
+
+.bd-callout {
+    padding: 1.25rem;
+    margin-top: 1.25rem;
+    margin-bottom: 1.25rem;
+    border: 1px solid #eee;
+    border-left-width: .25rem;
+    border-radius: .25rem;
+}
+
+.bd-callout-info {
+    border-left-color: #5bc0de;
+}
+
+.bd-callout-danger {
+    border-left-color: #dc3545;
+}
+
+.bd-callout-warning {
+    border-left-color: #ffc107;
+}
+
+.bd-callout-success {
+    border-left-color: #28a745;
+}
+
+.perso_badge {
+    font-family: 'Dynalight', cursive;
+    display: inline-block;
+    /* padding: .35em .65em; */
+    font-size: .65em;
+    font-weight: 400;
+    color: #fff;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: 4px;
+    line-height: 1.2;
+    background-color:#5bc0de
+}

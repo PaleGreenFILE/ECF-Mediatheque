@@ -1,4 +1,4 @@
-☐ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet
+✔ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet @done(21-10-09 09:43)
 ☐ Alimenter le Trello, Backlog Card si besoin
 
 US1. Créer son compte Utilisateurs concernés: habitant, employé
@@ -12,6 +12,9 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
     ✔ un mot de passe sécurisé résistant aux injections SQL. @done(21-10-08 09:18)
     ✔ isAutorise pour la vérification par l'employé @done(21-10-08 09:24)
     ☐ Un employé devra obligatoirement vérifier les informations entrées. 
+
+    ✔ Design du formulaire de connexion @done(21-10-09 09:42)
+    ☐ Responsive du formulaire de connexion
     S’il décide de confirmer la création du compte, alors l’utilisateur pourra se connecter sur la plateforme.
     
     L'employé aura le même modele de base de donnée mais aura en plus

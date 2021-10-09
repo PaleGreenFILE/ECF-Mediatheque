@@ -1,20 +1,32 @@
 {% extends 'layouts/base.html.twig' %}
 
-{% block title %}Hello HomeController!{% endblock %}
+{% block title %}Accueil{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/papoel/Bureau/ECF/mediatheque/src/Controller/HomeController.php'|file_link(0) }}">src/Controller/HomeController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/papoel/Bureau/ECF/mediatheque/templates/home/index.html.twig'|file_link(0) }}">templates/home/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% if not app.user %}
+	<div class="mt-5 container alert alert-danger text-center">
+		<p class="lead">
+			<span class="fw-bold">Erreur - </span>
+				Vous avez été déconnecté de l'application
+			<a href=" {{path('app_login')}} ">cliquez ici</a>
+			pour vous reconnecter.
+		</p>
+	</div>
+	{% elseif (app.user.isAutorise == false) %}
+		<div
+			style="z-index: 999999999;"
+			class="mt-5 container alert alert-danger shadow"
+			style="height:10rem; position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
+			<p class="lead text-center mt-5" style:"position:absolute; top:auto">
+                Vous n'êtes pas encore autorisé à accèder à l'application. Soyez patient, un administrateur va prochainement valider vos accès.
+            </p>
+            <a class="d-block text-center h4" href=" {{path('app_login')}} ">Se déconnecter.</a>
+		</div>
+	{% else %}
+        <section id="accueil">
+        <h1>
+            Bienvenue {{ app.user.prenom|capitalize }}, nous sommes ravi de vous voir en ce {{ "now"|date("dd") }}
+        </h1>
+        </section>
+    {% endif %}
 {% endblock %}

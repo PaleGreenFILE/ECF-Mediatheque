@@ -12,9 +12,11 @@ class RedirectController extends AbstractController
     #[Route('/access',  methods: 'GET', name:"access")]
     public function redirectAccordingRole(UserInterface $user): Response
     {
-        dd($userRoles = $user->getRoles());
+        // dd($userRoles = $user->getRoles());
 
-        if (in_array("ROLE_ADMIN", $userRoles) && in_array("ROLE_USER", $userRoles))   {
+        $userRoles = $user->getRoles();
+
+        if (in_array("ROLE_ADMIN", $userRoles))   {
             return $this->redirectToRoute('admin');
         } elseif (in_array("ROLE_LIBRAIRE", $userRoles)) {
             return $this->redirectToRoute('libraire');

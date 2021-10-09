@@ -57,7 +57,7 @@ class UserCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
-            ->setDefaultSort(['nom' => 'ASC'])
+            ->setDefaultSort(['isAutorise' => 'ASC'])
             ->setPageTitle('index', 'Liste des inscrits')
             ->setPageTitle('new', fn () => 'Inscription')
             ->setPageTitle('detail',

@@ -18,12 +18,13 @@ class LivreFixtures extends Fixture
         for ($i = 1; $i <= 50 ; $i++) { 
             $livres = [];
             $livre = new Livre();
-            $livre->setTitre($faker->word(4));
+            $livre->setTitre($faker->word(5));
             $livre->setIllustration('https://picsum.photos/360/360');
             $livre->setParution($faker->dateTimeThisCentury());
             $livre->setDescription($faker->paragraph(2, false));
             $livre->setAuteur($faker->firstname() . ' ' . $faker->lastname());
-            $livre->setQuantite($faker->numberBetween(1,50));
+            $livre->setQuantite($faker->numberBetween(0,50));
+            $livre->setIsbn($faker->isbn13());
 
             $manager->persist($livre);
             $livres[] = $livre;

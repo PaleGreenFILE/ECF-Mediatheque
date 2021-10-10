@@ -54,6 +54,11 @@ class Livre
      */
     private $quantite;
 
+    /**
+     * @ORM\Column(type="string", length=13, nullable=true)
+     */
+    private $isbn;
+
     public function __construct()
     {
         $this->genre = new ArrayCollection();
@@ -156,6 +161,18 @@ class Livre
     public function setQuantite(int $quantite): self
     {
         $this->quantite = $quantite;
+
+        return $this;
+    }
+
+    public function getIsbn(): ?string
+    {
+        return $this->isbn;
+    }
+
+    public function setIsbn(?string $isbn): self
+    {
+        $this->isbn = $isbn;
 
         return $this;
     }

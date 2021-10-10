@@ -22,6 +22,11 @@ class LivreController extends AbstractController
     #[Route('/livre', name: 'app_livre')]
     public function index(): Response
     {
+        $user_autorise = $this->getUser()->getIsAutorise();
+        
+        if ($user_autorise == false) {
+            return $this->redirectToRoute('app_home');
+        }
 
         // ? Récupérer tous les livres
         $livres = $this->LivreRepository->findAll();

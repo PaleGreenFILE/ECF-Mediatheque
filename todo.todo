@@ -52,11 +52,11 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
             ☐ Un User
     
     @critical Sécurité:
-        ☐ Sécuriser toutes les routes
+        ✔ Sécuriser toutes les routes
         test:
-            ☐ Un user non autorisé ne peut pas taper /xxx et accèder à la route
-            ☐ /admin réservé aux admin
-            ☐ /libraire réservé au Libraire ou aux Admin
+            ✔ Un user non autorisé ne peut pas taper /xxx et accèder à la route
+            ✔ /admin réservé aux admin
+            ✔ /libraire réservé au Libraire ou aux Admin
 
 
 

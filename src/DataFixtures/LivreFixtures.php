@@ -23,6 +23,7 @@ class LivreFixtures extends Fixture
             $livre->setParution($faker->dateTimeThisCentury());
             $livre->setDescription($faker->paragraph(2, false));
             $livre->setAuteur($faker->firstname() . ' ' . $faker->lastname());
+            $livre->setQuantite($faker->numberBetween(1,50));
 
             $manager->persist($livre);
             $livres[] = $livre;

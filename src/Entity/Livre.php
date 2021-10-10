@@ -49,6 +49,11 @@ class Livre
      */
     private $genre;
 
+    /**
+     * @ORM\Column(type="integer")
+     */
+    private $quantite;
+
     public function __construct()
     {
         $this->genre = new ArrayCollection();
@@ -139,6 +144,18 @@ class Livre
     public function removeGenre(Genre $genre): self
     {
         $this->genre->removeElement($genre);
+
+        return $this;
+    }
+
+    public function getQuantite(): ?int
+    {
+        return $this->quantite;
+    }
+
+    public function setQuantite(int $quantite): self
+    {
+        $this->quantite = $quantite;
 
         return $this;
     }

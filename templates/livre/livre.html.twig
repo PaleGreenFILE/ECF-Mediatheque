@@ -58,9 +58,19 @@
                     </div>
 
                      {# ! Ne pas afficher si Non Disponible #}
-                    <div>
-                        <a class="d-block mx-auto btn btn-outline-success w-50 my-3" href="#">Réserver ce livre</a>
-                    </div>
+                     {% if livre.quantite == 0 %}
+                            <span class="py-3 bg-danger text-uppercase text-center fw-bold text-white"> ce livre n'est plus disponible </span>
+                     {% else %}
+                         
+                        <div class="d-flex justify-content-around">
+                            <button type="button" class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver ce livre
+                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+                                    {{ livre.quantite }}
+                                    <span class="visually-hidden">exemplaire disponible</span>
+                                </span>
+                            </button>
+                        </div>
+                     {% endif %}
 
                 </div>
             </div>

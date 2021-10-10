@@ -9,7 +9,7 @@ use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-class AppFixtures extends Fixture
+class UserFixtures extends Fixture
 {
     private UserPasswordHasherInterface $passwordHasher;
 
@@ -34,6 +34,23 @@ class AppFixtures extends Fixture
         $hash = $this->passwordHasher->hashPassword($user, ('password'));
         $user->setPassword($hash);
         $user->setRoles(['ROLE_ADMIN']);
+        $user->setIsAutorise(1);
+        $user->setIsVerified(1);
+
+        $manager->persist($user);
+        $users[] = $user;
+
+        // ? Le compte Libraire
+        $users = [];
+        $user = new User();
+        $user->setNom('Lavisse');
+        $user->setPrenom('Jean-Baptiste');
+        $user->setDateNaissance(new \DateTime('1980-11-13'));
+        $user->setAdresse('136 bis Faubourg Saint Honoré 59000 Lille');
+        $user->setEmail('libraire@email.fr');
+        $hash = $this->passwordHasher->hashPassword($user, ('password'));
+        $user->setPassword($hash);
+        $user->setRoles(['ROLE_LIBRAIRE']);
         $user->setIsAutorise(1);
         $user->setIsVerified(1);
 

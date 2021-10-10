@@ -1,9 +1,9 @@
 <?php
 
-namespace App\Controller\Admin;
+namespace App\Controller\libraire;
 
 use App\Entity\User;
-use App\Entity\Livre;
+use App\Entity\Libraire;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
@@ -13,24 +13,23 @@ use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
-class AdminController extends AbstractDashboardController
+class LibraireController extends AbstractDashboardController
 {
     private $userRepository;
     
-
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/libraire", name="libraire")
      */
     public function index(): Response
     {
         // return parent::index();
         $users = $this->userRepository->findAll();
 
-        return $this->render('admin/dashboard.html.twig', [
+        return $this->render('libraire/dashboard.html.twig', [
             'users' => $users
         ]);
     }
@@ -44,8 +43,7 @@ class AdminController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToRoute('Utilisateur non autorisés', 'fas fa-check', 'admin_check_user');
+        // yield MenuItem::linkToRoute('Utilisateur non autorisés', 'fas fa-check', 'libraire_check_user');
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Liste des livres', 'fas fa-users', Livre::class);
     }
 }

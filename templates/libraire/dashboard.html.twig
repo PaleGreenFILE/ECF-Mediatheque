@@ -1,0 +1,28 @@
+{% extends '@EasyAdmin/layout.html.twig' %}
+
+{% block stylesheets %}
+	<link rel="stylesheet" href="../public/styles/main.css">
+{% endblock %}
+
+{% block content %}
+    <section class="row container">
+        <div class="col-12 mb-5">
+            <div class="jumbotron">
+                <h1 class="display-4">Libraire</h1>
+                <p class="lead">Bienvenue dans l'interface des employés de l' ECF-Mediatheque de <b>Chapelles-Cureaux</b>.</p>
+            </div>
+            <div class="bd-callout bd-callout-warning">
+                <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quia mollitia magni perspiciatis, sapiente ratione fugit ex. Placeat, exercitationem inventore. Error.</p>
+            </div>
+        </div>
+
+    <hr>
+
+    {{ include("admin/check_user.html.twig") }}
+        {#
+            1. Récupérer le nombre d'oeuvre total de la bibliothèque
+            2. Comptabiliser le nombres d'oeuvre prété
+            3. Comptabiliser le nombres d'oeuvre disponible au prêt
+            4. Afficher la liste des adhérents qui sont en retard
+        #}
+{% endblock %}

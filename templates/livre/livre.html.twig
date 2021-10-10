@@ -1,0 +1,42 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+<section class="container mb-5" id="livre-carte">
+    <div class="row row-cols-1 row-cols-md-3 g-4">
+        {% for livre in livres %}
+            <div class="col">
+                <div class="card h-100 shadow rounded border border-2 border-secondary">
+                    {# <div class="card-header">
+                        <span class="text-center d-block mx-auto text-uppercase">{{livre.titre|capitalize}}</span>
+                    </div> #}
+                    <img 
+                        src="{{ livre.illustration }}" 
+                        class="card-img-top img-fluid p-1" 
+                        alt="{{livre.titre}}" 
+                        height="250"
+                        style="border-radius: 15px;"
+                    >
+                   
+                    <div class="card-body">
+                        {# ! Remplacer livre.parution par isDisponible #}
+                        <h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
+                            {{livre.titre|capitalize}}
+                        </h5>
+                        <p class="card-text lead"> {{livre.description|u.truncate(50, '...')}} </p>
+                    </div>
+
+                    <div class="card-footer d-flex justify-content-between mb-1 p-2">
+                        <span class="text-muted">{{livre.auteur}}</span>
+                        <span class="text-muted">{{livre.parution|date('Y')}}</span>
+                    </div>
+
+                     {# ! Ne pas afficher si Non Disponible #}
+                    <div>
+                        <a class="d-block mx-auto btn btn-outline-success w-50 my-3" href="#">Réserver ce livre</a>
+                    </div>
+
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endblock %}

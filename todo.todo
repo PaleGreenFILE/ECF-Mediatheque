@@ -1,23 +1,63 @@
-✔ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet @done(21-10-09 09:43)
 ☐ Alimenter le Trello, Backlog Card si besoin
+✔ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet
 
 US1. Créer son compte Utilisateurs concernés: habitant, employé
  L’habitant désirant s’inscrire devra renseigner : 
-    ✔ un nom, @done(21-10-08 09:23)
-    ✔ un prénom, @done(21-10-08 09:23)
-    ✔ Role @done(21-10-08 09:20)
-    ✔ un email valide, @done(21-10-08 09:18)
-    ✔ une date de naissance, @done(21-10-08 09:23)
-    ✔ son adresse postale @done(21-10-08 09:23)
-    ✔ un mot de passe sécurisé résistant aux injections SQL. @done(21-10-08 09:18)
-    ✔ isAutorise pour la vérification par l'employé @done(21-10-08 09:24)
-    ☐ Un employé devra obligatoirement vérifier les informations entrées. 
-
-    ✔ Design du formulaire de connexion @done(21-10-09 09:42)
+    ✔ un nom,
+    ✔ un prénom,
+    ✔ Role
+    ✔ L'employé aura le même modele de base de donnée mais aura en plus un rôle Libraire.
+    ✔ un email valide,
+    ✔ une date de naissance,
+    ✔ son adresse postale
+    ✔ un mot de passe sécurisé résistant aux injections SQL.
+    ✔ isAutorise pour la vérification par l'employé
+    ✔ Si un utilisateur n'est pas autorisé lorsqu'il se connecte il aura une alerte
+    ✔ Un employé devra obligatoirement vérifier les informations entrées. 
+    ✔ Design du formulaire de connexion
     ☐ Responsive du formulaire de connexion
-    S’il décide de confirmer la création du compte, alors l’utilisateur pourra se connecter sur la plateforme.
     
-    L'employé aura le même modele de base de donnée mais aura en plus
-    un rôle Libraire. 
+    Livres:
+        ✔ Lister tous les livres
+        ✔ Afficher le nombre de livre Disponible
+        ✔ Afficher si le livre n'est plus disponible (quantité = 0)
+        ☐ Faire une page de recherche par titre ou Auteur (un champ)
+
+    Genres:
+        ✔ Lister tous les genres de livres
+        ✔ Afficher le nombres de livres de ce genre
+        ✔ Si aucun livre dans une catégorie ne pas afficher un lien
+        ✔ Gérer automatiquement le pluriel de "Livre"
+
+    Backlog:
+        ☐ Afficher les genres de livres dans une sidebar plutôt qu'en haut de page
+        ☐ Comment faire une dataFixtures avec une relation (ajouter un genre aux datfixtures livre)
+
+    Emprunter un livre:
+        ☐ Création d'une entity Emprunt
+        ✔ Définir combien de livre un utilisateur peut emprunter
+        ☐ Faire comme un panier (pour voir les livres ajoutés)
+        ☐ Afficher en temps reel le retrait d'un livre
+        ☐ Un utilisateur ne peut pas ajouter plus de livre que la limite définis
+        ☐ Le Libraire prépare la commande et informe par email le User qu'elle est prête
+        ☐ Si à J0+3 après l'envoie du mail la commande n'est pas retiré tous les livres retourne en stock la commande est annulée
+
+    Déploiement:
+        ☐ Heroku
+        ☐ ClearDB (pour une database mySql)
+        ☐ Travailler sur une copie de la database
+        Ajouter à la migration:
+            ☐ Un Admin
+            ☐ Un Libraire
+            ☐ Un User
+    
+    @critical Sécurité:
+        ☐ Sécuriser toutes les routes
+        test:
+            ☐ Un user non autorisé ne peut pas taper /xxx et accèder à la route
+            ☐ /admin réservé aux admin
+            ☐ /libraire réservé au Libraire ou aux Admin
+
+
 
 

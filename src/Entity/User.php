@@ -75,6 +75,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $authCode;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $emprunt_max;
+
+    /**
      * Retourne le nom compet d'un utilisateur
      *
      * @return string
@@ -265,6 +270,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function setIsAutorise(bool $isAutorise): self
     {
         $this->isAutorise = $isAutorise;
+
+        return $this;
+    }
+
+    public function getEmpruntMax(): ?int
+    {
+        return $this->emprunt_max;
+    }
+
+    public function setEmpruntMax(?int $emprunt_max): self
+    {
+        $this->emprunt_max = $emprunt_max;
 
         return $this;
     }

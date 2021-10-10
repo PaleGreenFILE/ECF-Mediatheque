@@ -47,7 +47,8 @@
         "symfony/web-link": "5.3.*",
         "symfony/yaml": "5.3.*",
         "symfonycasts/verify-email-bundle": "^1.5",
-        "twig/extra-bundle": "^2.12|^3.0",
+        "twig/extra-bundle": "^3.3",
+        "twig/intl-extra": "^3.3",
         "twig/twig": "^2.12|^3.0"
     },
     "require-dev": {

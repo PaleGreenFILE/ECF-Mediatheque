@@ -24,8 +24,14 @@
         {% endblock %}
     </head>
     <body>
-        <main role="main">
+     
+        <header>
+			{% include "layouts/partials/_navbar.html.twig" %}
+		</header>
+
+        <main role="main" class="container-fluid">
             {% block body %}{% endblock %}
         </main>
+
     </body>
 </html>

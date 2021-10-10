@@ -4,7 +4,7 @@
 
 {% block body %}
 {% if not app.user %}
-	<div class="mt-5 container alert alert-danger text-center">
+	<div class="mt-5 container-fluid alert alert-danger text-center">
 		<p class="lead">
 			<span class="fw-bold">Erreur - </span>
 				Vous avez été déconnecté de l'application
@@ -23,10 +23,14 @@
             <a class="d-block text-center h4" href=" {{path('app_login')}} ">Se déconnecter.</a>
 		</div>
 	{% else %}
-        <section id="accueil">
-        <h1>
-            Bienvenue {{ app.user.prenom|capitalize }}, nous sommes ravi de vous voir en ce {{ "now"|date("dd") }}
-        </h1>
+        <section id="accueil" class="container mb-3">
+			<h1>
+				Bienvenue {{ app.user.prenom|capitalize }}, nous sommes ravi de vous voir <br />
+				Nous sommes le {{ "now"|format_datetime('full', 'none') }}.
+			</h1>
         </section>
+		<section class="container-fluid mt-5 p-5">
+			<h2>Voici nos dernières oeuvres entrées :</h2>
+		</section>
     {% endif %}
 {% endblock %}

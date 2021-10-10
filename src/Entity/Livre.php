@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\LivreRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -41,6 +43,16 @@ class Livre
      * @ORM\Column(type="string", length=255)
      */
     private $auteur;
+
+    /**
+     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="livres")
+     */
+    private $genre;
+
+    public function __construct()
+    {
+        $this->genre = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -103,6 +115,30 @@ class Livre
     public function setAuteur(string $auteur): self
     {
         $this->auteur = $auteur;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Genre[]
+     */
+    public function getGenre(): Collection
+    {
+        return $this->genre;
+    }
+
+    public function addGenre(Genre $genre): self
+    {
+        if (!$this->genre->contains($genre)) {
+            $this->genre[] = $genre;
+        }
+
+        return $this;
+    }
+
+    public function removeGenre(Genre $genre): self
+    {
+        $this->genre->removeElement($genre);
 
         return $this;
     }

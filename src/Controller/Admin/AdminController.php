@@ -3,6 +3,7 @@
 namespace App\Controller\Admin;
 
 use App\Entity\User;
+use App\Entity\Genre;
 use App\Entity\Livre;
 use App\Repository\UserRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -46,6 +47,7 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
         // yield MenuItem::linkToRoute('Utilisateur non autorisés', 'fas fa-check', 'admin_check_user');
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
-        yield MenuItem::linkToCrud('Liste des livres', 'fas fa-users', Livre::class);
+        yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
+        yield MenuItem::linkToCrud('Genres', 'fas fa-box', Genre::class);
     }
 }

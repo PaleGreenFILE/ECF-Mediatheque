@@ -1,6 +1,32 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block body %}
+
+<section id="genre" class="py-5 text-center container my-3">
+		<div class="row">
+			<div class="col-lg-6 col-md-6 mx-auto">
+				<h1 class="fw-light">Genre</h1>
+				<p class="lead text-muted">Retrouvez nos livres classés par genres</p>
+			</div>
+
+			<ul class="list-group">
+				{% for genre in genres %}
+				<li class="list-group-item d-flex justify-content-between">
+					<li class="list-group-item d-flex justify-content-between align-items-center">
+						<a class="text-dark"
+							href="{{ path('app_show_livre', {'id':genre.id}) }}">
+							{{ genre.nom }}
+						</a>
+							<span class="text-dark fs-6 p-2 badge bg-warning rounded-pill">
+								{{ genre.livres | length }}
+								Livre(s)
+							</span>
+					</li>
+				{% endfor %}
+			</ul>
+		</div>
+	</section>
+
 <section class="container mb-5" id="livre-carte">
     <div class="row row-cols-1 row-cols-md-3 g-4">
         {% for livre in livres %}
@@ -18,6 +44,7 @@
                     >
                    
                     <div class="card-body">
+                        {# <span class="badge badge-sm bg-success">{{livre.genre|capitalize}}</span> #}
                         {# ! Remplacer livre.parution par isDisponible #}
                         <h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
                             {{livre.titre|capitalize}}
@@ -39,4 +66,7 @@
             </div>
         {% endfor %}
     </div>
+</section>
+
+
 {% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+    <section id="genre_select" class="py-5 text-center container">
+        <div class="row py-lg-5">
+            <div class="col-lg-6 col-md-8 mx-auto">
+                <h1 class="fw-light"> {{ genreChoisis }} </h1>
+            </div>
+        </div>
+    </section>
+
+    <section id="livres">
+		<div class="container">
+			<div class="album py-5 bg-light mb-5">
+				<div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3 mx-2">
+					{% for livre in livres %}
+						<div class="col">
+							<div class="card shadow-sm">
+								<div class="card-body">
+									<h5 class="text-center">{{ livre.titre | upper}}</h5>
+                                    <div>
+                                        <p class="text-muted">
+                                            {{ livre.description|raw }}
+                                        </p>
+                                    </div>
+									<div class="d-flex justify-content-between align-items-center">
+										<small class="text-muted">
+											<p class=" date mx-auto">
+												Ecrit en {{ livre.parution | date("Y") }}
+												<span> Par {{ livre.auteur }}</span>
+											</p>
+										</small>
+										{# <div class="btn-group">
+											<a href=" {{ path('show', {'id':livre.id}) }} " class="btn btn-sm btn-outline-warning">Lire</a>
+										</div> #}
+									</div>
+                                    <div>
+                                        <a class="d-block mx-auto btn btn-outline-success w-50 my-3" href="#">Réserver ce livre</a>
+                                    </div>
+								</div>
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+			</div>
+		</div>
+	</section>
+{% endblock %}

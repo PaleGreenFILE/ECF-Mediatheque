@@ -1,0 +1,48 @@
+<nav class="d-flex justify-content-center">
+	<ul class="pagination">
+
+    {% set pages = (total / limit )|round(0, 'ceil') %}
+    {% if (page != 1) %}
+
+        <li class="{{ (page == 1) ? 'disabled page-item' : 'page-item'}}">
+            <a class="page-link" href="?page=1">
+                <i class="fas fa-step-backward text-primary"></i>
+            </a>
+        </li>
+
+        <li class="{{ (page == 1) ? 'disabled page-item' : 'page-item'}}">
+            <a
+                class="page-link"
+                href="{{ (page > 1) ? '?page=' ~ (page - 1) : ''}}">
+                <span aria-hidden="true">&laquo;</span>
+                Précédente
+            </a>
+        </li>
+    {% endif %}
+
+        {% for item in 1..pages %}
+            <li class="{{ (page == item) ? 'page-item active' : 'page-item' }}">
+                <a href="?page={{item}}" class="page-link"> {{item}} </a>
+            </li>
+        {% endfor %}
+
+        {% if page != pages %}
+            <li class="{{ (page == pages) ? 'disabled page-item' : 'page-item'}}">
+                <a
+                    class="page-link"
+                    href="{{ (page < pages) ? '?page=' ~ (page + 1) : ''}}">
+                    Suivante
+                    <span aria-hidden="true">&raquo;</span>
+                </a>
+            </li>
+
+            <li class="{{ (page == pages) ? 'disabled page-item' : 'page-item'}}">
+                <a class="page-link" href="?page={{pages}}">
+                    <i class="fas fa-step-forward text-primary"></i>
+                </a>
+            </li>
+        {% endif %}
+
+
+	</ul>
+</nav>

@@ -2,7 +2,7 @@
 ✔ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet
 
 US1. Créer son compte Utilisateurs concernés: habitant, employé
- L’habitant désirant s’inscrire devra renseigner : 
+ L’habitant désirant s’inscrire devra renseigner :
     ✔ un nom,
     ✔ un prénom,
     ✔ Role
@@ -13,10 +13,10 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
     ✔ un mot de passe sécurisé résistant aux injections SQL.
     ✔ isAutorise pour la vérification par l'employé
     ✔ Si un utilisateur n'est pas autorisé lorsqu'il se connecte il aura une alerte
-    ✔ Un employé devra obligatoirement vérifier les informations entrées. 
+    ✔ Un employé devra obligatoirement vérifier les informations entrées.
     ✔ Design du formulaire de connexion
     ☐ Responsive du formulaire de connexion
-    
+
     Livres:
         ✔ Lister tous les livres
         ✔ Afficher le nombre de livre Disponible
@@ -50,13 +50,24 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
             ☐ Un Admin
             ☐ Un Libraire
             ☐ Un User
-    
+
     @critical Sécurité:
         ✔ Sécuriser toutes les routes
         test:
             ✔ Un user non autorisé ne peut pas taper /xxx et accèder à la route
             ✔ /admin réservé aux admin
             ✔ /libraire réservé au Libraire ou aux Admin
+
+    @Problèmes:
+        Pagination:
+            1. Ma fonction count me renvoie un tableau
+        Solution:
+            Remplacer la ligne
+                return $query->getQuery()->getResult();
+            PAr
+                return $query->getQuery()->getSingleScalarResult();
+
+
 
 
 

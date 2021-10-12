@@ -84,42 +84,8 @@
 						</div>
 					{% endfor %}
 				</div>
-
 			</div>
 		</div>
 	</div>
-	{#
-			<section id="genre" class="py-5 text-center container my-3">
-			<section id="genre" class="py-5 text-center container my-3">
-			    <div class="row">
-			        <div class="col-lg-6 col-md-6 mx-auto">
-			            <h1 class="fw-light">Genre</h1>
-			            <p class="lead text-muted">Retrouvez nos livres classés par genres</p>
-			        </div>
-
-			        <ul class="list-group">
-			            {% for genre in genres %}
-			            <li class="list-group-item d-flex justify-content-between">
-			                <li class="list-group-item d-flex justify-content-between align-items-center">
-			                    {% if (genre.livres|length == 0) %}
-			                        <span class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </span>
-			                    {% else %}
-			                        <a class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </a>
-			                    {% endif %}
-			                    {% if (genre.livres|length == 0) %}
-			                        <span class="text-white px-4 py-2 badge bg-danger rounded-pill text-uppercase">
-			                            Pas de livre
-			                        </span>
-			                    {% else %}
-			                        <span class="text-dark px-4 py-2 badge bg-warning rounded-pill">
-			                            {{ pluriel(genre.livres|length, 'Livre') }}
-			                        </span>
-			                    {% endif %}
-			                </li>
-			            {% endfor %}
-			        </ul>
-			    </div>
-			</section> #}
-
-
-</div>{% endblock %}
+	{% include 'partials/_pagination.html.twig' %}
+{% endblock %}

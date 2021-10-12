@@ -20,7 +20,7 @@ class UserCrudController extends AbstractCrudController
         return User::class;
     }
 
-    
+
     public function configureFields(string $pageName): iterable
     {
         return [
@@ -29,8 +29,8 @@ class UserCrudController extends AbstractCrudController
             TextField::new('fullName', 'Nom Complet')->hideOnForm()->setColumns('col-12'),
 
             TextField::new('prenom', "Prénom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')->hideOnIndex(),
-            
-            TextField::new('nom', "Nom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')->hideOnIndex(), 
+
+            TextField::new('nom', "Nom")->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')->hideOnIndex(),
 
             DateField::new('date_naissance', 'Date de naissance')->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
@@ -42,7 +42,7 @@ class UserCrudController extends AbstractCrudController
 
             TextField::new('password', 'Mot de passe')->onlyWhenCreating()->setColumns('col-6'),
 
-            
+
             ChoiceField::new ('roles')->setChoices([
                 'ROLE_USER' => 'ROLE_ADMIN',
                 'ROLE_LIBRAIRE' => 'ROLE_LIBRAIRE',
@@ -70,6 +70,6 @@ class UserCrudController extends AbstractCrudController
         return $actions->add(Crud::PAGE_INDEX, 'detail');
     }
 
-    
-    
+
+
 }

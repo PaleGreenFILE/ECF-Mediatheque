@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\Livre;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -21,6 +22,8 @@ class LivreCrudController extends AbstractCrudController
     public function configureFields(string $pageName): iterable
     {
         return [
+            IdField::new('id', 'Id')->onlyOnIndex(),
+
             TextField::new('titre')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 

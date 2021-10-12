@@ -5,11 +5,19 @@
 		<div class="row flex-nowrap">
 			<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
 				<div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-dark max-vh-100">
-					<a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
-						<span class="fs-5 d-none d-sm-inline">Menu</span>
-					</a>
+					<p class="lead text-center mx-auto fw-bold">
+						Filtrer
+					</p>
+          {% for genre in genres %}
+            {% if (genre.livres|length != 0) %}
+              <p>
+                <input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}">
+                <label for="genre{{genre.id}}">{{genre.nom}}</label>
+              </p>
+            {% endif %}
+          {% endfor %}
 
-					<ul class="list-group w-100">
+					{# <ul class="list-group w-100">
 						{% for genre in genres %}
 							{% if (genre.livres|length != 0) %}
 								<li class="list-group-item">
@@ -27,7 +35,7 @@
 								</li>
 							{% endif %}
 						{% endfor %}
-					</ul>
+					</ul> #}
 
 					<hr>
 				</div>

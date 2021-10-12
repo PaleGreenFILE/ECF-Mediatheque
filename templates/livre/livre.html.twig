@@ -1,88 +1,117 @@
 {% extends 'layouts/base.html.twig' %}
 
 {% block body %}
+	<div class="container-fluid">
+		<div class="row flex-nowrap">
+			<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+				<div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-dark max-vh-100">
+					<a href="/" class="d-flex align-items-center pb-3 mb-md-0 me-md-auto text-dark text-decoration-none">
+						<span class="fs-5 d-none d-sm-inline">Menu</span>
+					</a>
 
-<section id="genre" class="py-5 text-center container my-3">
-		<div class="row">
-			<div class="col-lg-6 col-md-6 mx-auto">
-				<h1 class="fw-light">Genre</h1>
-				<p class="lead text-muted">Retrouvez nos livres classés par genres</p>
+					<ul class="list-group w-100">
+						{% for genre in genres %}
+							{% if (genre.livres|length != 0) %}
+								<li class="list-group-item">
+									<div class="form-check d-flex justify-content-between">
+										<input class="form-check-input" type="checkbox" value="{{genre.nom}}" id="{{genre.id}}">
+										<label class="form-check-label" for="{{genre.id}}">
+											{{genre.nom}}
+										</label>
+										{% if (genre.livres|length > 0) %}
+											<span class="text-white badge bg-primary">
+												{{ genre.livres|length }}
+											</span>
+										{% endif %}
+									</div>
+								</li>
+							{% endif %}
+						{% endfor %}
+					</ul>
+
+					<hr>
+				</div>
 			</div>
+			<div class="col py-3" id="livres-cartes">
+				<div class="row row-cols-1 row-cols-md-3 g-4">
+					{% for livre in livres %}
+						<div class="col">
+							<div class="card h-100 shadow rounded border border-2 border-secondary">
+								<img src="{{ livre.illustration }}" class="card-img-top img-fluid p-1" alt="{{livre.titre}}" height="250" style="border-radius: 7px;">
 
-			<ul class="list-group">
-				{% for genre in genres %}
-				<li class="list-group-item d-flex justify-content-between">
-					<li class="list-group-item d-flex justify-content-between align-items-center">
-                        {% if (genre.livres|length == 0) %}
-                        	<span class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </span>
-                        {% else %}
-						    <a class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </a>
-                        {% endif %}
-                        {% if (genre.livres|length == 0) %}
-                            <span class="text-white px-4 py-2 badge bg-danger rounded-pill text-uppercase">
-                                Pas de livre
-                            </span> 
-                        {% else %}
-                            <span class="text-dark px-4 py-2 badge bg-warning rounded-pill">
-                                {{ pluriel(genre.livres|length, 'Livre') }}
-                            </span> 
-                        {% endif %}
-					</li>
-				{% endfor %}
-			</ul>
+								<div
+									class="card-body">
+									{# ! Remplacer livre.parution par isDisponible #}
+									<h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
+										{{livre.titre|capitalize}}
+									</h5>
+									<p class="card-text lead">
+										{{livre.description|u.truncate(50, '...')}}
+									</p>
+								</div>
+
+								<div class="card-footer d-flex justify-content-between mb-1 p-2">
+									<span class="text-muted">{{livre.auteur}}</span>
+									<span class="text-muted">{{livre.parution|date('Y')}}</span>
+								</div>
+
+								{# ! Ne pas afficher si Non Disponible #}
+								{% if livre.quantite == 0 %}
+									<span class="py-3 bg-danger text-uppercase text-center fw-bold text-white">
+										ce livre n'est plus disponible
+									</span>
+								{% else %}
+
+									<div class="d-flex justify-content-around">
+										<button type="button" class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver ce livre
+											<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+												{{ livre.quantite }}
+												<span class="visually-hidden">exemplaire disponible</span>
+											</span>
+										</button>
+									</div>
+								{% endif %}
+
+							</div>
+						</div>
+					{% endfor %}
+				</div>
+
+			</div>
 		</div>
-	</section>
+	</div>
+	{#
+			<section id="genre" class="py-5 text-center container my-3">
+			<section id="genre" class="py-5 text-center container my-3">
+			    <div class="row">
+			        <div class="col-lg-6 col-md-6 mx-auto">
+			            <h1 class="fw-light">Genre</h1>
+			            <p class="lead text-muted">Retrouvez nos livres classés par genres</p>
+			        </div>
 
-<section class="container mb-5" id="livre-carte">
-    <div class="row row-cols-1 row-cols-md-3 g-4">
-        {% for livre in livres %}
-            <div class="col">
-                <div class="card h-100 shadow rounded border border-2 border-secondary">
-                    {# <div class="card-header">
-                        <span class="text-center d-block mx-auto text-uppercase">{{livre.titre|capitalize}}</span>
-                    </div> #}
-                    <img 
-                        src="{{ livre.illustration }}" 
-                        class="card-img-top img-fluid p-1" 
-                        alt="{{livre.titre}}" 
-                        height="250"
-                        style="border-radius: 7px;"
-                    >
-                   
-                    <div class="card-body">
-                        {# <span class="badge badge-sm bg-success">{{livre.genre|capitalize}}</span> #}
-                        {# ! Remplacer livre.parution par isDisponible #}
-                        <h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
-                            {{livre.titre|capitalize}}
-                        </h5>
-                        <p class="card-text lead"> {{livre.description|u.truncate(50, '...')}} </p>
-                    </div>
-
-                    <div class="card-footer d-flex justify-content-between mb-1 p-2">
-                        <span class="text-muted">{{livre.auteur}}</span>
-                        <span class="text-muted">{{livre.parution|date('Y')}}</span>
-                    </div>
-
-                     {# ! Ne pas afficher si Non Disponible #}
-                     {% if livre.quantite == 0 %}
-                            <span class="py-3 bg-danger text-uppercase text-center fw-bold text-white"> ce livre n'est plus disponible </span>
-                     {% else %}
-                         
-                        <div class="d-flex justify-content-around">
-                            <button type="button" class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver ce livre
-                                <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
-                                    {{ livre.quantite }}
-                                    <span class="visually-hidden">exemplaire disponible</span>
-                                </span>
-                            </button>
-                        </div>
-                     {% endif %}
-
-                </div>
-            </div>
-        {% endfor %}
-    </div>
-</section>
+			        <ul class="list-group">
+			            {% for genre in genres %}
+			            <li class="list-group-item d-flex justify-content-between">
+			                <li class="list-group-item d-flex justify-content-between align-items-center">
+			                    {% if (genre.livres|length == 0) %}
+			                        <span class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </span>
+			                    {% else %}
+			                        <a class="text-dark" href="{{ path('app_show_livre', {'id':genre.id}) }}"> {{ genre.nom }} </a>
+			                    {% endif %}
+			                    {% if (genre.livres|length == 0) %}
+			                        <span class="text-white px-4 py-2 badge bg-danger rounded-pill text-uppercase">
+			                            Pas de livre
+			                        </span>
+			                    {% else %}
+			                        <span class="text-dark px-4 py-2 badge bg-warning rounded-pill">
+			                            {{ pluriel(genre.livres|length, 'Livre') }}
+			                        </span>
+			                    {% endif %}
+			                </li>
+			            {% endfor %}
+			        </ul>
+			    </div>
+			</section> #}
 
 
-{% endblock %}
+</div>{% endblock %}

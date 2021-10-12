@@ -17,7 +17,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 class AdminController extends AbstractDashboardController
 {
     private $userRepository;
-    
+
 
     public function __construct(UserRepository $userRepository)
     {
@@ -46,9 +46,13 @@ class AdminController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        // yield MenuItem::linkToRoute('Utilisateur non autorisés', 'fas fa-check', 'admin_check_user');
+
+        yield MenuItem::linkToRoute('Site - Home Page', 'fa fa-jedi', 'app_home');
+
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
+
         yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
+
         yield MenuItem::linkToCrud('Genres', 'fas fa-box', Genre::class);
     }
 }

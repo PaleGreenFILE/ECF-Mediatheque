@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
     <span class="navbar-brand mb-0 h1 ms-3">
-        <a class="text-decoration-none text-success" href="{{path('app_home')}}">Médiathèque</a> 
+        <a class="text-decoration-none text-success" href="{{path('app_home')}}">Médiathèque</a>
     </span>
 
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,12 @@
 					{% if is_granted ("ROLE_LIBRAIRE") %}
 						<li class="nav-item">
 							<a class="nav-link" href="#">Ajouter un livre</a>
+						</li>
+					{% endif %}
+
+					{% if is_granted ("ROLE_ADMIN") %}
+						<li class="nav-item">
+							<a class="nav-link" href="admin">Admin</a>
 						</li>
 					{% endif %}
 

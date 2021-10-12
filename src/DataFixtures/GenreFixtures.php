@@ -14,7 +14,7 @@ class GenreFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // ? Création des genres
-        $value = ['Science-Fiction', 'Thriller', 'Horreur', 'Biographie', 'Roman', 'Theatre'];
+        $value = ['Fiction', 'Thriller', 'Horreur', 'Biographie', 'Roman', 'Theatre'];
         for ($i = 1; $i <= count($value); $i++) {
         $genres = [];
         $genre = new Genre();

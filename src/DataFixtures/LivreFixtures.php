@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\Livre;
-use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 
@@ -15,7 +14,7 @@ class LivreFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // ? Le compte Livres
-        for ($i = 1; $i <= 50 ; $i++) { 
+        for ($i = 1; $i <= 50 ; $i++) {
             $livres = [];
             $livre = new Livre();
             $livre->setTitre($faker->word(5));

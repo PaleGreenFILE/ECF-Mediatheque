@@ -7,6 +7,7 @@ use App\Repository\LivreRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class LivreController extends AbstractController
@@ -40,20 +41,35 @@ class LivreController extends AbstractController
         // ? Récupérer le numéro de ma page
         $page = (int)$request->query->get('page', 1);
 
-        // ? Calculer le nombre total de livres
-        $total = (int)$this->LivreRepository->getTotalLivres();
-
         // dd($total);
         // dd($page);
 
-        // ? Récupérer tous les livres
-        // $livres = $this->LivreRepository->findAll();
+        // ? Récupérer les genres pour filtrer
+        $filtres = $request->get("genre");
 
         // ? Récupérer les livres en limitant le nombre d'affichage
-        $livres = $this->LivreRepository->getPaginationLivre($page, $limit);
+        $livres = $this->LivreRepository->getPaginationLivre($page, $limit, $filtres);
+        // dump($livres);
+
+        // ? Calculer le nombre total de livres
+        $total = (int) $this->LivreRepository->getTotalLivres($filtres);
+        // dd($total);
+
 
         // ? Récupérer tous les genres
         $genres = $this->GenreRepository->findAll();
+        // dd($genres);
+
+        // ? Vérifie si j'ai une requete ajax
+        if ($request->get('ajax')) {
+            return new JsonResponse([
+                'content' => $this->renderView('livre/_content_ajax.html.twig', compact(
+                    'livres', 'genres', 'page', 'limit', 'total'
+                ))
+            ]);
+        }
+        // ? Vérifier si j'ai une requête ajax
+
 
         return $this->render('livre/livre.html.twig', [
             'livres' => $livres,

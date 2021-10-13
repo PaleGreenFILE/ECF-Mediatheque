@@ -25,18 +25,18 @@ class Genre
     private $nom;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Livre::class, mappedBy="genre")
+     * @ORM\OneToMany(targetEntity=Livre::class, mappedBy="genre")
      */
     private $livres;
-
-    public function __toString()
-    {
-        return $this->nom;
-    }
 
     public function __construct()
     {
         $this->livres = new ArrayCollection();
+    }
+
+    public function __toString()
+    {
+        return $this->nom;
     }
 
     public function getId(): ?int
@@ -68,7 +68,7 @@ class Genre
     {
         if (!$this->livres->contains($livre)) {
             $this->livres[] = $livre;
-            $livre->addGenre($this);
+            $livre->setGenre($this);
         }
 
         return $this;
@@ -77,7 +77,10 @@ class Genre
     public function removeLivre(Livre $livre): self
     {
         if ($this->livres->removeElement($livre)) {
-            $livre->removeGenre($this);
+            // set the owning side to null (unless already changed)
+            if ($livre->getGenre() === $this) {
+                $livre->setGenre(null);
+            }
         }
 
         return $this;

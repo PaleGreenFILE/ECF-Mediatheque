@@ -45,11 +45,6 @@ class Livre
     private $auteur;
 
     /**
-     * @ORM\ManyToMany(targetEntity=Genre::class, inversedBy="livres")
-     */
-    private $genre;
-
-    /**
      * @ORM\Column(type="integer")
      */
     private $quantite;
@@ -59,10 +54,10 @@ class Livre
      */
     private $isbn;
 
-    public function __construct()
-    {
-        $this->genre = new ArrayCollection();
-    }
+    /**
+     * @ORM\ManyToOne(targetEntity=Genre::class, inversedBy="livres")
+     */
+    private $genre;
 
     public function getId(): ?int
     {
@@ -129,30 +124,6 @@ class Livre
         return $this;
     }
 
-    /**
-     * @return Collection|Genre[]
-     */
-    public function getGenre(): Collection
-    {
-        return $this->genre;
-    }
-
-    public function addGenre(Genre $genre): self
-    {
-        if (!$this->genre->contains($genre)) {
-            $this->genre[] = $genre;
-        }
-
-        return $this;
-    }
-
-    public function removeGenre(Genre $genre): self
-    {
-        $this->genre->removeElement($genre);
-
-        return $this;
-    }
-
     public function getQuantite(): ?int
     {
         return $this->quantite;
@@ -173,6 +144,18 @@ class Livre
     public function setIsbn(?string $isbn): self
     {
         $this->isbn = $isbn;
+
+        return $this;
+    }
+
+    public function getGenre(): ?Genre
+    {
+        return $this->genre;
+    }
+
+    public function setGenre(?Genre $genre): self
+    {
+        $this->genre = $genre;
 
         return $this;
     }

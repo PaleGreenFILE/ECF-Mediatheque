@@ -45,21 +45,35 @@ class LivreRepository extends ServiceEntityRepository
         // return $query->getQuery()->getResult();
     }
 
-    public function getPaginationLivre($page, $limit)
+    public function getPaginationLivre($page, $limit, $filtres = null)
     {
         $query = $this->createQueryBuilder('l')
-            // ->orderBy('l.id')
-            ->setFirstResult(($page * $limit) - $limit)
-            ->setMaxResults($limit)
+            // ->where('where', 'l.isDisponible = 1')
+            ;
+
+            if ($filtres != null) {
+                $query->andWhere('l.genre IN(:genre)')
+                ->setParameter(':genre', array_values($filtres));
+            }
+
+            $query->orderBy('l.id')
+                ->setFirstResult(($page * $limit) - $limit)
+                ->setMaxResults($limit)
         ;
 
         return $query->getQuery()->getResult();
     }
 
-    public function getTotalLivres()
+    public function getTotalLivres($filtres = null)
     {
         $query = $this->createQueryBuilder('l')
             ->select('COUNT(l)');
+
+        if ($filtres != null) {
+        $query->andWhere('l.genre IN(:genre)')
+            ->setParameter(':genre', array_values($filtres));
+    }
+
 
             return $query->getQuery()->getSingleScalarResult();
     }

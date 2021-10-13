@@ -1,0 +1,40 @@
+{% for livre in livres %}
+	<div class="col">
+		<div class="card h-100 shadow rounded border border-2 border-secondary">
+			<img src="{{ livre.illustration }}" class="card-img-top img-fluid p-1" alt="{{livre.titre}}" height="250" style="border-radius: 7px;">
+
+			<div
+				class="card-body">
+				{# ! Remplacer livre.parution par isDisponible #}
+				<h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
+					{{livre.titre|capitalize}}
+				</h5>
+				<p class="card-text lead">
+					{{livre.description|u.truncate(50, '...')}}
+				</p>
+			</div>
+
+			<div class="card-footer d-flex justify-content-between mb-1 p-2">
+				<span class="text-muted">{{livre.auteur}}</span>
+				<span class="text-muted">{{livre.parution|date('Y')}}</span>
+			</div>
+
+			{# ! Ne pas afficher si Non Disponible #}
+			{% if livre.quantite == 0 %}
+				<span class="py-3 bg-danger text-uppercase text-center fw-bold text-white">
+					ce livre n'est plus disponible
+				</span>
+			{% else %}
+
+				<div class="d-flex justify-content-around">
+					<button type="button" class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver ce livre
+						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
+							{{ livre.quantite }}
+							<span class="visually-hidden">exemplaire disponible</span>
+						</span>
+					</button>
+				</div>
+			{% endif %}
+		</div>
+	</div>
+{% endfor %}

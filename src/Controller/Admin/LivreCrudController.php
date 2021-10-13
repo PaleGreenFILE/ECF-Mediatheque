@@ -2,9 +2,12 @@
 
 namespace App\Controller\Admin;
 
+use App\Entity\Genre;
 use App\Entity\Livre;
-use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IntegerField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
@@ -28,7 +31,9 @@ class LivreCrudController extends AbstractCrudController
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
             AssociationField::new('genre', 'Genre')
-                ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
+                ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')
+                ->setFormTypeOptions(
+                    ['by_reference' => true,]),
 
             DateField::new('parution', 'Date de parution')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
@@ -42,6 +47,26 @@ class LivreCrudController extends AbstractCrudController
             IntegerField::new('quantite', 'Exemplaire')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')
         ];
+    }
+
+    public function configureCrud(Crud $crud): Crud
+    {
+        return $crud
+            ->setDefaultSort(['id' => 'ASC'])
+            ->setPageTitle('index', 'Liste des livres')
+            ->setPageTitle('edit',
+            fn (Livre $livre) => $livre->getTitre())
+
+            ->setPageTitle('new', fn () => 'Ajouter un livre')
+            ->setPageTitle('detail',
+                fn (Livre $livre) => $livre->getTitre()
+            );
+    }
+
+
+    public function configureActions(Actions $actions): Actions
+    {
+        return $actions->add(Crud::PAGE_INDEX, 'detail');
     }
 
 }

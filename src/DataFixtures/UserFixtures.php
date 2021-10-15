@@ -69,7 +69,7 @@ class UserFixtures extends Fixture
             $user->setPassword($this->passwordHasher->hashPassword($user, 'password'));
             $user->setRoles(['ROLE_USER']);
             $user->setIsAutorise($faker->boolean());
-            $user->setIsVerified(1);
+            $user->setIsVerified(0);
 
             $manager->persist($user);
             $users[] = $user;

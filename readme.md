@@ -1,19 +1,19 @@
 # Spécifications technique
 
-### Serveur
+## Serveur
 
 - Version PHP 8.0.x
 - Extension PHP : PDO
 - MariaDB (version 10.4)
 
-### Front
+## Front
 
 - HTML5 (Twig)
 - CSS3
 - Bootstrap
 - Javascript
 
-### Back
+## Back
 
 - Minimum PHP 8.0
 - Symfony (5.3.9)
@@ -59,10 +59,22 @@ git clone https://github.com/Papoel/ECF-Mediatheque
 composer instal
 ```
 
-Une fois le projet instalé il faut créer la base de donnée :
+Une fois le projet installé il faut créer la base de donnée :
 
 ```bash
 symfony console doctrine:database:create
+```
+
+Jouer les migrations :
+
+```bash
+symfony console doctrine:migrations:migrate
+```
+
+Lancer les DataFixtures :
+
+```bash
+symfony console doctrine:fixture:load -n
 ```
 
 Pour la gestion des mails en local vous pouvez utiliser votre mailer habituel, j'utilise personellement `mailhog`.
@@ -71,7 +83,15 @@ Pour la gestion des mails en local vous pouvez utiliser votre mailer habituel, j
 > [INFO]
 > La commande <i>symfony console</i> peut être remplacée dans votre terminal par <i>php bin/console</i> si vous n'utilisez pas le <i>cli symfony</i>
 
-## Lien utiles:
+## Se connecter à l'application
+
+|email   |mot de passe   |
+|---|---|
+| admin@email.fr  |  password |
+| libraire@email.fr  |  password |
+| user{x}@email.fr  |  password |
+
+## Lien utiles
 
 Dans cette section je met à disposition tous ce dont je me suis appuyé pour réaliser cette application :
 

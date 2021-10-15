@@ -30,6 +30,9 @@ class LivreCrudController extends AbstractCrudController
             TextField::new('titre')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
+            TextField::new('isbn')
+                ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
+
             AssociationField::new('genre', 'Genre')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')
                 ->setFormTypeOptions(
@@ -45,7 +48,7 @@ class LivreCrudController extends AbstractCrudController
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
             IntegerField::new('quantite', 'Exemplaire')
-                ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')
+                ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
         ];
     }
 

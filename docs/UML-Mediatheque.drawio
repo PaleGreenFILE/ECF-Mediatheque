@@ -1,0 +1,65 @@
+<mxfile host="65bd71144e">
+    <diagram id="C5RBs43oDa-KdzZeNtuy" name="Page-1">
+        <mxGraphModel dx="1086" dy="790" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+            <root>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="WIyWlLk6GJQsqaUBKTNV-1" parent="WIyWlLk6GJQsqaUBKTNV-0"/>
+                <mxCell id="zkfFHV4jXpPFQw0GAbJ--0" value="User" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="60" y="10" width="160" height="210" as="geometry">
+                        <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="zkfFHV4jXpPFQw0GAbJ--1" value="    +Id (AI)&#10;    +Prenom (string)&#10;    +Nom (string)&#10;    +Date_naissance (date)&#10;    +Adresse (string)&#10;    +Email (string)&#10;    +Password (string)&#10;    +Role (array)&#10;    +isVerified (bool)&#10;    +isAutorise (bool)&#10;    +authCode (string)&#10;    +emprunt_max (int)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="zkfFHV4jXpPFQw0GAbJ--0" vertex="1">
+                    <mxGeometry y="26" width="160" height="184" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-19" style="edgeStyle=orthogonalEdgeStyle;rounded=0;sketch=0;jumpStyle=gap;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.5;entryY=1;entryDx=0;entryDy=0;shadow=0;fontFamily=Verdana;fontSize=14;fontColor=default;endArrow=classic;endFill=1;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;strokeWidth=1;fillColor=#e51400;strokeColor=#B20000;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YXaPY6qXGY7zq1wlbJ5o-0" target="YXaPY6qXGY7zq1wlbJ5o-17" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-0" value="Livre" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="60" y="450" width="160" height="250" as="geometry">
+                        <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-1" value="    +Titre (string)&#10;    +Isbn (string 13)&#10;    +Illustration (string)&#10;    +date_parution (date)&#10;    +Genre (string)&#10;    +Exemplaire (integer)&#10;    +isDisiponible (bool)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="YXaPY6qXGY7zq1wlbJ5o-0" vertex="1">
+                    <mxGeometry y="26" width="160" height="220" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-5" value="Emprunt" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="510" y="290" width="220" height="130" as="geometry">
+                        <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-6" value="    +id_User (ManyToOne)&#10;    +id_Livre (OneToOne)&#10;    +Date_emprunt (date)&#10;    +Retour_prevue (date)&#10;    +is_restitue (bool)&#10;    +Status (array)&#10;" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="YXaPY6qXGY7zq1wlbJ5o-5" vertex="1">
+                    <mxGeometry y="26" width="220" height="104" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-8" value="" style="endArrow=none;shadow=0;strokeWidth=1;rounded=0;endFill=0;edgeStyle=elbowEdgeStyle;elbow=vertical;dashed=1;exitX=0.471;exitY=0.05;exitDx=0;exitDy=0;startArrow=none;exitPerimeter=0;entryX=1.025;entryY=0.255;entryDx=0;entryDy=0;entryPerimeter=0;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YXaPY6qXGY7zq1wlbJ5o-11" target="zkfFHV4jXpPFQw0GAbJ--1" edge="1">
+                    <mxGeometry x="0.5" y="41" relative="1" as="geometry">
+                        <mxPoint x="530" y="388" as="sourcePoint"/>
+                        <mxPoint x="250" y="83" as="targetPoint"/>
+                        <mxPoint x="-40" y="32" as="offset"/>
+                        <Array as="points">
+                            <mxPoint x="330" y="83"/>
+                            <mxPoint x="370" y="80"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="7M5gZ5Lq1BfUcmqZ4kjH-0" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;entryX=0.618;entryY=0.023;entryDx=0;entryDy=0;entryPerimeter=0;dashed=1;" parent="WIyWlLk6GJQsqaUBKTNV-1" source="YXaPY6qXGY7zq1wlbJ5o-11" target="YXaPY6qXGY7zq1wlbJ5o-5" edge="1">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-11" value="Fais 1 ou n emprunt" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#BD7000;fillColor=#F0A30A;fontSize=14;fontFamily=Verdana;fontColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="510" y="130" width="140" height="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-17" value="Genre" style="swimlane;fontStyle=2;align=center;verticalAlign=top;childLayout=stackLayout;horizontal=1;startSize=26;horizontalStack=0;resizeParent=1;resizeLast=0;collapsible=1;marginBottom=0;rounded=0;shadow=0;strokeWidth=1;fillColor=#d80073;strokeColor=#A50040;fontColor=#ffffff;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="60" y="240" width="160" height="100" as="geometry">
+                        <mxRectangle x="230" y="140" width="160" height="26" as="alternateBounds"/>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-18" value="    +Id (AI)&#10;    +name (string)&#10;    +livres (ManyToMany)" style="text;align=left;verticalAlign=top;spacingLeft=4;spacingRight=4;overflow=hidden;rotatable=0;points=[[0,0.5],[1,0.5]];portConstraint=eastwest;" parent="YXaPY6qXGY7zq1wlbJ5o-17" vertex="1">
+                    <mxGeometry y="26" width="160" height="74" as="geometry"/>
+                </mxCell>
+                <mxCell id="YXaPY6qXGY7zq1wlbJ5o-20" value="&lt;span style=&quot;font-family: &amp;#34;helvetica&amp;#34; ; font-size: 11px ; background-color: rgb(240 , 163 , 10)&quot;&gt;&lt;b&gt;Un livre a 1 ou n genres&lt;/b&gt;&lt;/span&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=#BD7000;fillColor=#F0A30A;fontSize=14;fontFamily=Verdana;fontColor=#000000;" parent="WIyWlLk6GJQsqaUBKTNV-1" vertex="1">
+                    <mxGeometry x="70" y="380" width="140" height="20" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

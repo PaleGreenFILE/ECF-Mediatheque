@@ -22,10 +22,13 @@ class ShowLivresController extends AbstractController
     #[Route('/voir-les-livres/{id}', name: 'app_show_livre')]
     public function showLivres(?Genre $genre): Response
     {
-        $user_autorise = $this->getUser()->getIsAutorise();
-        
-        if ($user_autorise == false) {
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('app_home');
+        } else {
+             $user_autorise = $this->getUser()->getIsAutorise();
+             if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+             }
         }
         
         // ? Tester si le N° de genre existe

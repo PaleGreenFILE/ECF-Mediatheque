@@ -27,16 +27,20 @@ class LivreController extends AbstractController
         // Filtre des livres dans un interval de dates -- TEST
         // dd($livres = $this->LivreRepository->selectDateInterval("1980-01-01", "1995-01-01"));
 
-        $user_autorise = $this->getUser()->getIsAutorise();
-
-        if ($user_autorise == false) {
+       
+        if ($this->getUser() == null) {
             return $this->redirectToRoute('app_home');
+        } else {
+             $user_autorise = $this->getUser()->getIsAutorise();
+             if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+             }
         }
 
         // * Pagination
 
         // ? Définir la limite de livre par page
-        $limit = 5;
+        $limit = 9;
 
         // ? Récupérer le numéro de ma page
         $page = (int)$request->query->get('page', 1);

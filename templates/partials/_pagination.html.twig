@@ -1,3 +1,9 @@
+{# Création des variables perso #}
+{% set queryParams = app.request.query.all %}
+{# On retire page de queryParams et on encode la catégorie => pour la pagination #}
+{# ! Passer dans le href concténation queryStrings pour conserver les catégories cochés de page en page #}
+{% set queryStrings = queryParams|filter((value, key) => key != "page" and key != "ajax")|url_encode %}
+
 <nav class="d-flex justify-content-center">
 	<ul class="pagination">
 
@@ -5,24 +11,26 @@
     {% if (page != 1) %}
 
         <li class="{{ (page == 1) ? 'disabled page-item' : 'page-item'}}">
-            <a class="page-link" href="?page=1">
+            <a  class="page-link" 
+                href="?page=1&{{queryStrings}}">
                 <i class="fas fa-step-backward text-primary"></i>
             </a>
         </li>
 
         <li class="{{ (page == 1) ? 'disabled page-item' : 'page-item'}}">
-            <a
-                class="page-link"
-                href="{{ (page > 1) ? '?page=' ~ (page - 1) : ''}}">
-                <span aria-hidden="true">&laquo;</span>
-                Précédente
+            <a  class="page-link"
+                href="{{ (page > 1) ? '?page=' ~ (page - 1) : ''}}&{{queryStrings}}">
+                <span aria-hidden="true">&laquo;</span>  Précédente
             </a>
         </li>
     {% endif %}
 
         {% for item in 1..pages %}
             <li class="{{ (page == item) ? 'page-item active' : 'page-item' }}">
-                <a href="?page={{item}}" class="page-link"> {{item}} </a>
+                <a  class="page-link"
+                    href="?page={{item}}&{{queryStrings}}" > 
+                    {{item}} 
+                </a>
             </li>
         {% endfor %}
 
@@ -30,14 +38,16 @@
             <li class="{{ (page == pages) ? 'disabled page-item' : 'page-item'}}">
                 <a
                     class="page-link"
-                    href="{{ (page < pages) ? '?page=' ~ (page + 1) : ''}}">
+                    href="{{ (page < pages) ? '?page=' ~ (page + 1) : ''}}&{{queryStrings}}">
                     Suivante
                     <span aria-hidden="true">&raquo;</span>
                 </a>
             </li>
 
             <li class="{{ (page == pages) ? 'disabled page-item' : 'page-item'}}">
-                <a class="page-link" href="?page={{pages}}">
+                <a 
+                    class="page-link" 
+                    href="?page={{pages}}&{{queryStrings}}">
                     <i class="fas fa-step-forward text-primary"></i>
                 </a>
             </li>

@@ -1,5 +1,5 @@
 {% for livre in livres %}
-	<div class="col">
+	<div class="col" id="livre-{{livre.id}}">
 		<div class="card h-100 shadow rounded border border-2 border-secondary">
 			<img src="{{ livre.illustration }}" class="card-img-top img-fluid p-1" alt="{{livre.titre}}" height="250" style="border-radius: 7px;">
 

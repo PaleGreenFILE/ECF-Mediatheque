@@ -17,21 +17,26 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
     ✔ Design du formulaire de connexion
     ☐ Responsive du formulaire de connexion
 
+    Ajax:
+        ✔ Recherche par genre de livre
+        ☐ Recherche par titre ou auteur
+        ☐ Gérer la pagination
     Livres:
         ✔ Lister tous les livres
-        ✔ Afficher le nombre de livre Disponible
+        ☐ Afficher le nombre de livre Disponible
         ✔ Afficher si le livre n'est plus disponible (quantité = 0)
-        ☐ Faire une page de recherche par titre ou Auteur (un champ)
+        ☐ Faire une page de recherche par titre ou Auteur (un champ) <=> (ou en Ajax)
 
     Genres:
         ✔ Lister tous les genres de livres
-        ✔ Afficher le nombres de livres de ce genre
+        ✔ Afficher les livres par genres
         ✔ Si aucun livre dans une catégorie ne pas afficher un lien
         ✔ Gérer automatiquement le pluriel de "Livre"
 
     Backlog:
-        ☐ Afficher les genres de livres dans une sidebar plutôt qu'en haut de page
+        ✔ Afficher les genres de livres dans une sidebar plutôt qu'en haut de page
         ☐ Comment faire une dataFixtures avec une relation (ajouter un genre aux datfixtures livre)
+        ☐ Pagination queryStrings -- Ajax ...
 
     Emprunter un livre:
         ☐ Création d'une entity Emprunt

@@ -1,40 +1,41 @@
-// Chercher le form
-// selectionner input
-// plaver un event listenner sur change Event
-
 window.onload = () => {
-    const formFilter = document.querySelector('#filtre')
-    console.log('Fichier chargé');
+    const FiltersForm = document.querySelector("#filtre");
 
-    // ? Boucler sur les input du formulaire
-    document.querySelectorAll('#filtre input').forEach((input) => {
-        input.addEventListener('change', () => {
-            // ? Récupérer les données du formuaire
-            const form = new FormData(formFilter)
+    // On boucle sur les input
+    document.querySelectorAll("#filtre input").forEach(input => {
+        input.addEventListener("change", () => {
+            // Ici on intercepte les clics
+            // On récupère les données du formulaire
+            const Form = new FormData(FiltersForm);
 
-            // ? Génrér Url de requête ajax
-            const requete = new URLSearchParams();
+            // On fabrique la "queryString"
+            const Params = new URLSearchParams();
 
-            form.forEach((value, key) => {
-                requete.append(key, value);
-            })
+            Form.forEach((value, key) => {
+                Params.append(key, value);
+            });
 
-            // ? Récupérer Url de la page actuelle
-            const url = new URL(window.location.href)
-
-            // ? Exécuter la requête ajax
-            fetch(url.pathname + "?" + requete.toString() + "&ajax=1", {
+            // On récupère l'url active
+            const Url = new URL(window.location.href);
+    
+            // On lance la requête ajax
+            fetch(Url.pathname + "?" + Params.toString() + "&ajax=1", {
                 headers: {
                     "X-Requested-With": "XMLHttpRequest"
                 }
-            }).then(response => response.json()
+            }).then(response => 
+                response.json()
             ).then(data => {
-                // Cibler ma div
-                const contentAjax = document.querySelector("#content")
-                // Remplacer mon contenu
-                contentAjax.innerHTML = data.contentAjax
-            }).catch(error => alert(error))
+                // On va chercher la zone de contenu
+                const content = document.querySelector("#content");
 
-        })
-    })
+                // On remplace le contenu
+                content.innerHTML = data.content;
+
+                // On met à jour l'url
+                history.pushState({}, null, Url.pathname + "?" + Params.toString());
+            }).catch(e => alert(e));
+
+        });
+    });
 }

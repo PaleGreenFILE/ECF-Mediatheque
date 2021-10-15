@@ -46,17 +46,19 @@ Mr X emprunte le livre L'Étranger d'Albert Camus, Le n°d'emprunt sera ISBN-Sto
     /**
      * @ORM\Column(type="string", length=30, nullable=true)
      */
-    private $exemplaireDePret;
+    private $numEmprunt;
     ---
-    public function getExemplaireDePret(): ?string
+    public function getNumEmprunt(): ?string
     {
-        // return $this->exemplaireDePret;
+        // Renvoie ISBN-XX;
+        // A chaque fois qu'un livre est emprunté : quantité = quantite - 1
+        // Quantite = 0 => "LIVRE NON DISPONIBLE"
         return $this->getIsbn().'-'. $this->getQuantite();
     }
 
-    public function setExemplaireDePret(?string $exemplaireDePret): self
+    public function setNumEmprunt(?string $numEmprunt): self
     {
-        $this->exemplaireDePret = $exemplaireDePret;
+        $this->numEmprunt = $numEmprunt;
 
         return $this;
     }

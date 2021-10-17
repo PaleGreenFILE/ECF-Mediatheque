@@ -71,7 +71,10 @@
 
     <div class="{{empruntRestant == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
         <h4 class="jumbotron-heading">
-            {{empruntRestant == 0 ? 'Vous avez emprunter le nombre maximal autorisé.' : 'Emprunt disponible : {{emprunt}} '}} 
+            {{empruntRestant == 0 ? 'Vous avez emprunté le nombre maximal de livres autorisés.' : 'Emprunt disponible : '}} 
+            {% if empruntRestant > 0 %}
+                {{empruntRestant}} 
+            {% endif %}
             {# <span class="h4 ms-2">{{emprunt}}</span> #}
         </h4>
      </div>

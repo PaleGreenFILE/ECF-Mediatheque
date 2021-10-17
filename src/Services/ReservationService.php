@@ -30,13 +30,23 @@ class ReservationService
         $this->UserRepository  = $UserRepository;
     }
 
+    protected function getPanier() : array
+    {
+        return $this->session->get('reservation', []);
+    }
+
+    protected function savePanier(array $reservation)
+    {
+        return $this->session->set('reservation', $reservation);
+    }
+
     public function add(int $id)
     {
         $livre = $this->LivreRepository->find($id);
 
         // 1. Retrouver le panier utilisateur
         // ? 2. Si panier n'existe pas return []
-        $reservation = $this->session->get('reservation', []);
+        $reservation = $this->getPanier();
 
         // ? 3. Voir si le livre ($id) est deja dans le tableau
         if (array_key_exists($id, $reservation)) {
@@ -48,7 +58,7 @@ class ReservationService
         // 3.a Oui => Augmente la quantié
         // 3.b Non => L'ajouter
         // 4. Enregistrer le tableau dans la session
-        $this->session->set('reservation', $reservation);
+        $this->savePanier($reservation);
 
         $curentUserId = $this->security->getUser()->getId();
         /** @var User*/
@@ -74,7 +84,7 @@ class ReservationService
 
         $curentUser->deduitUnEmpruntMax();
    
-        $this->session->set('reservation', $reservation);
+        $this->savePanier($reservation);
 
         // dd($curentUser);
 
@@ -84,16 +94,16 @@ class ReservationService
 
     public function remove(int $id)
     {
-        $reservation = $this->session->get('reservation', []);
+        $reservation = $this->getPanier();
 
         unset($reservation[$id]);
 
-        $this->session->set('reservation', $reservation);
+        $this->savePanier($reservation);
     }
     
     public function decrement(int $id): void
     {
-        $reservation = $this->session->get('reservation', []);
+        $reservation = $this->getPanier();
         /** @var User*/
         $curentUser = $this->security->getUser();
 
@@ -107,7 +117,7 @@ class ReservationService
         
         $curentUser->ajouterUnEmpruntMax();
    
-        $this->session->set('reservation', $reservation);
+        $this->savePanier($reservation);
 
         $this->EntityManagerInterface->flush();
 

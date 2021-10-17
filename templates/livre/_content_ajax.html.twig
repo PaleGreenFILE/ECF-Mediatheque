@@ -5,11 +5,22 @@
 
 			<div
 				class="card-body">
-				{# ! Remplacer livre.parution par isDisponible #}
-				<h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
-					<a class="text-decoration-none text-success h3" href="{{ path('app_detail_livre', {'id': livre.id} ) }}">{{livre.titre|capitalize}}</a>
-					{# {{livre.titre|capitalize}} #}
-				</h5>
+				<div class="d-flex justify-content-between">
+					<h5 class="card-title">
+						<a class="{{livre.quantite > 0 ? 'text-success' : 'text-danger'}} text-decoration-none h3" href="{{ path('app_detail_livre', {'id': livre.id} ) }}">{{livre.titre|capitalize}}</a>
+					</h5>
+					{% if livre.quantite > 0 %}
+						<span>✅</span>
+					{% else %}
+						<span>❌</span>
+					{% endif %}
+				</div>
+				{% if livre.genre is not null %}
+				<span class="badge bg-light text-primary fw-light me-auto">
+					{{livre.genre}}
+				</span>
+				{% endif %}
+				
 				<p class="card-text lead">
 					{{livre.description|u.truncate(50, '...')}}
 				</p>

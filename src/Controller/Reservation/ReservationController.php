@@ -26,8 +26,8 @@ class ReservationController extends AbstractController
         $this->UserRepository  = $UserRepository;
     }
 
-    #[Route('/reservation/livre/{id<[0-9]+>}', name: 'app_reservation')]
-    public function add($id, Livre $livre, ReservationService $reservationService, EntityManagerInterface $em): Response
+    #[Route('/reservation/livre/{id<[0-9]+>}', name: 'add_reservation')]
+    public function add($id, Livre $livre, ReservationService $reservationService, EntityManagerInterface $em, Request $request): Response
     {
         // ? Redirection de l'utilisateur si il n'est pas connecté
         if ($this->getUser() == null) {
@@ -51,6 +51,10 @@ class ReservationController extends AbstractController
 
         $em->flush();
 
+        if ($request->query->get('returnToPanier')) {
+            return $this->redirectToRoute('panier');
+        }
+
         // ! Supprimer la session :
         // $session->remove('reservation');   
 
@@ -64,8 +68,17 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/panier' , name: 'panier')]
-    public function showPanier(SessionInterface $session, ReservationService $reservationService): Response
+    public function showPanier(SessionInterface $session, ReservationService $reservationService, LivreRepository $LivreRepository): Response
     {
+        // ? Redirection de l'utilisateur si il n'est pas connecté
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('app_home');
+        } else {
+             $user_autorise = $this->getUser()->getIsAutorise();
+             if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+             }
+        }
 
         $detailPanier = $reservationService->getDetailReservations();
 
@@ -80,4 +93,59 @@ class ReservationController extends AbstractController
         ]);
     }
 
+    #[Route('/panier/supprimer/{id<[0-9]+>}', name: 'delete_reservation')]
+    public function delete($id, ReservationService $reservationService, LivreRepository $LivreRepository)
+    {
+        // ? Redirection de l'utilisateur si il n'est pas connecté
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('app_home');
+        } else {
+             $user_autorise = $this->getUser()->getIsAutorise();
+             if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+             }
+        }
+
+        // ? Vérifier si le livre existe
+        $livre = $this->LivreRepository->find($id);
+        $livreTitre = $livre->getTitre();
+
+        if (!$livre) {
+            throw $this->createNotFoundException("Le livre $livreTitre n'est pas dans votre panier, il ne peut donc pas être supprimé !");
+        }
+
+        $reservationService->remove($id);
+
+        $this->addFlash('success', 'Le livre ' .$livreTitre. ' a bien été supprimé du panier.');
+
+        return $this->redirectToRoute('panier');
+    }
+
+    #[Route('/panier/decrement/{id<[0-9]+>}', name: 'decrement_reservation')]
+    public function decrement($id, ReservationService $reservationService)
+    {
+        // ? Redirection de l'utilisateur si il n'est pas connecté
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('app_home');
+        } else {
+             $user_autorise = $this->getUser()->getIsAutorise();
+             if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+             }
+        }
+
+        // ? Vérifier si le livre existe
+        $livre = $this->LivreRepository->find($id);
+        $livreTitre = $livre->getTitre();
+
+        if (!$livre) {
+            throw $this->createNotFoundException("Le livre $livreTitre n'est pas dans votre panier, il ne peut donc pas être décrémenté !");
+        }
+
+        $reservationService->decrement($id);
+
+        $this->addFlash('success', 'Le livre a bien été décrémenté du panier.');
+
+        return $this->redirectToRoute('panier');
+    }
 }

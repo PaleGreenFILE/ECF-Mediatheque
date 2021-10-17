@@ -7,6 +7,7 @@ use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
+use App\Controller\Reservation\ReservationItem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationService
@@ -70,10 +71,32 @@ class ReservationService
         }
 
     }
-    
-    public function getEmpruntDisponible(): int
-    {
 
+    public function remove(int $id)
+    {
+        $reservation = $this->session->get('reservation', []);
+
+        unset($reservation[$id]);
+
+        $this->session->set('reservation', $reservation);
+    }
+    
+    public function decrement(int $id): int
+    {
+        $reservation = $this->session->get('reservation', []);
+
+        // if (!array_key_exists($id, $reservation)) {
+        //     continue;
+        // }
+
+        // 1 livre => je supprime
+        if ($reservation[$id] === 1) {
+            $this->remove($id);
+            // return;
+        }
+
+        // Plus d'1 livre => decrement
+        $reservation[$id]--;
     }
 
     public function getDetailReservations():array
@@ -88,10 +111,15 @@ class ReservationService
         foreach($this->session->get('reservation', []) as $id => $quantite){
             $livre = $this->LivreRepository->find($id);
 
+            if (!$livre) {
+               continue;
+            }
+
             $detailPanier[] = [
                 'livre' => $livre,
                 'quantite' => $quantite,
             ];
+
         }
 
         return $detailPanier;

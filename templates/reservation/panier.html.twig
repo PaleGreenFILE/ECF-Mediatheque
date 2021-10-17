@@ -20,6 +20,7 @@
                 <th>Livre</th>
                 <th>Quantite</th>
                 <th></th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -27,12 +28,23 @@
                 <tr class="text-center">
                     <td> <img src="{{item.livre.illustration}}" height="50" width="50" alt="{{item.livre.titre}}"> </td>
                     <td> {{item.livre.titre|capitalize}} </td>	
-                    <td > <span class="text-center">{{item.quantite}}</span> </td>
+                    <td> 
+                    <div class="d-flex justify-content-around">
+                        <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
+                            <i class="fas fa-minus-square"></i> 
+                        </a> 
+                        <span class="text-center">{{item.quantite}}</span> 
+                    </div>
+                    </td>
                     <td>
-                        <div class="d-flex justify-content-around">
-                            <button id="add-one-{id}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> </button> 
-                            <button id="delete-one-{id}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> 
-                        </div>
+                        <a href="{{ path('add_reservation', {'id': item.livre.id}) }}?returnToPanier=true" id="add" class="btn btn-sm btn-success">
+                            <i class="fas fa-plus"></i> 
+                        </a> 
+                    </td>
+                    <td>
+                        <a href="{{ path('delete_reservation', {'id': item.livre.id}) }} " class="btn btn-sm btn-danger">
+                            <i class="fa fa-trash"></i> 
+                        </a> 
                     </td>
                 </tr>
             {% endfor %}

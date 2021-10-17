@@ -48,6 +48,7 @@ class ReservationController extends AbstractController
 
         // ! Injecter le service
         $reservationService->add($id);
+
         $em->flush();
 
         // ! Supprimer la session :
@@ -63,20 +64,14 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/panier' , name: 'panier')]
-    public function showPanier(SessionInterface $session): Response
+    public function showPanier(SessionInterface $session, ReservationService $reservationService): Response
     {
-        $detailPanier = [];
+
+        $detailPanier = $reservationService->getDetailReservations();
 
         $curentUserId = $this->getUser()->getId();
         $user = $this->UserRepository->find($curentUserId);
         $empruntRestant = $user->getEmpruntMax();
-
-        foreach($session->get('reservation', []) as $id => $quantite){
-            $detailPanier[] = [
-                'livre' => $this->LivreRepository->find($id),
-                'quantite' => $quantite,
-            ];
-        }
 
         // dd($detailPanier);
         return $this->render('reservation/panier.html.twig', [

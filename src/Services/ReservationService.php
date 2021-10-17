@@ -11,6 +11,9 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationService
 {
+    protected $session;
+    protected $LivreRepository;
+
     public function __construct(
         SessionInterface $session, 
         LivreRepository $LivreRepository, 
@@ -28,13 +31,6 @@ class ReservationService
 
     public function add(int $id)
     {
-        // * Retour attendu :
-        // Reservation du livre $id 124 + 2 réservations du livre $id 136
-        // [124 => 1, 136 => 2] 
-        // ! Supprimer la session :
-        // $this->session->remove('reservation');  
-        // dd($this->session->get('reservation'));
-
         $livre = $this->LivreRepository->find($id);
 
         // 1. Retrouver le panier utilisateur
@@ -72,7 +68,36 @@ class ReservationService
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('danger', 'Vous ne pouvez pas réserver ce livre, votre limite de réservation est atteinte');
         }
-        
-        
+
     }
+    
+    public function getEmpruntDisponible(): int
+    {
+
+    }
+
+    public function getDetailReservations():array
+    {
+        $detailPanier = [];
+
+        $curentUserId = $this->security->getUser()->getId();
+        $user = $this->UserRepository->find($curentUserId);
+
+        $empruntRestant = $user->getEmpruntMax();
+
+        foreach($this->session->get('reservation', []) as $id => $quantite){
+            $livre = $this->LivreRepository->find($id);
+
+            $detailPanier[] = [
+                'livre' => $livre,
+                'quantite' => $quantite,
+            ];
+        }
+
+        return $detailPanier;
+
+    }
+
+        
+        
 }

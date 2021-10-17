@@ -49,15 +49,14 @@ class ReservationService
         $reservation = $this->getPanier();
 
         // ? 3. Voir si le livre ($id) est deja dans le tableau
-        if (array_key_exists($id, $reservation)) {
+        $curentUserId = $this->security->getUser()->getId();
+
+        if (array_key_exists($id, $reservation) && $this->UserRepository->find($curentUserId)->getEmpruntMax() > 0) {
             $reservation[$id]++;
         } else {
             $reservation[$id] = 1;
         }
 
-        // 3.a Oui => Augmente la quantié
-        // 3.b Non => L'ajouter
-        // 4. Enregistrer le tableau dans la session
         $this->savePanier($reservation);
 
         $curentUserId = $this->security->getUser()->getId();
@@ -66,9 +65,6 @@ class ReservationService
         $user_id = $user->getId();
 
         if ($user->getEmpruntMax() > 0) {
-            // $this->livre->retirerUnExemplaire();
-            // $livre->retirerUnExemplaire();
-            // $user->deduitUnEmpruntMax();
             /** @var FlashBag */
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('success', 'Livre réservé.');
@@ -96,9 +92,26 @@ class ReservationService
     {
         $reservation = $this->getPanier();
 
-        unset($reservation[$id]);
+        /** @var User*/
+        $curentUser = $this->security->getUser();
 
+        $empruntActuel = $curentUser->getEmpruntMax();
+        // dump($empruntActuel);
+
+        $updateEmpruntMax = $empruntActuel + $reservation[$id];
+        // dump($updateEmpruntMax);
+
+        // dd($updateEmpruntMax);
+
+        // dd($this->security->getUser()->setEmpruntMax($updateEmpruntMax));
+        $this->security->getUser()->setEmpruntMax($updateEmpruntMax);
+        $this->EntityManagerInterface->flush();
+
+        unset($reservation[$id]);
+        
         $this->savePanier($reservation);
+        
+
     }
     
     public function decrement(int $id): void

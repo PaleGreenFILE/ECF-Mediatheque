@@ -294,7 +294,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     public function deduitUnEmpruntMax(): self
     {
-        $this->emprunt_max = $this->emprunt_max - 1;
+        if ($this->emprunt_max > 0) {
+            $this->emprunt_max = $this->emprunt_max - 1;
+        }
 
         return $this;
     }

@@ -2,8 +2,9 @@
 
 namespace App\Entity;
 
-use App\Repository\EmpruntRepository;
+use DateTimeImmutable;
 use Doctrine\ORM\Mapping as ORM;
+use App\Repository\EmpruntRepository;
 
 /**
  * @ORM\Entity(repositoryClass=EmpruntRepository::class)
@@ -46,6 +47,11 @@ class Emprunt
      * @ORM\OneToOne(targetEntity=Livre::class, cascade={"persist", "remove"})
      */
     private $livre;
+
+    public function __construct()
+    {
+        $this->EmprunterAt = new DateTimeImmutable();
+    }
 
     public function getId(): ?int
     {

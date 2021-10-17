@@ -3,6 +3,7 @@
 namespace App\Controller\Livre;
 
 use App\Entity\Genre;
+use App\Entity\Livre;
 use App\Repository\GenreRepository;
 use App\Repository\LivreRepository;
 use Symfony\Component\HttpFoundation\Response;
@@ -19,8 +20,8 @@ class ShowLivresController extends AbstractController
         $this->GenreRepository = $GenreRepository;
     }
 
-    #[Route('/voir-les-livres/{id}', name: 'app_show_livre')]
-    public function showLivres(?Genre $genre): Response
+    #[Route('/voir-les-livres-par-genre/{id<[0-9]+>}', name: 'app_show_livre')]
+    public function showLivresByGenre(?Genre $genre): Response
     {
         if ($this->getUser() == null) {
             return $this->redirectToRoute('app_home');
@@ -47,5 +48,30 @@ class ShowLivresController extends AbstractController
             'genreChoisis' => $genreChoisis,
             'genres' => $genres,
         ]);
+    }
+
+    #[Route('/livre/{id<[0-9]+>}', name: 'app_detail_livre')]
+    public function detailLivre($id, ?Livre $livres): Response
+    {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('app_home');
+        } else {
+            $user_autorise = $this->getUser()->getIsAutorise();
+            if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+            }
+        }
+
+        // Vérifier si le livre existe
+        $livre = $this->LivreRepository->find($id);
+
+        if (!$livre) {
+            throw $this->createNotFoundException("Le livre $id n'éxiste pas !...");
+        }
+
+        return $this->render('livre/detail_livre.html.twig', [
+            'livre' => $livre
+        ]);
+
     }
 }

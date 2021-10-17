@@ -1,0 +1,26 @@
+{% extends 'layouts/base.html.twig' %}
+
+{% block body %}
+
+<section class="conatiner">
+	<div class="mt-5 d-flex justify-content-around">
+		<div class="justify-self-center">
+			<img class="mx-auto d-block rounded mt-5" src="{{livre.illustration}}" width="250" alt="">
+			{# <div id="image-right"> #}
+				<h1 class="text-center my-5">{{livre.titre|upper}}</h1>
+				<div class="info d-flex justify-content-around">
+					<h5 class="text-muted">De:
+						{{livre.auteur}}</h5>
+					<h5 class="text-muted">Parut en
+						{{livre.parution|date('Y')}}</h5>
+				</div>
+				<hr>
+				<p class="lead mb-5">{{livre.description|raw}}</p>
+			{# </div> #}
+		</div>
+	</div>
+</section>
+	<br>
+	<a class="d-block mx-auto text-center mt-5 pt-5" href="{{ path('app_livre') }}">Revenir en arriere</a>
+
+{% endblock %}

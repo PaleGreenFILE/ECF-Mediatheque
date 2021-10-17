@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Controller\libraire;
+namespace App\Controller\Libraire;
 
 use App\Entity\User;
 use App\Entity\Livre;

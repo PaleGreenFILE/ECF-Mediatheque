@@ -2,8 +2,11 @@
 
 namespace App\Controller\Livre;
 
+use App\Entity\Livre;
+use App\Entity\User;
 use App\Repository\GenreRepository;
 use App\Repository\LivreRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -72,7 +75,8 @@ class LivreController extends AbstractController
                 ))
             ]);
         }
-        // ? Vérifier si j'ai une requête ajax
+        // ? Passer les livres
+        $Books = $this->LivreRepository->findAll();
 
 
         return $this->render('livre/livre.html.twig', [
@@ -81,6 +85,7 @@ class LivreController extends AbstractController
             'page'   => $page,
             'limit'  => $limit,
             'total'  => $total,
+            'books'  => $Books
         ]);
-    }
+    }    
 }

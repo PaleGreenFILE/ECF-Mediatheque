@@ -1,50 +1,33 @@
 {% extends 'layouts/base.html.twig' %}
 
-{# Création des variables perso #}
+{# ? Création des variables perso #}
 {% set queryParams = app.request.query.all %}
 
 {% block body %}
+
 	<div class="container-fluid">
 		<div class="row flex-nowrap">
-			<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-				<div class="d-flex flex-column align-items-center align-items-sm-start px-2 pt-2 text-dark max-vh-100">
-					<p class="lead text-center mx-auto fw-bold">
-						Filtrer
-					</p>
-					<form id="filtre">
-						{% for genre in genres %}
-							{# {% if (genre.livres|length != 0) %} #}
-							{# Cocher la case Filtre lorsqu'un genre est dispoonible sur la page #}
-							{% if queryParams is not empty and queryParams.genres is defined %}
-								{% set checked = (genre.id in queryParams.genres) ? "checked" : "" %}
-							{% else %}
-								{% set checked = "" %}
-							{% endif %}
+		{# ? Filtre par catégorie #}
 
-								<p id="categorie-{{genre.nom|lower}}">
-									<input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}" {{checked}}>
-									<label for="genre{{genre.id}}">{{genre.nom}}</label>
-								</p>
-							{# {% endif %} #}
-						{% endfor %}
-						<input type="hidden" name="page" value="{{page}}">
-					</form>
-					<hr>
-				</div>
-			</div>
+		<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+			{% include 'livre/_filtre_genre.html.twig' %}
+		</div>
 
+		{# ? Afficher les cartes "Livre" #}
 			<div class="col py-3" id="livres">
-				<div class="row row-cols-1 row-cols-md-2 row-cols-lg-3 g-4" id="content">
+				<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4" id="content">
 					{% include "livre/_content_ajax.html.twig" %}
 				</div>
 			</div>
-
 		</div>
 	</div>
 
+	{# ? Inclure la pagination #}
 	{% include 'partials/_pagination.html.twig' %}
+
 {% endblock %}
 
-{% block javascripts %}
-	<script src="{{ asset('js/filtres.js') }}"></script>
-{% endblock %}
+	{# ? JS pour afficher le résultat des filtres => AJAX #}
+	{% block javascripts %}
+		<script src="{{ asset('js/filtres.js') }}"></script>
+	{% endblock %}

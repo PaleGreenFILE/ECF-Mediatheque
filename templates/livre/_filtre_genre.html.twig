@@ -1,0 +1,22 @@
+<div class="p-5 mt-3 text-dark bg-light">
+	<p class="lead fw-bold text-primary text-uppercase" style="letter-spacing:2px">
+		Filtrer
+	</p>
+	<form id="filtre">
+		{% for genre in genres %}
+			{# Cocher la case Filtre lorsqu'un genre est dispoonible sur la page #}
+			{% if queryParams is not empty and queryParams.genres is defined %}
+				{% set checked = (genre.id in queryParams.genres) ? "checked" : "" %}
+			{% else %}
+				{% set checked = "" %}
+			{% endif %}
+
+			<p id="categorie-{{genre.nom|lower}}">
+				<input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}" {{checked}}>
+				<label for="genre{{genre.id}}">{{genre.nom}}</label>
+			</p>
+		{% endfor %}
+		<input type="hidden" name="page" value="{{page}}">
+	</form>
+	<hr>
+</div>

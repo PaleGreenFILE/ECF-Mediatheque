@@ -34,6 +34,7 @@ class UserFixtures extends Fixture
         $hash = $this->passwordHasher->hashPassword($user, ('password'));
         $user->setPassword($hash);
         $user->setRoles(['ROLE_ADMIN']);
+        $user->setEmpruntMax(999);
         $user->setIsAutorise(1);
         $user->setIsVerified(1);
 
@@ -51,6 +52,7 @@ class UserFixtures extends Fixture
         $hash = $this->passwordHasher->hashPassword($user, ('password'));
         $user->setPassword($hash);
         $user->setRoles(['ROLE_LIBRAIRE']);
+        $user->setEmpruntMax(999);
         $user->setIsAutorise(1);
         $user->setIsVerified(1);
 
@@ -70,6 +72,7 @@ class UserFixtures extends Fixture
             $user->setRoles(['ROLE_USER']);
             $user->setIsAutorise($faker->boolean());
             $user->setIsVerified(0);
+            $user->setEmpruntMax(10);
 
             $manager->persist($user);
             $users[] = $user;

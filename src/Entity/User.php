@@ -291,4 +291,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
         return $this->prenom .' '. $this->nom;
     }
 
+    public function deduitUnEmpruntMax(): self
+    {
+        $this->emprunt_max = $this->emprunt_max - 1;
+
+        return $this;
+    }
+
 }

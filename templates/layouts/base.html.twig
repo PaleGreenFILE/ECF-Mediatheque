@@ -27,6 +27,7 @@
 		</header>
 
         <main role="main" class="container-fluid">
+            {{ include("layouts/partials/_flash_messages.html.twig") }}
             {% block body %}{% endblock %}
         </main>
 

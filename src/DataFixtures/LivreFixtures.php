@@ -18,7 +18,7 @@ class LivreFixtures extends Fixture
             $livres = [];
             $livre = new Livre();
             $livre->setTitre($faker->word(5));
-            $livre->setIllustration('https://picsum.photos/150/150');
+            $livre->setIllustration('https://picsum.photos/400/400');
             $livre->setParution($faker->dateTimeThisCentury());
             $livre->setDescription($faker->paragraph(2, false));
             $livre->setAuteur($faker->firstname() . ' ' . $faker->lastname());

@@ -1,0 +1,39 @@
+{{form_start(form)}}
+
+
+    <div class="row mb-4 mt-3">
+        <div id="marque" class="col-sm-12 col-md-4 col-12">
+            {{ form_row(form.livre) }}
+        </div>
+
+        <div id="type" class="col-sm-12 col-md-4 col-12">
+            {{ form_row(form.user) }}
+        </div>
+
+    </div>
+
+    <div id="dimension" class="row">
+        <div class="col-sm-12 col-md-4 col-12">
+            {{ form_row(form.numEmprunt) }}
+        </div>
+
+        <div id="frequence" class="col-sm-12 col-md-4 col-12">
+            {{ form_row(form.EmprunterAt) }}
+        </div>
+
+        <div id="quantity" class="col-sm-12 col-md-4 col-12">
+            {{ form_row(form.RendreAt) }}
+        </div>
+    </div>
+
+    <hr>
+
+
+    <div class="d-flex justify-content-between">
+        <button type="submit" class="btn btn-outline-success w-50 mb-5 me-1">
+            {{ submitButtonText ?? 'Ajouter le materiel' }}
+        </button>
+         <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-50 mb-5 ms-1">Annuler</a>
+    </div>
+
+{{form_end(form)}}

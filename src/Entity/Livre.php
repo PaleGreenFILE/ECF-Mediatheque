@@ -162,6 +162,13 @@ class Livre
 
     public function __toString()
     {
-        return $this->titre;
+        return $this->titre .' (' .$this->auteur .')';
+    }
+
+    public function retirerUnExemplaire(): self
+    {
+        $this->quantite = $this->quantite - 1;
+
+        return $this;
     }
 }

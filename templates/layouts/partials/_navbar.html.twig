@@ -18,6 +18,9 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#">Rechercher un livre</a>
 					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{path('app_panier')}}">Panier</a>
+					</li>
 
 					{% if is_granted ("ROLE_LIBRAIRE") %}
 						<li class="nav-item">

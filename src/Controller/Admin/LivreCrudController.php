@@ -55,12 +55,17 @@ class LivreCrudController extends AbstractCrudController
     public function configureCrud(Crud $crud): Crud
     {
         return $crud
+            ->setDateFormat('Y')
+
             ->setDefaultSort(['id' => 'ASC'])
+
             ->setPageTitle('index', 'Liste des livres')
+
             ->setPageTitle('edit',
             fn (Livre $livre) => $livre->getTitre())
 
             ->setPageTitle('new', fn () => 'Ajouter un livre')
+
             ->setPageTitle('detail',
                 fn (Livre $livre) => $livre->getTitre()
             );

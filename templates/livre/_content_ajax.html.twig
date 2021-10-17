@@ -1,13 +1,14 @@
 {% for livre in livres %}
 	<div class="col" id="livre-{{livre.id}}">
-		<div class="card h-100 shadow rounded border border-2 border-secondary">
-			<img src="{{ livre.illustration }}" class="card-img-top img-fluid p-1" alt="{{livre.titre}}" height="250" style="border-radius: 7px;">
+		<div class="card shadow rounded border border-2 border-secondary mb-2" style="width-max: 15rem;">
+			<img src="{{ livre.illustration }}" class="card-img img-fluid p-1" alt="{{livre.titre}}" height="50" style="border-radius: 7px;">
 
 			<div
 				class="card-body">
 				{# ! Remplacer livre.parution par isDisponible #}
 				<h5 class="{{livre.parution ? 'text-success text-center' : 'text-danger'}} card-title">
-					{{livre.titre|capitalize}}
+					<a class="text-decoration-none text-success h3" href="{{ path('app_detail_livre', {'id': livre.id} ) }}">{{livre.titre|capitalize}}</a>
+					{# {{livre.titre|capitalize}} #}
 				</h5>
 				<p class="card-text lead">
 					{{livre.description|u.truncate(50, '...')}}
@@ -25,14 +26,19 @@
 					🔒 ce livre n'est plus disponible
 				</span>
 			{% else %}
-
 				<div class="d-flex justify-content-around">
-					<button type="button" class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver ce livre
+					<a 
+						href = {{ path('app_reservation', {'id': livre.id} ) }}
+						class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
 							{{ livre.quantite }}
 							<span class="visually-hidden">exemplaire disponible</span>
 						</span>
-					</button>
+					</a>
+					<a 
+						href ="{{ path('app_reservation', {'id': livre.id}) }}"
+						class="btn btn-sm btn-outline-primary w-25 mx-auto my-3 position-relative">Détail
+					</a>
 				</div>
 			{% endif %}
 		</div>

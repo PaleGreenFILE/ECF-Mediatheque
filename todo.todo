@@ -2,7 +2,7 @@
 ✔ Vérifier les champs de mon entity User et s'assurer que je n'ai que ce qui est demandé dans le sujet
 
 US1. Créer son compte Utilisateurs concernés: habitant, employé
- L’habitant désirant s’inscrire devra renseigner :
+L’habitant désirant s’inscrire devra renseigner :
     ✔ un nom,
     ✔ un prénom,
     ✔ Role
@@ -15,37 +15,54 @@ US1. Créer son compte Utilisateurs concernés: habitant, employé
     ✔ Si un utilisateur n'est pas autorisé lorsqu'il se connecte il aura une alerte
     ✔ Un employé devra obligatoirement vérifier les informations entrées.
     ✔ Design du formulaire de connexion
-    ☐ Responsive du formulaire de connexion
+    ✔ Responsive du formulaire de connexion
 
-    Ajax:
-        ✔ Recherche par genre de livre
-        ☐ Recherche par titre ou auteur
-        ☐ Gérer la pagination
-    Livres:
-        ✔ Lister tous les livres
-        ☐ Afficher le nombre de livre Disponible
-        ✔ Afficher si le livre n'est plus disponible (quantité = 0)
-        ☐ Faire une page de recherche par titre ou Auteur (un champ) <=> (ou en Ajax)
+Ajax:
+    ✔ Recherche par genre de livre
+    ☐ Recherche par titre ou auteur
+    ✔ Gérer la pagination
+Livres:
+    ✔ Lister tous les livres
+    ☐ Afficher le nombre de livre Disponible
+    ✔ Afficher si le livre n'est plus disponible (quantité = 0)
+    ☐ Faire une page de recherche par titre ou Auteur (un champ) <=> (ou en Ajax)
 
-    Genres:
-        ✔ Lister tous les genres de livres
-        ✔ Afficher les livres par genres
-        ✔ Si aucun livre dans une catégorie ne pas afficher un lien
-        ✔ Gérer automatiquement le pluriel de "Livre"
+Genres:
+    ✔ Lister tous les genres de livres
+    ✔ Afficher les livres par genres
+    ✔ Si aucun livre dans une catégorie ne pas afficher un lien
+    ✔ Gérer automatiquement le pluriel de "Livre"
 
-    Backlog:
-        ✔ Afficher les genres de livres dans une sidebar plutôt qu'en haut de page
-        ☐ Comment faire une dataFixtures avec une relation (ajouter un genre aux datfixtures livre)
-        ☐ Pagination queryStrings -- Ajax ...
+Backlog:
+    ✔ Afficher les genres de livres dans une sidebar plutôt qu'en haut de page
+    ☐ Comment faire une dataFixtures avec une relation (ajouter un genre aux datfixtures livre)
+    ☐ Pagination queryStrings -- Ajax ...
 
-    Emprunter un livre:
-        ☐ Création d'une entity Emprunt
+Emprunter un livre:
+        ✔ Création d'une entity Emprunt
         ✔ Définir combien de livre un utilisateur peut emprunter
-        ☐ Faire comme un panier (pour voir les livres ajoutés)
-        ☐ Afficher en temps reel le retrait d'un livre
-        ☐ Un utilisateur ne peut pas ajouter plus de livre que la limite définis
+        ✔ Faire comme un panier (pour voir les livres ajoutés)
+        ✔ Afficher en temps reel le retrait d'un livre
+        ✔ Un utilisateur ne peut pas ajouter plus de livre que la limite définis
         ☐ Le Libraire prépare la commande et informe par email le User qu'elle est prête
         ☐ Si à J0+3 après l'envoie du mail la commande n'est pas retiré tous les livres retourne en stock la commande est annulée
+    L'utilisateur confirme sa demande d'emprunt:
+        ☐ En cliquant sur confirmer la table emprunt est alimentée
+        ☐ la réservation prend le status "En préparation"
+        ☐ Le libraire est avertis
+        ☐ On imagine que le Libaire valide la commande
+        ☐ Le libraire passe la commande au status "Prêt"
+        ☐ Le status "Prêt" déclenche un Email à l'utilmisateur l'informant que sa commande est prête
+    Déclenche un compte a rebours J0-3 jours:
+        Cas 1: L'utilisateur ne vient pas dans les 3 jours:
+            ☐ Réservation annulée tous les livres sont remis a disposition 
+        Cas 2: L'utilisateur vient dans les 3 jours:
+            ☐ Lorsque la commande est retirée le status passe à "Sortie"
+            ☐ Le statut "Sortie" déclenche un compte à rebours (J0 - 3 semaines) (champ $RendreAt)
+    Alerte dépassement de la date de restitution des livres:
+        ☐ A 3 semaines - 1 jour (J0 + 20) mail informant que les livres doivent être rendu dans 24h
+        ☐ Dans le pannel libraire afficher les livres devant rentrer dans les 24h
+        ☐ Si livre non restitué dans le temps impartis envoyé un Email de rappel 
 
     Déploiement:
         ☐ Heroku

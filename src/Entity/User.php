@@ -76,6 +76,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\Positive
      */
     private $emprunt_max;
 
@@ -294,6 +295,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function deduitUnEmpruntMax(): self
     {
         $this->emprunt_max = $this->emprunt_max - 1;
+
+        return $this;
+    }
+
+    public function ajouterUnEmpruntMax(): self
+    {
+        $this->emprunt_max = $this->emprunt_max + 1;
 
         return $this;
     }

@@ -18,16 +18,16 @@ class ReservationService
     public function __construct(
         SessionInterface $session, 
         LivreRepository $LivreRepository, 
-        EntityManagerInterface $em, 
+        EntityManagerInterface $EntityManagerInterface, 
         Security $security,
         UserRepository $UserRepository
     )
     {
         $this->session = $session;
         $this->LivreRepository = $LivreRepository;
-        $this->EntityManagerInterface = $em;
+        $this->EntityManagerInterface = $EntityManagerInterface;
         $this->security = $security;
-        $this->UserRepository  = $UserRepository;;
+        $this->UserRepository  = $UserRepository;
     }
 
     public function add(int $id)
@@ -49,8 +49,6 @@ class ReservationService
         // 3.b Non => L'ajouter
         // 4. Enregistrer le tableau dans la session
         $this->session->set('reservation', $reservation);
-    
-        
 
         $curentUserId = $this->security->getUser()->getId();
         /** @var User*/
@@ -59,8 +57,8 @@ class ReservationService
 
         if ($user->getEmpruntMax() > 0) {
             // $this->livre->retirerUnExemplaire();
-            $livre->retirerUnExemplaire();
-            $user->deduitUnEmpruntMax();
+            // $livre->retirerUnExemplaire();
+            // $user->deduitUnEmpruntMax();
             /** @var FlashBag */
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('success', 'Livre réservé.');
@@ -69,6 +67,18 @@ class ReservationService
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('danger', 'Vous ne pouvez pas réserver ce livre, votre limite de réservation est atteinte');
         }
+
+        $curentUser = $this->security->getUser();
+        
+        // dump($curentUser);
+
+        $curentUser->deduitUnEmpruntMax();
+   
+        $this->session->set('reservation', $reservation);
+
+        // dd($curentUser);
+
+        $this->EntityManagerInterface->flush();
 
     }
 
@@ -81,25 +91,33 @@ class ReservationService
         $this->session->set('reservation', $reservation);
     }
     
-    public function decrement(int $id): int
+    public function decrement(int $id): void
     {
         $reservation = $this->session->get('reservation', []);
+        /** @var User*/
+        $curentUser = $this->security->getUser();
 
-        // if (!array_key_exists($id, $reservation)) {
-        //     continue;
-        // }
 
         // 1 livre => je supprime
         if ($reservation[$id] === 1) {
             $this->remove($id);
-            // return;
+        } else {
+            $reservation[$id]--;
         }
+        
+        $curentUser->ajouterUnEmpruntMax();
+   
+        $this->session->set('reservation', $reservation);
+
+        $this->EntityManagerInterface->flush();
+
 
         // Plus d'1 livre => decrement
-        $reservation[$id]--;
+        // dd($reservation[$id]);
+       
     }
 
-    public function getDetailReservations():array
+    public function getDetailReservations(): array
     {
         $detailPanier = [];
 

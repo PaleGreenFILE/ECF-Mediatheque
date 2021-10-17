@@ -49,8 +49,6 @@ class ReservationController extends AbstractController
         // ! Injecter le service
         $reservationService->add($id);
 
-        $em->flush();
-
         if ($request->query->get('returnToPanier')) {
             return $this->redirectToRoute('panier');
         }

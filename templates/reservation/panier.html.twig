@@ -30,16 +30,20 @@
                     <td> {{item.livre.titre|capitalize}} </td>	
                     <td> 
                     <div class="d-flex justify-content-around">
+                    {% if item.quantite > 1 %}
                         <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
                             <i class="fas fa-minus-square"></i> 
                         </a> 
+                    {% endif %}
                         <span class="text-center">{{item.quantite}}</span> 
                     </div>
                     </td>
                     <td>
+                    {% if empruntRestant %}
                         <a href="{{ path('add_reservation', {'id': item.livre.id}) }}?returnToPanier=true" id="add" class="btn btn-sm btn-success">
                             <i class="fas fa-plus"></i> 
                         </a> 
+                    {% endif %}
                     </td>
                     <td>
                         <a href="{{ path('delete_reservation', {'id': item.livre.id}) }} " class="btn btn-sm btn-danger">
@@ -65,9 +69,9 @@
 
 <section id="Emprunt-restant">
 
-    <div class="{{emprunt == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
+    <div class="{{empruntRestant == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
         <h4 class="jumbotron-heading">
-            {{emprunt == 0 ? 'Vous avez emprunter le nombre maximal autorisé.' : 'Emprunt disponible : {{emprunt}} '}} 
+            {{empruntRestant == 0 ? 'Vous avez emprunter le nombre maximal autorisé.' : 'Emprunt disponible : {{emprunt}} '}} 
             {# <span class="h4 ms-2">{{emprunt}}</span> #}
         </h4>
      </div>

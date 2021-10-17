@@ -19,6 +19,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 class ReservationController extends AbstractController
 {
     private $LivreRepository;
+    private $UserRepository;
 
     function __construct(LivreRepository $LivreRepository, UserRepository $UserRepository)
     {
@@ -27,7 +28,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/reservation/livre/{id<[0-9]+>}', name: 'add_reservation')]
-    public function add($id, Livre $livre, ReservationService $reservationService, EntityManagerInterface $em, Request $request): Response
+    public function add($id, Livre $livre, ReservationService $reservationService, Request $request): Response
     {
         // ? Redirection de l'utilisateur si il n'est pas connecté
         if ($this->getUser() == null) {
@@ -82,12 +83,14 @@ class ReservationController extends AbstractController
 
         $curentUserId = $this->getUser()->getId();
         $user = $this->UserRepository->find($curentUserId);
+
         $empruntRestant = $user->getEmpruntMax();
+        // $empruntRestant = $user->getEmpruntMax();
 
         // dd($detailPanier);
         return $this->render('reservation/panier.html.twig', [
             'items' => $detailPanier,
-            'emprunt' => $empruntRestant
+            'empruntRestant' =>  $empruntRestant
         ]);
     }
 

@@ -5,77 +5,59 @@
 {% endblock %}
 
 {% block body %}
+
 <section class="jumbotron text-center">
     <div class="container">
         <h1 class="jumbotron-heading">VOTRE RESEVERVATION</h1>
      </div>
 </section>
 
-<div class="container mb-4">
-    <div class="row">
-        <div class="col-12">
-            <div class="table-responsive">
-                <table class="table table-striped">
-                    <thead>
-                        <tr>
-                            <th scope="col"> </th>
-                            <th scope="col">Livres</th>
-                            <th scope="col" class="text-center">Quantité</th>
-                            <th> </th>
-                            <th> </th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {# ? Livre 1 #}
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/6c1f75/fff.jpg&text=Livre+1" /> </td>
-                            <td><span class="text-dark">Livre 1</span></td>
-                            <td><input class="form-control text-center" type="text" value="1" /></td>
-                            <td>
-                                <div class="d-flex justify-content-around">
-                                    <button id="add-one-{id}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> </button> 
-                                    <button id="delete-one-{id}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> 
-                                </div>
-                            </td>
-                        </tr>
-                        {# ? Livre 2 #}
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/6c1f75/fff.jpg&text=Livre+2" /> </td>
-                            <td><span class="text-warning-perso">Livre 2</span></td>
-                            <td><input class="form-control text-center" type="text" value="2" /></td>
-                            <td>
-                                <div class="d-flex justify-content-around">
-                                    <button id="add-one-{id}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> </button> 
-                                    <button id="delete-one-{id}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> 
-                                </div>
-                            </td>
-                        </tr>
-                        {# ? Livre 3 #}
-                        <tr>
-                            <td><img src="https://dummyimage.com/50x50/6c1f75/fff.jpg&text=Livre+3" /> </td>
-                            <td><span class="text-warning-perso">Livre 3</span></td>
-                            <td><input class="form-control text-center" type="text" value="3" /></td>
-                            <td>
-                                <div class="d-flex justify-content-around">
-                                    <button id="add-one-{id}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> </button> 
-                                    <button id="delete-one-{id}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> 
-                                </div>
-                            </td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
+<section class="container mt-5" id="detail-reservation">
+    <table class="table">
+        <thead>
+            <tr class="text-center">
+                <th></th>
+                <th>Livre</th>
+                <th>Quantite</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr class="text-center">
+                    <td> <img src="{{item.livre.illustration}}" height="50" width="50" alt="{{item.livre.titre}}"> </td>
+                    <td> {{item.livre.titre|capitalize}} </td>	
+                    <td > <span class="text-center">{{item.quantite}}</span> </td>
+                    <td>
+                        <div class="d-flex justify-content-around">
+                            <button id="add-one-{id}" class="btn btn-sm btn-success"><i class="fas fa-plus"></i> </button> 
+                            <button id="delete-one-{id}" class="btn btn-sm btn-danger"><i class="fa fa-trash"></i> </button> 
+                        </div>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
 
-    <div class="d-flex justify-content-between">
-        <button type="submit" class="btn btn-outline-success w-50 mb-5 me-1">
+<hr class="container my-5 ">
+
+<section id="Boutons">
+    <div class="container d-flex justify-content-around">
+        <button type="submit" class="btn btn-outline-success w-25 mb-5">
             Confirmer la réservation
         </button>
-         <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-50 mb-5 ms-1">Annuler</a>
+         <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-25 mb-5">Annuler</a>
     </div>
+</section>
 
-</div>
-
-
+<section id="Emprunt-restant">
+    <div class="{{emprunt == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
+        <h4 class="jumbotron-heading">
+            {{emprunt == 0 ? 'Vous avez emprunter le nombre maximal autorisé.' : 'Emprunt disponible : {{emprunt}} '}} 
+            {# <span class="h4 ms-2">{{emprunt}}</span> #}
+        </h4>
+     </div>
+</section>
+{# <h5 class="{{livre.quantite != 0 ? 'text-success' : 'text-danger'}} card-title"> #}
 {% endblock %}

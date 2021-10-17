@@ -8,6 +8,7 @@ use App\Entity\Emprunt;
 use App\Form\EmpruntFormType;
 use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
+use App\Services\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -26,7 +27,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/reservation/livre/{id<[0-9]+>}', name: 'app_reservation')]
-    public function add($id, SessionInterface $session, Livre $livre, EntityManagerInterface $em, User $user): Response
+    public function add($id, Livre $livre, ReservationService $reservationService, EntityManagerInterface $em): Response
     {
         // ? Redirection de l'utilisateur si il n'est pas connecté
         if ($this->getUser() == null) {
@@ -40,54 +41,19 @@ class ReservationController extends AbstractController
 
         // ? Vérifier si le livre existe
         $livre = $this->LivreRepository->find($id);
+
         if (!$livre) {
             throw $this->createNotFoundException("Le livre $id n'éxiste pas !...");
         }
+
+        // ! Injecter le service
+        $reservationService->add($id);
+        $em->flush();
 
         // ! Supprimer la session :
         // $session->remove('reservation');   
 
         // ! ##### TEST ######
-        $curentUserId = $this->getUser()->getId();
-        /** @var User*/
-        $user = $this->UserRepository->find($curentUserId);
-        $user_id = $user->getId();
-
-        if ($user->getEmpruntMax() > 0) {
-            $livre->retirerUnExemplaire();
-            $user->deduitUnEmpruntMax();
-            /** @var FlashBag */
-            $flashBag = $session->getBag('flashes');
-            $flashBag->add('success', 'Livre réservé.');
-        } elseif ($user->getEmpruntMax() === 0) {
-            /** @var FlashBag */
-            $flashBag = $session->getBag('flashes');
-            $flashBag->add('danger', 'Vous ne pouvez pas réserver ce livre, votre limite de réservation est atteinte');
-        }
-        
-        $em->flush();
-
-        // ! ##### TEST ######
-
-        // * Retour attendu :
-            // Reservation du livre $id 124 + 2 réservations du livre $id 136
-            // [124 => 1, 136 => 2] 
-
-        // 1. Retrouver le panier utilisateur
-        // ? 2. Si panier n'existe pas return []
-        $reservation = $session->get('reservation', []);
-
-        // ? 3. Voir si le livre ($id) est deja dans le tableau
-        if (array_key_exists($id, $reservation)) {
-            $reservation[$id]++;
-        } else {
-            $reservation[$id] = 1;
-        }
-
-        // 3.a Oui => Augmente la quantié
-        // 3.b Non => L'ajouter
-        // 4. Enregistrer le tableau dans la session
-        $session->set('reservation', $reservation);
 
         // dd($session->get('reservation'));
 
@@ -96,36 +62,26 @@ class ReservationController extends AbstractController
         ]);
     }
 
-    #[Route('/reservation/panier', name: 'app_panier')]
-    public function panier()
+    #[Route('/panier' , name: 'panier')]
+    public function showPanier(SessionInterface $session): Response
     {
-        return $this->render('reservation/panier.html.twig');
-    }
+        $detailPanier = [];
 
-    #[Route('/reservation/test', name: 'test')]
-    public function test(Request $request, EntityManagerInterface $em)
-    {
-        // dd($this->getUser()->getEmpruntMax());
-        $limitLivre = $this->getUser()->getEmpruntMax();
-        
-        $emprunt = new Emprunt();
+        $curentUserId = $this->getUser()->getId();
+        $user = $this->UserRepository->find($curentUserId);
+        $empruntRestant = $user->getEmpruntMax();
 
-        $form = $this->createForm(EmpruntFormType::class, $emprunt);
-
-        $form->handleRequest($request);
-
-        if ($form -> isSubmitted() && $form->isValid()) {
-
-            $em->persist($emprunt);
-            $em->flush();
-
-            $this->addFlash('success', 'Livre réservé avec succès');
-
-            return $this->redirectToRoute('app_livre');
+        foreach($session->get('reservation', []) as $id => $quantite){
+            $detailPanier[] = [
+                'livre' => $this->LivreRepository->find($id),
+                'quantite' => $quantite,
+            ];
         }
 
-        return $this->renderForm('reservation/test.html.twig', [
-            'form' => $form
+        // dd($detailPanier);
+        return $this->render('reservation/panier.html.twig', [
+            'items' => $detailPanier,
+            'emprunt' => $empruntRestant
         ]);
     }
 

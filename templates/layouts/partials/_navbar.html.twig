@@ -18,10 +18,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="#">Rechercher un livre</a>
 					</li>
-					<li class="nav-item">
-						<a class="nav-link" href="{{path('app_panier')}}">Panier</a>
-					</li>
-
 					{% if is_granted ("ROLE_LIBRAIRE") %}
 						<li class="nav-item">
 							<a class="nav-link" href="#">Ajouter un livre</a>
@@ -33,14 +29,12 @@
 							<a class="nav-link" href="admin">Admin</a>
 						</li>
 					{% endif %}
-
 				</ul>
 				<ul class="nav navbar-nav ms-auto">
-					<li>
-						<a class="btn btn-sm btn-outline-danger px-3 m-1 me-5" href="{{path('app_logout')}}">
-							Déconnexion
-						</a>
-					</li>
+					<div class="d-flex justify-content-end">
+						<li><a class="btn btn-sm btn-outline-success px-3 m-1" href="{{path('panier')}}"><i class="fas fa-shopping-cart me-3"></i>Panier</a></li>
+						<li><a class="btn btn-sm btn-outline-danger px-3 m-1 me-5" href="{{path('app_logout')}}">Déconnexion</a></li>
+					</div>
 				</ul>
 			</div>
 		{% endif %}

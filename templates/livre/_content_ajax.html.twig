@@ -40,14 +40,15 @@
 				<div class="d-flex justify-content-around">
 					<a 
 						href = {{ path('app_reservation', {'id': livre.id} ) }}
-						class="btn btn-outline-success w-50 mx-auto my-3 position-relative">Réserver
+						class="btn btn-outline-success w-50 mx-auto my-3 position-relative">
+						<i class="fas fa-cart-plus me-3"></i>Réserver
 						<span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-success">
 							{{ livre.quantite }}
 							<span class="visually-hidden">exemplaire disponible</span>
 						</span>
 					</a>
 					<a 
-						href ="{{ path('app_reservation', {'id': livre.id}) }}"
+						href ="#"
 						class="btn btn-sm btn-outline-primary w-25 mx-auto my-3 position-relative">Détail
 					</a>
 				</div>

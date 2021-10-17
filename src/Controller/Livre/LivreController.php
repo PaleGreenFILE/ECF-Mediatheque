@@ -87,5 +87,6 @@ class LivreController extends AbstractController
             'total'  => $total,
             'books'  => $Books
         ]);
-    }    
+    }
+    
 }

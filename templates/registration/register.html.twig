@@ -12,16 +12,43 @@
     <h1>Inscription</h1>
 
     {{ form_start(registrationForm) }}
-        {{ form_row(registrationForm.prenom) }}
-        {{ form_row(registrationForm.nom) }}
-        {{ form_row(registrationForm.date_naissance) }}
-        {{ form_row(registrationForm.adresse) }}
-        {{ form_row(registrationForm.email) }}
-        {{ form_row(registrationForm.plainPassword) }}
-        {# {{ form_row(registrationForm.password) }} #}
-        {{ form_row(registrationForm.agreeTerms) }}
 
-        <button type="submit" class="btn btn-sm btn-success">S'inscrire</button>
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-6">
+            {{ form_row(registrationForm.prenom) }}
+        </div>
+        <div class="col-sm-6 col-md-6 col-6">
+            {{ form_row(registrationForm.nom) }}
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-6">
+            {{ form_row(registrationForm.email) }}
+        </div>
+        <div class="col-sm-6 col-md-6 col-6">
+            {{ form_row(registrationForm.date_naissance) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-6">
+        {{ form_row(registrationForm.adresse) }}
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6 col-md-6 col-6">
+            {{ form_row(registrationForm.plainPassword) }}
+        </div>
+    </div>
+
+    <div class="col-sm-6 col-md-6 col-6 text-muted">
+        {{ form_row(registrationForm.agreeTerms) }}
+    </div>
+
+    <div class="col-12">
+        <button type="submit" class="mt-3 btn btn-outline-success w-25">S'inscrire</button>
+    </div>
+
     {{ form_end(registrationForm) }}
 </section>
 {% endblock %}

@@ -5,6 +5,7 @@ namespace App\Controller\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use App\Services\ReservationService;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
@@ -26,7 +27,7 @@ class ConfirmationController extends AbstractController
     }
 
     #[Route('/panier/confirmation', name: 'confirmation_reservation')]
-    public function confirmation(ReservationService $Service)
+    public function confirmation(ReservationService $Service, EntityManagerInterface $entityManager, )
     {
 
         $reservation = $Service->getDetailReservations();
@@ -35,7 +36,9 @@ class ConfirmationController extends AbstractController
 
         dd($curentUserName, $curentUserId, $reservation);
 
-        return $this->render('detail_reservation.html.twig', [
+        $reservation = New 
+
+        return $this->render('libraire/detail_reservation.html.twig', [
             'items' => $reservation
         ]);
     }

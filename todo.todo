@@ -55,14 +55,14 @@ Emprunter un livre:
         ☐ Le status "Prêt" déclenche un Email à l'utilmisateur l'informant que sa commande est prête
     Déclenche un compte a rebours J0-3 jours:
         Cas 1: L'utilisateur ne vient pas dans les 3 jours:
-            ☐ Réservation annulée tous les livres sont remis a disposition 
+            ☐ Réservation annulée tous les livres sont remis a disposition
         Cas 2: L'utilisateur vient dans les 3 jours:
             ☐ Lorsque la commande est retirée le status passe à "Sortie"
             ☐ Le statut "Sortie" déclenche un compte à rebours (J0 - 3 semaines) (champ $RendreAt)
     Alerte dépassement de la date de restitution des livres:
         ☐ A 3 semaines - 1 jour (J0 + 20) mail informant que les livres doivent être rendu dans 24h
         ☐ Dans le pannel libraire afficher les livres devant rentrer dans les 24h
-        ☐ Si livre non restitué dans le temps impartis envoyé un Email de rappel 
+        ☐ Si livre non restitué dans le temps impartis envoyé un Email de rappel
 
     Déploiement:
         ☐ Heroku
@@ -73,7 +73,7 @@ Emprunter un livre:
             ☐ Un Libraire
             ☐ Un User
 
-    @critical 
+    @critical
     Sécurité:
         ✔ Sécuriser toutes les routes
     test:
@@ -88,7 +88,7 @@ Emprunter un livre:
         Solution:
             Remplacer la ligne
                 return $query->getQuery()->getResult();
-            PAr
+            Par
                 return $query->getQuery()->getSingleScalarResult();
 
 

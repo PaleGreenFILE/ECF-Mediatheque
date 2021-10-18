@@ -67,7 +67,7 @@ class Livre
     private $pret;
 
     /**
-     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="livre")
+     * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="livre")
      */
     private $reservations;
 
@@ -213,7 +213,7 @@ class Livre
     {
         if (!$this->reservations->contains($reservation)) {
             $this->reservations[] = $reservation;
-            $reservation->setLivre($this);
+            $reservation->addLivre($this);
         }
 
         return $this;
@@ -222,10 +222,7 @@ class Livre
     public function removeReservation(Reservation $reservation): self
     {
         if ($this->reservations->removeElement($reservation)) {
-            // set the owning side to null (unless already changed)
-            if ($reservation->getLivre() === $this) {
-                $reservation->setLivre(null);
-            }
+            $reservation->removeLivre($this);
         }
 
         return $this;

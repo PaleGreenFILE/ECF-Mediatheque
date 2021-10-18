@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\ReservationRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -23,7 +25,7 @@ class Reservation
     private $user;
 
     /**
-     * @ORM\ManyToOne(targetEntity=Livre::class, inversedBy="reservations")
+     * @ORM\ManyToMany(targetEntity=Livre::class, inversedBy="reservations")
      */
     private $livre;
 
@@ -35,12 +37,17 @@ class Reservation
     /**
      * @ORM\Column(type="boolean")
      */
-    private $isRestitue;
+    private $IsRestitue;
 
     /**
      * @ORM\Column(type="datetime_immutable")
      */
     private $EmpruntedAt;
+
+    public function __construct()
+    {
+        $this->livre = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -59,14 +66,26 @@ class Reservation
         return $this;
     }
 
-    public function getLivre(): ?Livre
+    /**
+     * @return Collection|Livre[]
+     */
+    public function getLivre(): Collection
     {
         return $this->livre;
     }
 
-    public function setLivre(?Livre $livre): self
+    public function addLivre(Livre $livre): self
     {
-        $this->livre = $livre;
+        if (!$this->livre->contains($livre)) {
+            $this->livre[] = $livre;
+        }
+
+        return $this;
+    }
+
+    public function removeLivre(Livre $livre): self
+    {
+        $this->livre->removeElement($livre);
 
         return $this;
     }
@@ -85,12 +104,12 @@ class Reservation
 
     public function getIsRestitue(): ?bool
     {
-        return $this->isRestitue;
+        return $this->IsRestitue;
     }
 
-    public function setIsRestitue(bool $isRestitue): self
+    public function setIsRestitue(bool $IsRestitue): self
     {
-        $this->isRestitue = $isRestitue;
+        $this->IsRestitue = $IsRestitue;
 
         return $this;
     }

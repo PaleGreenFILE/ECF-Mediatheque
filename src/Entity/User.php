@@ -87,7 +87,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     private $reservations;
 
-    public function __construct() 
+    public function __construct()
     {
         $this->isAutorise = false;
         $this->roles = ['ROLE_USER'];
@@ -351,5 +351,4 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
 
         return $this;
     }
-
 }

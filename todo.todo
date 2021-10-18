@@ -73,12 +73,14 @@ Emprunter un livre:
             ☐ Un Libraire
             ☐ Un User
 
-    @critical Sécurité:
+    @critical 
+    Sécurité:
         ✔ Sécuriser toutes les routes
-        test:
-            ✔ Un user non autorisé ne peut pas taper /xxx et accèder à la route
-            ✔ /admin réservé aux admin
-            ✔ /libraire réservé au Libraire ou aux Admin
+    test:
+        ✔ Un user non autorisé ne peut pas taper /xxx et accèder à la route
+        ✔ /admin réservé aux admin
+        ✔ /libraire réservé au Libraire ou aux Admin
+        ☐ La décrémentation des livres ne fonctionne plus !
 
     @Problèmes:
         Pagination:

@@ -54,6 +54,10 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('panier');
         }
 
+        if ($request->query->get('returnToLivre')) {
+            return $this->redirectToRoute('app_livre');
+        }
+
         // ! Supprimer la session :
         // $session->remove('reservation');   
 

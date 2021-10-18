@@ -6,76 +6,89 @@
 
 {% block body %}
 
-<section class="jumbotron text-center">
-    <div class="container">
-        <h1 class="jumbotron-heading">VOTRE RESEVERVATION</h1>
-     </div>
-</section>
+{% if (items) %}
+    <section class="jumbotron text-center">
+        <div class="container">
+            <h1 class="jumbotron-heading">VOTRE RESEVERVATION</h1>
+        </div>
+    </section>
 
-<section class="container mt-5" id="detail-reservation">
-    <table class="table">
-        <thead>
-            <tr class="text-center">
-                <th></th>
-                <th>Livre</th>
-                <th>Quantite</th>
-                <th></th>
-                <th></th>
-            </tr>
-        </thead>
-        <tbody>
-            {% for item in items %}
+    <section class="container mt-5" id="detail-reservation">
+        <table class="table">
+            <thead>
                 <tr class="text-center">
-                    <td> <img src="{{item.livre.illustration}}" height="50" width="50" alt="{{item.livre.titre}}"> </td>
-                    <td> {{item.livre.titre|capitalize}} </td>	
-                    <td> 
-                    <div class="d-flex justify-content-around">
-                    {% if item.quantite > 1 %}
-                        <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
-                            <i class="fas fa-minus-square"></i> 
-                        </a> 
-                    {% endif %}
-                        <span class="text-center">{{item.quantite}}</span> 
-                    </div>
-                    </td>
-                    <td>
-                    {% if empruntRestant %}
-                        <a href="{{ path('add_reservation', {'id': item.livre.id}) }}?returnToPanier=true" id="add" class="btn btn-sm btn-success">
-                            <i class="fas fa-plus"></i> 
-                        </a> 
-                    {% endif %}
-                    </td>
-                    <td>
-                        <a href="{{ path('delete_reservation', {'id': item.livre.id}) }} " class="btn btn-sm btn-danger">
-                            <i class="fa fa-trash"></i> 
-                        </a> 
-                    </td>
+                    <th></th>
+                    <th>Livre</th>
+                    <th>Quantite</th>
+                    <th></th>
+                    <th></th>
                 </tr>
-            {% endfor %}
-        </tbody>
-    </table>
-</section>
+            </thead>
+            <tbody>
+                {% for item in items %}
+                    <tr class="text-center">
+                        <td> <img src="{{item.livre.illustration}}" height="50" width="50" alt="{{item.livre.titre}}"> </td>
+                        <td> {{item.livre.titre|capitalize}} </td>
+                        <td>
+                        <div class="d-flex justify-content-around">
+                        {% if item.quantite > 1 %}
+                            <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
+                                <i class="fas fa-minus-square"></i>
+                            </a>
+                        {% endif %}
+                            <span class="text-center">{{item.quantite}}</span>
+                        </div>
+                        </td>
+                        <td>
+                        {% if empruntRestant %}
+                            <a href="{{ path('add_reservation', {'id': item.livre.id}) }}?returnToPanier=true" id="add" class="btn btn-sm btn-success">
+                                <i class="fas fa-plus"></i>
+                            </a>
+                        {% endif %}
+                        </td>
+                        <td>
+                            <a href="{{ path('delete_reservation', {'id': item.livre.id}) }} " class="btn btn-sm btn-danger">
+                                <i class="fa fa-trash"></i>
+                            </a>
+                        </td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </section>
 
-<hr class="container my-5 ">
+    <hr class="container my-5 ">
 
-<section id="Boutons">
-    <div class="container d-flex justify-content-around">
-        <button type="submit" class="btn btn-outline-success w-25 mb-5">
-            Confirmer la réservation
-        </button>
-         <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-25 mb-5">Annuler</a>
-    </div>
-</section>
+    <section id="Boutons">
+        <div class="container d-flex justify-content-around">
+        <a
+            href="{{ path('confirmation_reservation')}}"
+            class=" btn btn-outline-success w-25 mb-5">
+                Confirmer la réservation
+            </a>
+            <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-25 mb-5">Annuler</a>
+        </div>
+    </section>
 
-<section id="Emprunt-restant">
+    <section id="Emprunt-restant">
 
-    <div class="{{empruntRestant == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
-        <h4 class="jumbotron-heading">
-            {{empruntRestant == 0 ? 'Vous avez emprunté le nombre maximal de livres autorisés.' : 'Emprunt disponible : '}} 
-            {% if empruntRestant > 0 %}
-                {{empruntRestant}} 
-            {% endif %}
-        </h4>
-     </div>
-</section>
+        <div class="{{empruntRestant == 0 ? 'bg-danger' : 'bg-success'}} shadow rounded container p-2 text-white text-center">
+            <h4 class="jumbotron-heading">
+                {{empruntRestant == 0 ? 'Vous avez emprunté le nombre maximal de livres autorisés.' : 'Emprunt disponible : '}}
+                {% if empruntRestant > 0 %}
+                    {{empruntRestant}}
+                {% endif %}
+            </h4>
+        </div>
+    </section>
+
+    {% else %}
+        <section class="jumbotron text-center bg-warning p-5">
+            <div class="container">
+                <h1 class="jumbotron-heading">VOUS N'AVEZ AUCUNE RESERVATION...</h1>
+            </div>
+        </section>
+
+{% endif %}
+
 {% endblock %}

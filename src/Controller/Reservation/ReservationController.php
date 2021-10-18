@@ -85,7 +85,7 @@ class ReservationController extends AbstractController
         $user = $this->UserRepository->find($curentUserId);
 
         $empruntRestant = $user->getEmpruntMax();
-        // $empruntRestant = $user->getEmpruntMax();
+        // dd($empruntRestant, $user, $detailPanier);
 
         // dd($detailPanier);
         return $this->render('reservation/panier.html.twig', [

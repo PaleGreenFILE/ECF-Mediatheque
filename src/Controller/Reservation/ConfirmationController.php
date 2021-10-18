@@ -2,11 +2,15 @@
 
 namespace App\Controller\Reservation;
 
+use DateTimeImmutable;
+use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use App\Services\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\Session\Session;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class ConfirmationController extends AbstractController
@@ -18,28 +22,45 @@ class ConfirmationController extends AbstractController
     public function __construct(
         LivreRepository $LivreRepository,
         UserRepository $UserRepository,
-        ReservationService $Service
+        ReservationService $Service,
+        SessionInterface $Session
     )
     {
         $this->LivreRepository = $LivreRepository;
         $this->UserRepository = $UserRepository;
-        $this ->ReservationService = $Service;
+        $this->ReservationService = $Service;
+        $this->SessionInterface = $Session;
     }
 
     #[Route('/panier/confirmation', name: 'confirmation_reservation')]
-    public function confirmation(ReservationService $Service, EntityManagerInterface $entityManager, )
+    public function confirmation(ReservationService $Service, EntityManagerInterface $entityManager)
     {
 
-        $reservation = $Service->getDetailReservations();
+        $reservationDetail = $Service->getDetailReservations();
         $curentUserName = $this->getUser()->getFullName();
-        $curentUserId = $this->getUser()->getId();
+        $curentUser = $this->getUser();
 
-        dd($curentUserName, $curentUserId, $reservation);
+        if ($reservationDetail != null) {
 
-        $reservation = New 
+            $reservation = new Reservation();
 
-        return $this->render('libraire/detail_reservation.html.twig', [
-            'items' => $reservation
-        ]);
+            $reservation->setUser($curentUser);
+
+            foreach ($reservationDetail as $one) {
+                $reservation->addLivre($one['livre']);
+            }
+
+            $reservation->setEmpruntedAt(new DateTimeImmutable());
+            $reservation->setIsValidate(false);
+            $reservation->setIsRestitue(false);
+            $entityManager->persist($reservation);
+            $entityManager->flush();
+            $this->get('session')->remove('reservation');
+            $this->addFlash('success', 'Merci, votre réservation est bien enregistré, un Libraire va prochainement vous contacter.');
+        } else {
+            $this->addFlash('danger', 'Veuillez réserver au moins un livre.');
+        }
+
+        return $this->redirectToRoute('app_home');
     }
 }

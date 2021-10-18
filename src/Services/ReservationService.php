@@ -104,7 +104,9 @@ class ReservationService
 
         $updateEmpruntMax = $empruntActuel + $reservation[$id];
 
-        // dd($this->security->getUser()->setEmpruntMax($updateEmpruntMax));
+        $livre->setQuantite($livre->getQuantite() + $this->getPanier()[$id]);
+        $livre->setPret($livre->getPret() - $this->getPanier()[$id]);
+
         $this->security->getUser()->setEmpruntMax($updateEmpruntMax);
         $this->EntityManagerInterface->flush();
 

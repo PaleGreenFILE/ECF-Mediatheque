@@ -7,6 +7,7 @@
 {% block body %}
 
 {% if (items) %}
+
     <section class="jumbotron text-center">
         <div class="container">
             <h1 class="jumbotron-heading">VOTRE RESEVERVATION</h1>
@@ -40,7 +41,7 @@
                         </div>
                         </td>
                         <td>
-                        {% if empruntRestant %}
+                        {% if empruntRestant and item.livre.quantite > 0 %}
                             <a href="{{ path('add_reservation', {'id': item.livre.id}) }}?returnToPanier=true" id="add" class="btn btn-sm btn-success">
                                 <i class="fas fa-plus"></i>
                             </a>

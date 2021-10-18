@@ -56,6 +56,11 @@
 												</button>
 											</div>
 
+											<div class="col-12">
+												<span>Vous n'avez pas de compte ? inscrivez-vous en </span>
+												<a href=" {{path('app_inscription')}} ">cliquant ici</a>
+											</div>
+
 											{# ! Le csrf token #}
 											<input hidden type="text" name="_csrf_token" value="{{csrf_token('authenticate')}}">
 										</form>

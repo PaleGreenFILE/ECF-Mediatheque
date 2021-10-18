@@ -8,7 +8,7 @@ use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
-
+use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
  * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cette adresse e-mail")
@@ -80,6 +80,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     private $emprunt_max;
 
+    public function __construct() 
+    {
+        $this->isAutorise = false;
+        $this->roles = ['ROLE_USER'];
+        $this->emprunt_max = 10;
+    }
     /**
      * Retourne le nom compet d'un utilisateur
      *

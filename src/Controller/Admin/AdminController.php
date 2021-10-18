@@ -55,7 +55,6 @@ class AdminController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
 
         yield MenuItem::linkToCrud('Genres', 'fas fa-box', Genre::class);
-        
-        yield MenuItem::linkToCrud('Emprunt', 'fas fa-book-reader', Emprunt::class);
+
     }
 }

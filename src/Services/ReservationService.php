@@ -7,7 +7,6 @@ use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
-use App\Controller\Reservation\ReservationItem;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class ReservationService
@@ -16,9 +15,9 @@ class ReservationService
     protected $LivreRepository;
 
     public function __construct(
-        SessionInterface $session, 
-        LivreRepository $LivreRepository, 
-        EntityManagerInterface $EntityManagerInterface, 
+        SessionInterface $session,
+        LivreRepository $LivreRepository,
+        EntityManagerInterface $EntityManagerInterface,
         Security $security,
         UserRepository $UserRepository
     )
@@ -30,7 +29,7 @@ class ReservationService
         $this->UserRepository  = $UserRepository;
     }
 
-    protected function getPanier() : array
+    public function getPanier() : array
     {
         return $this->session->get('reservation', []);
     }
@@ -43,7 +42,6 @@ class ReservationService
     public function add(int $id)
     {
         $livre = $this->LivreRepository->find($id);
-
         // 1. Retrouver le panier utilisateur
         // ? 2. Si panier n'existe pas return []
         $reservation = $this->getPanier();
@@ -57,7 +55,11 @@ class ReservationService
             $reservation[$id] = 1;
         }
 
+        $livre->setQuantite($livre->getQuantite() - 1);
+        $livre->setPret($livre->getPret() + 1);
+
         $this->savePanier($reservation);
+
 
         $curentUserId = $this->security->getUser()->getId();
         /** @var User*/
@@ -75,11 +77,11 @@ class ReservationService
         }
 
         $curentUser = $this->security->getUser();
-        
+
         // dump($curentUser);
 
         $curentUser->deduitUnEmpruntMax();
-   
+
         $this->savePanier($reservation);
 
         // dd($curentUser);
@@ -90,6 +92,8 @@ class ReservationService
 
     public function remove(int $id)
     {
+        $livre = $this->LivreRepository->find($id);
+
         $reservation = $this->getPanier();
 
         /** @var User*/
@@ -99,23 +103,22 @@ class ReservationService
         // dump($empruntActuel);
 
         $updateEmpruntMax = $empruntActuel + $reservation[$id];
-        // dump($updateEmpruntMax);
-
-        // dd($updateEmpruntMax);
 
         // dd($this->security->getUser()->setEmpruntMax($updateEmpruntMax));
         $this->security->getUser()->setEmpruntMax($updateEmpruntMax);
         $this->EntityManagerInterface->flush();
 
         unset($reservation[$id]);
-        
+
         $this->savePanier($reservation);
-        
+
 
     }
-    
+
     public function decrement(int $id): void
     {
+        $livre = $this->LivreRepository->find($id);
+
         $reservation = $this->getPanier();
         /** @var User*/
         $curentUser = $this->security->getUser();
@@ -127,17 +130,18 @@ class ReservationService
         } else {
             $reservation[$id]--;
         }
-        
+
         $curentUser->ajouterUnEmpruntMax();
-   
+
+        $livre->setQuantite($livre->getQuantite() + 1);
+        $livre->setPret($livre->getPret() - 1);
+
+
+
         $this->savePanier($reservation);
 
         $this->EntityManagerInterface->flush();
 
-
-        // Plus d'1 livre => decrement
-        // dd($reservation[$id]);
-       
     }
 
     public function getDetailReservations(): array
@@ -166,7 +170,4 @@ class ReservationService
         return $detailPanier;
 
     }
-
-        
-        
 }

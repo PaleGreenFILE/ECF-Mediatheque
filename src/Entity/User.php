@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Scheb\TwoFactorBundle\Model\Email\TwoFactorInterface;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -80,11 +82,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      */
     private $emprunt_max;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="user")
+     */
+    private $reservations;
+
     public function __construct() 
     {
         $this->isAutorise = false;
         $this->roles = ['ROLE_USER'];
         $this->emprunt_max = 10;
+        $this->reservations = new ArrayCollection();
     }
     /**
      * Retourne le nom compet d'un utilisateur
@@ -310,6 +318,36 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function ajouterUnEmpruntMax(): self
     {
         $this->emprunt_max = $this->emprunt_max + 1;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getUser() === $this) {
+                $reservation->setUser(null);
+            }
+        }
 
         return $this;
     }

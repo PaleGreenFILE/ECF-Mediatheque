@@ -9,7 +9,7 @@ use App\Repository\EmpruntRepository;
 /**
  * @ORM\Entity(repositoryClass=EmpruntRepository::class)
  */
-class Emprunt
+class EmpruntOld
 {
     /**
      * @ORM\Id

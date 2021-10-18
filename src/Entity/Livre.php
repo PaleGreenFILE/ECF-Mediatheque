@@ -61,6 +61,21 @@ class Livre
      */
     private $genre;
 
+    /**
+     * @ORM\Column(type="integer", nullable=true)
+     */
+    private $pret;
+
+    /**
+     * @ORM\OneToMany(targetEntity=Reservation::class, mappedBy="livre")
+     */
+    private $reservations;
+
+    public function __construct()
+    {
+        $this->reservations = new ArrayCollection();
+    }
+
     public function getId(): ?int
     {
         return $this->id;
@@ -170,6 +185,48 @@ class Livre
     public function retirerUnExemplaire(): self
     {
         $this->quantite = $this->quantite - 1;
+
+        return $this;
+    }
+
+    public function getPret(): ?int
+    {
+        return $this->pret;
+    }
+
+    public function setPret(?int $pret): self
+    {
+        $this->pret = $pret;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|Reservation[]
+     */
+    public function getReservations(): Collection
+    {
+        return $this->reservations;
+    }
+
+    public function addReservation(Reservation $reservation): self
+    {
+        if (!$this->reservations->contains($reservation)) {
+            $this->reservations[] = $reservation;
+            $reservation->setLivre($this);
+        }
+
+        return $this;
+    }
+
+    public function removeReservation(Reservation $reservation): self
+    {
+        if ($this->reservations->removeElement($reservation)) {
+            // set the owning side to null (unless already changed)
+            if ($reservation->getLivre() === $this) {
+                $reservation->setLivre(null);
+            }
+        }
 
         return $this;
     }

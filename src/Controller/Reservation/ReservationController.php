@@ -2,14 +2,10 @@
 
 namespace App\Controller\Reservation;
 
-use App\Entity\User;
 use App\Entity\Livre;
-use App\Entity\Emprunt;
-use App\Form\EmpruntFormType;
 use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use App\Services\ReservationService;
-use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -59,7 +55,7 @@ class ReservationController extends AbstractController
         }
 
         // ! Supprimer la session :
-        // $session->remove('reservation');   
+        // $session->remove('reservation');
 
         // ! ##### TEST ######
 
@@ -153,4 +149,5 @@ class ReservationController extends AbstractController
 
         return $this->redirectToRoute('panier');
     }
+
 }

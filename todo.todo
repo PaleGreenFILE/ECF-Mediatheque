@@ -47,8 +47,8 @@ Emprunter un livre:
         ☐ Le Libraire prépare la commande et informe par email le User qu'elle est prête
         ☐ Si à J0+3 après l'envoie du mail la commande n'est pas retiré tous les livres retourne en stock la commande est annulée
     L'utilisateur confirme sa demande d'emprunt:
-        ☐ En cliquant sur confirmer la table emprunt est alimentée
-        ☐ la réservation prend le status "En préparation"
+        ✔ En cliquant sur confirmer la table emprunt est alimentée
+        ✔ la réservation prend le status "Attente"
         ☐ Le libraire est avertis
         ☐ On imagine que le Libaire valide la commande
         ☐ Le libraire passe la commande au status "Prêt"
@@ -60,9 +60,26 @@ Emprunter un livre:
             ☐ Lorsque la commande est retirée le status passe à "Sortie"
             ☐ Le statut "Sortie" déclenche un compte à rebours (J0 - 3 semaines) (champ $RendreAt)
     Alerte dépassement de la date de restitution des livres:
-        ☐ A 3 semaines - 1 jour (J0 + 20) mail informant que les livres doivent être rendu dans 24h
+        ✘ A 3 semaines - 1 jour (J0 + 20) mail informant que les livres doivent être rendu dans 24h
+        ✔ A -3 semaines le libraire a un label RETARD qui apparait et un bouton mail qui apparait
         ☐ Dans le pannel libraire afficher les livres devant rentrer dans les 24h
-        ☐ Si livre non restitué dans le temps impartis envoyé un Email de rappel
+        ☐ Si livre non restitué dans le temps impartis envoyé un Email de
+
+    A Faire Vite:
+        ☐ Coder un envoie de mail quand RETARD apparait
+        ☐ Afficher dans le back réservation le User
+        ☐ Modifier le status de la réservation grace a un selectCase
+            Status:
+                1.ATTENTE => PRET:
+                    ☐ Libraire a preparer la commande
+                    ☐ Mise a jour Date d'emprunt prend la date de prepa commande
+                2.PRET => RETIRE:
+                    ☐ La commande est retiré par l'User
+                3.ATTENTE => ANNULE:
+                    ☐ A J0+3 => Annulé tous remmetre dispo en bdd envoyé mail
+                4.RETIRE => RENDU:
+                    ☐ Livre restitué dans le temps impartis
+
 CDN :
     ☐ cdn.datatables
     ☐ cdn.select2

@@ -18,7 +18,7 @@
 					<th>Date d'emprunt</th>
 					<th>Date de restitution</th>
 					<th>Status</th>
-					<th>Etat Réservation</th>
+					<th colspan="2" class="text-center">Etat Réservation</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -44,7 +44,7 @@
 							{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
 						</td>
 						<td>
-							<a class="btn btn-sm btn-primary" href="">
+							<a class="btn btn-sm btn-primary px-3 py-2 fw-bold rounded" href="">
 								{{ reservation.status }}
 							</a>
 						</td>
@@ -54,13 +54,17 @@
 
 						<td class="mb-1">
 							{% if ( TODAY > RESTITUTION ) %}
-								<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:red">
-									RETARD
-								</span>
-							{% else %}
-								<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:green">
-									OKAY
-								</span>
+								<div class="d-flex justify-center justify-content-between">
+									<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:red">
+										RETARD
+									</span>
+										<a class="btn btn-sm btn-warning px-3 py-2 fw-bold" href="{{path('check_reservation')}}?RestHereCoco=true">Mail</a>
+								{% else %}
+									<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:green">
+										OKAY
+									</span>
+								</div>
+
 							{% endif %}
 						</td>
 

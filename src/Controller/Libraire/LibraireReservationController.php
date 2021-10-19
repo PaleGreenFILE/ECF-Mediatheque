@@ -8,8 +8,10 @@ use App\Entity\Libraire;
 use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -22,10 +24,13 @@ class LibraireReservationController extends AbstractDashboardController
     public function __construct(
         UserRepository $userRepository,
         ReservationRepository $reservationRepository,
+        RequestStack $requestStack
     )
     {
         $this->userRepository = $userRepository;
         $this->reservationRepository = $reservationRepository;
+        $this->requestStack = $requestStack;
+
     }
     #[Route('/libraire/check-reservation', name:'check_reservation')]
     public function index(): Response
@@ -38,21 +43,28 @@ class LibraireReservationController extends AbstractDashboardController
                 return $this->redirectToRoute('app_home');
             }
         }
-
         // ? Récupérer la réservation de l'utilisateur connecté
 
         // dd($this->reservationRepository->findAll());
-        $ReservationUserCurent = $this->reservationRepository->findAll();
+        $Reservations = $this->reservationRepository->findAll();
+
+        // $ReservationUserName = $this->reservation->getUser();
+        $request = $this->requestStack->getCurrentRequest();
+        if ($request->query->get('RestHereCoco')) {
+            return $this->redirectToRoute('check_reservation');
+        }
+
 
         return $this->render('libraire/back_reservation.html.twig', [
-            'reservations' => $ReservationUserCurent,
+            'reservations' => $Reservations,
         ]);
     }
 
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new ()
-            ->setTitle('Mediatheque Chapelle-Cureaux');
+            ->setTitle('Mediatheque Chapelle-Cureaux')
+            ->disableUrlSignatures();
     }
 
     public function configureMenuItems(): iterable

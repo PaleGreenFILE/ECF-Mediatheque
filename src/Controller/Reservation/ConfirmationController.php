@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use App\Services\ReservationService;
 use Doctrine\ORM\EntityManagerInterface;
+use App\Repository\ReservationRepository;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
@@ -63,4 +64,23 @@ class ConfirmationController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
+
+    #[Route('/membre/{id}/reservation', name:'detail_reservation')]
+    public function showOneReservationAction($id, ReservationRepository $reservationRepository, LivreRepository $livreRepository)
+    {
+        if ($this->getUser() == null) {
+            return $this->redirectToRoute('app_home');
+        } else {
+            $user_autorise = $this->getUser()->getIsAutorise();
+            if ($user_autorise == false) {
+                return $this->redirectToRoute('app_home');
+            }
+
+            $reservations = $reservationRepository->findReservations($this->getUser());
+            // dd($reservations);
+
+        }
+
+    }
+
 }

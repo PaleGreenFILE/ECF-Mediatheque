@@ -64,23 +64,4 @@ class ConfirmationController extends AbstractController
 
         return $this->redirectToRoute('app_home');
     }
-
-    #[Route('/membre/{id}/reservation', name:'detail_reservation')]
-    public function showOneReservationAction($id, ReservationRepository $reservationRepository, LivreRepository $livreRepository)
-    {
-        if ($this->getUser() == null) {
-            return $this->redirectToRoute('app_home');
-        } else {
-            $user_autorise = $this->getUser()->getIsAutorise();
-            if ($user_autorise == false) {
-                return $this->redirectToRoute('app_home');
-            }
-
-            $reservations = $reservationRepository->findReservations($this->getUser());
-            // dd($reservations);
-
-        }
-
-    }
-
 }

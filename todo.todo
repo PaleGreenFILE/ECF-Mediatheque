@@ -63,15 +63,18 @@ Emprunter un livre:
         ☐ A 3 semaines - 1 jour (J0 + 20) mail informant que les livres doivent être rendu dans 24h
         ☐ Dans le pannel libraire afficher les livres devant rentrer dans les 24h
         ☐ Si livre non restitué dans le temps impartis envoyé un Email de rappel
+CDN :
+    ☐ cdn.datatables
+    ☐ cdn.select2
 
-    Déploiement:
-        ☐ Heroku
-        ☐ ClearDB (pour une database mySql)
-        ☐ Travailler sur une copie de la database
-        Ajouter à la migration:
-            ☐ Un Admin
-            ☐ Un Libraire
-            ☐ Un User
+Déploiement:
+    ☐ Heroku
+    ☐ ClearDB (pour une database mySql)
+    ☐ Travailler sur une copie de la database
+    Ajouter à la migration:
+        ☐ Un Admin
+        ☐ Un Libraire
+        ☐ Un User
 
     @critical
     Sécurité:

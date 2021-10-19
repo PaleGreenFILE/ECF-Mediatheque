@@ -42,8 +42,11 @@ class LibraireController extends AbstractDashboardController
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
-        yield MenuItem::linkToDashboard('Confirmer une réservation', 'fas fa-check', 'libraire/detail_reservation.html.twig');
+
+        // yield MenuItem::linkToDashboard('detail_reservation', 'fas fa-check');
+
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
+
         yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
 
     }

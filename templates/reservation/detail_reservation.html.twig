@@ -1,0 +1,41 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block title %}Mes réservations
+{% endblock %}
+
+{% block body %}
+	<h1 class=text-center p-2>Mes réservations</h1>
+
+	<table class="table text-center">
+		<thead>
+			<tr>
+				<th>Numéro</th>
+				<th>Livre</th>
+				<th>Date d'emprunt</th>
+				<th>Date de restitution</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+        <tbody>
+            {% for reservation in reservations %}
+                <tr>
+                    <td> {{ reservation.id }} </td>
+                    {# <td> LIVRE </td> #}
+                    <td>
+                        <ul>
+                        {% for livre in reservation.livre %}
+                            <li> {{ livre }} </li>
+                        {% endfor %}
+                        </ul>
+                    </td>
+                    <td> {{ reservation.empruntedAt|date('d-m-Y à H:i') }} </td>
+                    <td>
+                        {{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
+                    </td>
+                    <td> {{ reservation.status }} </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+	</table>
+
+{% endblock %}

@@ -12,6 +12,9 @@ use Doctrine\ORM\Mapping as ORM;
  */
 class Reservation
 {
+    public const STATUS_ATTENTE = 'ATTENTE';
+    public const STATUS_PRET = 'PRET';
+
     /**
      * @ORM\Id
      * @ORM\GeneratedValue
@@ -47,7 +50,7 @@ class Reservation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status;
+    private $status = 'ATTENTE';
 
     public function __construct()
     {

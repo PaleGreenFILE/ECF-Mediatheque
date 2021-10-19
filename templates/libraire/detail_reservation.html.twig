@@ -1,19 +1,18 @@
-{% extends '@EasyAdmin/layout.html.twig' %}
-{#
-{% stylesheets %}
-    cdn.datatables.net/1.11.3/css/jquery.dataTables.min.css
-{% en %}
-#}
+{# {% extends '@EasyAdmin/layout.html.twig' %} #}
+{# templates/admin/my-custom-page.html.twig #}
 
+{% extends '@EasyAdmin/page/content.html.twig' %}
 
-{% block title %}Confirmation{% endblock %}
+{% block content_title %}The Title of the Page{% endblock %}
 
-{% block body %}
-    <h1>Confirmation Controller</h1>
+{% block page_actions %}
+	<a class="btn btn-primary" href="...">Some Action</a>
+{% endblock %}
 
-    <section id="message" class="container">
-        {{ include("layouts/partials/_flash_messages.html.twig") }}
-    </section>
+{% block main %}
+{% block content %}
+	<h1 class="text-center p-2">Réservations</h1>
+{% endblock %}
 
 {% endblock %}
 

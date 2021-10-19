@@ -11,12 +11,15 @@
 		{% if app.user.isAutorise %}
 			<div class="collapse navbar-collapse" id="navbarSupportedContent">
 				<ul class="navbar-nav p-2">
-
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('app_livre')}}">Tous nos livres</a>
 					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="#">Rechercher un livre</a>
+					</li>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="{{ path('detail_reservation', {'id': app.user.id} ) }}">Mes réservations</a>
 					</li>
 					{% if is_granted ("ROLE_LIBRAIRE") %}
 						<li class="nav-item">

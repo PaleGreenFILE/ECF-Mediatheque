@@ -20,11 +20,10 @@
             {% for reservation in reservations %}
                 <tr>
                     <td> {{ reservation.id }} </td>
-                    {# <td> LIVRE </td> #}
                     <td>
                         <ul>
                         {% for livre in reservation.livre %}
-                            <li> {{ livre }} </li>
+                            <li class="ms-auto"> {{ livre.pret }} x {{ livre|capitalize }} </li>
                         {% endfor %}
                         </ul>
                     </td>
@@ -32,7 +31,9 @@
                     <td>
                         {{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
                     </td>
-                    <td> {{ reservation.status }} </td>
+                    <td>
+                        {{ reservation.status }}
+                    </td>
                 </tr>
             {% endfor %}
         </tbody>

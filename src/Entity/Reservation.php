@@ -14,6 +14,7 @@ class Reservation
 {
     public const STATUS_ATTENTE = 'ATTENTE';
     public const STATUS_PRET = 'PRET';
+    public const STATUS_RETARD = 'RETARD';
 
     /**
      * @ORM\Id

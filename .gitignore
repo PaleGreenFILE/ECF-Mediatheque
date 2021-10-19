@@ -22,3 +22,7 @@
 ###> vsCode/vsCode ###
 /.vscode
 ###< vsCode/vsCode ###
+
+###> vich/uplaod File ###
+/public/uploads/
+###< vich/uplaod File ###

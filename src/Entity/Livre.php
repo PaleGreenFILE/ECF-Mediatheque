@@ -7,9 +7,11 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
-
+use Symfony\Component\HttpFoundation\File\File;
+use Vich\UploaderBundle\Mapping\Annotation as Vich;
 /**
  * @ORM\Entity(repositoryClass=LivreRepository::class)
+ * @Vich\Uploadable
  */
 class Livre
 {
@@ -25,10 +27,20 @@ class Livre
      */
     private $titre;
 
+    // #####  Vich #####
+
     /**
      * @ORM\Column(type="string", length=255, nullable=true)
      */
-    private $illustration;
+    private $file;
+
+    /**
+     * @Vich\UploadableField(mapping="livre_images", fileNameProperty="file")
+     * @var File
+     */
+    private $imageFile;
+
+    // ##### End Vich #####
 
     /**
      * @ORM\Column(type="date", nullable=true)
@@ -71,6 +83,12 @@ class Livre
      */
     private $reservations;
 
+    /**
+     * @ORM\Column(type="datetime", nullable=true)
+     * @var \DateTimeInterface|null
+     */
+    private $updatedAt;
+
     public function __construct()
     {
         $this->reservations = new ArrayCollection();
@@ -93,16 +111,36 @@ class Livre
         return $this;
     }
 
-    public function getIllustration(): ?string
+
+
+    // #####  Vich #####
+
+    public function getFile(): ?string
     {
-        return $this->illustration;
+        return $this->file;
     }
 
-    public function setIllustration(?string $illustration): self
+    public function setFile(string $file): self
     {
-        $this->illustration = $illustration;
+        $this->file = $file;
 
         return $this;
+    }
+
+    public function getImageFile()
+    {
+        return $this->imageFile;
+    }
+
+    public function setImageFile(File $file = null)
+    {
+        $this->imageFile = $file;
+
+         if (null !== $file) {
+            // Il est nécessaire qu'au moins un champ change si vous utilisez la doctrine
+            // sinon les écouteurs d'événements ne seront pas appelés et le fichier sera perdu.
+            $this->updatedAt = new \DateTime();
+        }
     }
 
     public function getParution(): ?\DateTimeInterface
@@ -224,6 +262,18 @@ class Livre
         if ($this->reservations->removeElement($reservation)) {
             $reservation->removeLivre($this);
         }
+
+        return $this;
+    }
+
+    public function getUpdatedAt(): ?\DateTimeImmutable
+    {
+        return $this->updatedAt;
+    }
+
+    public function setUpdatedAt(?\DateTimeImmutable $updatedAt): self
+    {
+        $this->updatedAt = $updatedAt;
 
         return $this;
     }

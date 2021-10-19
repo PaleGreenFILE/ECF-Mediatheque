@@ -1,0 +1,77 @@
+{# {% extends '@EasyAdmin/layout.html.twig' %} #}
+
+{% extends '@EasyAdmin/page/content.html.twig' %}
+
+{% block content_title %}Reservation
+{% endblock %}
+
+
+{% block content %}
+	<section class="container">
+		<h1 class="text-center p-2">Réservations</h1>
+
+		<table class="table text-center">
+			<thead>
+				<tr>
+					<th>Numéro</th>
+					<th>Livre</th>
+					<th>Date d'emprunt</th>
+					<th>Date de restitution</th>
+					<th>Status</th>
+					<th>Etat Réservation</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for reservation in reservations %}
+					<tr>
+						<td>
+							{{ reservation.id }}
+						</td>
+						{# <td> LIVRE </td> #}
+						<td>
+							<ul>
+								{% for livre in reservation.livre %}
+									<li>
+										{{ livre }}
+									</li>
+								{% endfor %}
+							</ul>
+						</td>
+						<td>
+							{{ reservation.empruntedAt|date('d-m-Y à H:i') }}
+						</td>
+						<td>
+							{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
+						</td>
+						<td>
+							<a class="btn btn-sm btn-primary" href="">
+								{{ reservation.status }}
+							</a>
+						</td>
+
+						{% set TODAY =  'now'|date("Y-m-d") %}
+						{% set RESTITUTION = reservation.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
+
+						<td class="mb-1">
+							{% if ( TODAY > RESTITUTION ) %}
+								<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:red">
+									RETARD
+								</span>
+							{% else %}
+								<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:green">
+									OKAY
+								</span>
+							{% endif %}
+						</td>
+
+
+						{# {% if ({{RESTITUTION}}  {{TODAY}}) %}
+						{% endif %} #}
+
+						{# <td>{{TODAY}}</td> #}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</section>
+{% endblock %}

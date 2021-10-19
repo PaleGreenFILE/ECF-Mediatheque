@@ -20,6 +20,7 @@
         "scheb/2fa-email": "^5.12",
         "scheb/2fa-trusted-device": "^5.12",
         "sensio/framework-extra-bundle": "^6.1",
+        "stof/doctrine-extensions-bundle": "^1.6",
         "symfony/asset": "5.3.*",
         "symfony/console": "5.3.*",
         "symfony/dotenv": "5.3.*",
@@ -50,7 +51,8 @@
         "twig/extra-bundle": "^3.3",
         "twig/intl-extra": "^3.3",
         "twig/string-extra": "^3.3",
-        "twig/twig": "^2.12|^3.0"
+        "twig/twig": "^2.12|^3.0",
+        "vich/uploader-bundle": "^1.18"
     },
     "require-dev": {
         "phpunit/phpunit": "^9.5",

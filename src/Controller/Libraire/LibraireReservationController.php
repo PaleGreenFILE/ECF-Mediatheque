@@ -8,7 +8,6 @@ use App\Entity\Libraire;
 use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;

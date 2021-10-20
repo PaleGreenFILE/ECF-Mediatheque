@@ -15,6 +15,7 @@
 				<tr>
 					<th>Numéro</th>
 					<th>Livre</th>
+					<th>Emprunteur</th>
 					<th>Date d'emprunt</th>
 					<th>Date de restitution</th>
 					<th>Status</th>
@@ -27,6 +28,10 @@
 						<td>
 							{{ reservation.id }}
 						</td>
+						<td>
+							{{ reservation.user.fullname }}
+						</td>
+
 						{# <td> LIVRE </td> #}
 						<td>
 							<ul>
@@ -40,6 +45,7 @@
 						<td>
 							{{ reservation.empruntedAt|date('d-m-Y à H:i') }}
 						</td>
+
 						<td>
 							{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
 						</td>
@@ -50,7 +56,7 @@
 						</td>
 
 						{% set TODAY =  'now'|date("Y-m-d") %}
-						{% set RESTITUTION = reservation.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
+						{% set RESTITUTION = reservation.empruntedAt|date_modify("-21 day")|date("Y-m-d") %}
 
 						<td class="mb-1">
 							{% if ( TODAY > RESTITUTION ) %}
@@ -67,12 +73,6 @@
 
 							{% endif %}
 						</td>
-
-
-						{# {% if ({{RESTITUTION}}  {{TODAY}}) %}
-						{% endif %} #}
-
-						{# <td>{{TODAY}}</td> #}
 					</tr>
 				{% endfor %}
 			</tbody>

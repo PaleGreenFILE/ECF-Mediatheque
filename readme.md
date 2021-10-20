@@ -1,95 +1,96 @@
-# Spécifications technique
+# Bienvenue sur la Maediatheque de Chapelles-Cureaux
 
-## Serveur
+Dans le cadre de mon BTS de développeur Web Fullstack avec **Studi**, j'ai eu pour tâche finale le développement d'une médiathèque incorporant un système de click and collect.
 
-- Version PHP 8.0.x
-- Extension PHP : PDO
-- MariaDB (version 10.4)
+## Spécification Techniques
 
-## Front
+### Technologie
+
+   - PHP >= 8
+   - Composer >= 2
+  - Framework : Symfony
+  - Base de donnée : Mysql (MariaDB 10.4)
+
+###  Front
 
 - HTML5 (Twig)
 - CSS3
 - Bootstrap
 - Javascript
 
-## Back
+### Back
 
 - Minimum PHP 8.0
 - Symfony (5.3.9)
 - mySql
 
-<hr>
-
-## Les choix techniques
-
-### Sécurité
-
-<p>
-    Au niveau des mesures de sécurité j'ai décidé d'appliqué plusieurs pratiques recommandées.
-
-    1.Hashage du mot de passe en base de donnée.
-
-<i>Afin de ne pas compromettre le mot de passe de mon utilisateur j'utlise la fonction d'encodage de mot de passe livré avec l'authenticator de symfony, je peux définir moi même un algorithme de cryptage mais j'ai opté pour laissé à symfony d'appliquer de manière automatique le meilleur algorithme d'encodage (généralement bcrypt ou argon).
-</i><br>
-
-    2.Le csrf token
-
-<i>
-La protection CSRF fonctionne en ajoutant un champ masqué à mon formulaire qui contient un token Cela garantit que l'utilisateur <b> et non une autre "entité" </b> soumet les données fournies au formulaire.
-
-</i>
-
-    3.La double authentification
-
-<i>
-L’authentification à double facteur permet d’ajouter une couche de sécurité supplémentaire à notre système de connexion. En plus d’un mot de passe, L'utilisateur devra fournir un code de vérification généré  par notre application.
-</i>
-</p>
-
-<hr>
-
-## Comment utiliser le projet en local
+# Installation Locale
 
 ```bash
 git clone https://github.com/Papoel/ECF-Mediatheque
 ```
 
 ```bash
-composer instal
+composer install
 ```
 
-Une fois le projet installé il faut créer la base de donnée :
+Une fois le projet installé il faut créer un fichier .env.local ou modifier le .env déjà présent avec vos propres informations.
+
+**Création de la base de donnée :**
 
 ```bash
 symfony console doctrine:database:create
 ```
 
-Jouer les migrations :
+**Jouer la migration**
 
 ```bash
 symfony console doctrine:migrations:migrate
 ```
 
-Lancer les DataFixtures :
+**Exécuter les DataFixtures :**
 
 ```bash
 symfony console doctrine:fixture:load -n
 ```
 
-Pour la gestion des mails en local vous pouvez utiliser votre mailer habituel, j'utilise personellement `mailhog`.
+Pour la gestion des mails en local vous pouvez utiliser votre mailler habituel, j'utilise personnellement `mailhog` principalement pour sa rapidité à mettre en place.
+Configurer votre DSN comme ceci :
+```env
+MAILER_DSN=smtp://localhost:1025
+```
+Puis exécuter Mailhog en tapant dans le navigateur:
+
 `localhost:8025`
 
 > [INFO]
-> La commande <i>symfony console</i> peut être remplacée dans votre terminal par <i>php bin/console</i> si vous n'utilisez pas le <i>cli symfony</i>
+> Si vous n'utilisez pas le CLI de Symfony toutes les commandes commençant par **<i>symfony console</i>** peuvent être remplacées dans votre terminal par **<i>php bin/console</i>**.
 
 ## Se connecter à l'application
+
+Trois Cas de connexion sont possible dans cette application :
+ - Un administrateur (admin)
+ - Un Libraire (employé)
+ - Un Habitant (habitant)
 
 |email   |mot de passe   |
 |---|---|
 | admin@email.fr  |  password |
 | libraire@email.fr  |  password |
 | user{x}@email.fr  |  password |
+
+# Les choix Techniques
+
+## Connexion sécurisé mise en place
+Pour cette application j'ai fais le choix de faire une connexion sécurisée en double facteur authentification par Email.
+Je me suis aidé du bundle symfony [scheb/2fa-bundle](https://symfony.com/bundles/SchebTwoFactorBundle/5.x/installation.html).
+Cette fonction nécessite l'utilisation d'un mailler.
+
+## Ou trouver les documents
+
+Dans cette application vous trouverai un dossier **Documentation** vous pouvez y trouver plusieurs documents utiles ( schéma de la base de donnée, charte graphique, manuel d'utilisation etc...)
+
+# ECF Studi 2021 - Pascal Briffard
 
 ## Lien utiles
 

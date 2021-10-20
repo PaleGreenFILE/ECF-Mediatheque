@@ -46,7 +46,7 @@ class LibraireController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
-        // yield MenuItem::linkToDashboard('detail_reservation', 'fas fa-check');
+        yield MenuItem::linkToRoute('Aller sur le site', 'fas fa-jedi', 'app_home');
 
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
 

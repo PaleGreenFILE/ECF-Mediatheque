@@ -1,7 +1,11 @@
 {% for livre in livres %}
 	<div class="col" id="livre-{{livre.id}}">
 		<div class="card shadow rounded border border-2 border-secondary mb-2" style="width-max: 15rem;">
-			<img src="{{ livre.file }}" class="card-img img-fluid p-1" alt="{{livre.titre}}" height="50" style="border-radius: 7px;">
+		<img src="{{ asset('uploads/illustrations/' ~ livre.file ) }} "
+			class=""
+			alt="{{livre.file}}"
+			style="{{livre.file is not null ? 'border-radius: 7px; height: 250px; width: 250' : '' }}"
+		>
 
 			<div
 				class="card-body">

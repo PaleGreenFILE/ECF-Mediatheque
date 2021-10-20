@@ -71,13 +71,15 @@ class UserCrudController extends AbstractCrudController
     {
         if ($this->IsGranted('ROLE_LIBRAIRE')) {
             return $actions
-            ->remove(Crud::PAGE_INDEX, Action::NEW);
-        }
-
-        return $actions
+            ->remove(Crud::PAGE_INDEX, Action::NEW)
+            ->remove(Crud::PAGE_INDEX, Action::EDIT)
             ->add(Crud::PAGE_INDEX, 'detail')
             ->remove(Crud::PAGE_DETAIL, Action::EDIT)
             ->disable(Action::NEW, Action::DELETE);
+        }
+
+        return $actions
+            ->add(Crud::PAGE_INDEX, 'detail');
     }
 
 }

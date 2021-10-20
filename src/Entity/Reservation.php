@@ -51,7 +51,7 @@ class Reservation
     /**
      * @ORM\Column(type="string", length=255)
      */
-    private $status = 'ATTENTE';
+    private $status = self::STATUS_ATTENTE;
 
     public function __construct()
     {

@@ -20,10 +20,10 @@
 			<p class="lead text-center mt-5" style:"position:absolute; top:auto">
                 Vous n'êtes pas encore autorisé à accèder à l'application. Soyez patient, un administrateur va prochainement valider vos accès.
             </p>
-            <a class="d-block text-center h4" href=" {{path('app_login')}} ">Se déconnecter.</a>
+            <a class="d-block text-center h4" href=" {{path('app_logout')}} ">Se déconnecter.</a>
 		</div>
 	{% else %}
-	
+
         <section id="accueil" class="container mb-3">
 			<h1>
 				Bienvenue {{ app.user.prenom|capitalize }}, nous sommes ravi de vous voir <br />

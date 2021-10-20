@@ -5,7 +5,6 @@ namespace App\Services;
 /*
 This call sends a message based on a template.
  */
-require 'vendor/autoload.php';
 use Mailjet\Client;
 use \Mailjet\Resources;
 

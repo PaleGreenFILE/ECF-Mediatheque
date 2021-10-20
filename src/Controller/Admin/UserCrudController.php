@@ -4,6 +4,7 @@ namespace App\Controller\Admin;
 
 use App\Entity\User;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
 use EasyCorp\Bundle\EasyAdminBundle\Field\IdField;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
@@ -12,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\EmailField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 
 class UserCrudController extends AbstractCrudController
 {
@@ -67,9 +69,15 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        return $actions->add(Crud::PAGE_INDEX, 'detail');
+        if ($this->IsGranted('ROLE_LIBRAIRE')) {
+            return $actions
+            ->remove(Crud::PAGE_INDEX, Action::NEW);
+        }
+
+        return $actions
+            ->add(Crud::PAGE_INDEX, 'detail')
+            ->remove(Crud::PAGE_DETAIL, Action::EDIT)
+            ->disable(Action::NEW, Action::DELETE);
     }
-
-
 
 }

@@ -4,7 +4,6 @@ namespace App\DataFixtures;
 
 use Faker;
 use App\Entity\User;
-use DateTimeImmutable;
 use Doctrine\Persistence\ObjectManager;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -20,7 +19,7 @@ class UserFixtures extends Fixture
 
     public function load(ObjectManager $manager)
     {
-        
+
         $faker = Faker\Factory::create('fr_FR');
 
         // ? Le compte Admin
@@ -37,6 +36,7 @@ class UserFixtures extends Fixture
         $user->setEmpruntMax(999);
         $user->setIsAutorise(1);
         $user->setIsVerified(1);
+        $user->setEmailAuthCode('123456');
 
         $manager->persist($user);
         $users[] = $user;
@@ -55,12 +55,14 @@ class UserFixtures extends Fixture
         $user->setEmpruntMax(999);
         $user->setIsAutorise(1);
         $user->setIsVerified(1);
+        $user->setEmailAuthCode('654321');
+
 
         $manager->persist($user);
         $users[] = $user;
 
         // ? Création de 20 comptes utilisateurs
-        for ($i = 1; $i <= 20; $i++) { 
+        for ($i = 1; $i <= 20; $i++) {
             $users = [];
             $user = new User();
             $user->setNom($faker->lastname());

@@ -5,10 +5,12 @@ namespace App\Controller\Libraire;
 use App\Entity\User;
 use App\Entity\Livre;
 use App\Entity\Libraire;
-use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Crud;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Action;
+use EasyCorp\Bundle\EasyAdminBundle\Config\Actions;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
@@ -53,4 +55,5 @@ class LibraireController extends AbstractDashboardController
         yield MenuItem::linkToRoute('Réservation', 'fas fa-stamp', 'check_reservation');
 
     }
+
 }

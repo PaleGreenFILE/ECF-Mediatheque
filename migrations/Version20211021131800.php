@@ -41,10 +41,10 @@ final class Version20211021131800 extends AbstractMigration
         $this->addSql('SET FOREIGN_KEY_CHECKS = 0');
 
         // Inserer un admin
-        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Briffard','Pascal','1985-02-20','7 rue du col blanc 59245 Recquignies','bridevproject@gmail.com','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK','[\"ROLE_ADMIN\"]',1 , 1, '123456',999)");
+        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Briffard','Pascal','1985-02-20','7 rue du col blanc 59245 Recquignies','admin@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK','[\"ROLE_ADMIN\"]',1 , 1, '123456',999)");
 
         // Inserer un Employé
-        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Doe','John','1945-12-20','28 rue de l\'amnesie 59000 Lille','pascal@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_LIBRAIRE\"]',1, 1, '123456', 999)");
+        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Doe','John','1945-12-20','28 rue de l\'amnesie 59000 Lille','libraire@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_LIBRAIRE\"]',1, 1, '123456', 999)");
 
         // Inserer un utilisateur autorisé
         $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Valjean','Jean','1769-3-14','28 rue du Bagne 83000 Toulon','user1@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_USER\"]',1, 1, '123456',5)");

@@ -21,7 +21,7 @@ class RedirectController extends AbstractController
         } elseif (in_array("ROLE_LIBRAIRE", $userRoles)) {
             return $this->redirectToRoute('libraire');
         } else {
-            return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_livre');
         }
     }
 }

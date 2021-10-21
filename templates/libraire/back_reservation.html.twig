@@ -65,11 +65,7 @@
 										RETARD
 									</span>
 										<a class="btn btn-sm btn-warning px-3 py-2 fw-bold"
-										{# href="{{path('check_reservation')}}?RestHereCoco=true">Mail</a> #}
-										{{ path('test') }}>Mail</a>
-
-
-
+										href="{{path('mailing',{'id':reservation.id})}}">Mail</a>
 								{% else %}
 									<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:green">
 										OKAY

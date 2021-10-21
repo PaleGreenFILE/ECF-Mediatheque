@@ -2,9 +2,9 @@
 
 namespace App\Controller\Libraire;
 
+use App\Classe\Mail;
 use App\Entity\User;
 use App\Entity\Livre;
-use App\Services\Mail;
 use App\Entity\Libraire;
 use App\Entity\Reservation;
 use App\Repository\UserRepository;
@@ -85,16 +85,15 @@ class LibraireReservationController extends AbstractDashboardController
     }
 
 
-    #[Route('/libraire/test', name:'test')]
-    public function sendMailRetard()
+    #[Route('/libraire/mailing/{id}', name:'mailing')]
+    public function sendMailRetard(Reservation $reservation, Mail $mail)
     {
-        $mail = new Mail();
-        $user = $this->getUser()->getFullName();
-        $mailTo = $this->getUser()->getEmail();
-
-        $mail->send($mailTo, 'bridevproject@gmail.com', "Retard ...", `
-            Bonjour $user vous n'avez pas restitué les livres empruntés dans le temps
-            impartis, veuillez prendre contact avec la médiathèque.
+        // dd($reservation->getUser()->getEmail());
+        // ! Remplacer par le nom
+        $user = $reservation->getUser()->getEmail();
+        $mailTo = 'bridevproject@gmail.com';
+        $content = 'Bonjour ' .$user. ' vous n\'avez pas restitué les livres empruntés dans le temps';
+        $mail->send($mailTo, $user, 'hello@parlonscode.com', "Retard ...", `
         `);
 
         $this->addFlash('success', 'Email envoyé.');
@@ -102,5 +101,4 @@ class LibraireReservationController extends AbstractDashboardController
         // dd($user, $mailTo, $mail);
         return $this->redirectToRoute('check_reservation');
     }
-
 }

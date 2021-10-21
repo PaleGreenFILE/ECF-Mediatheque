@@ -47,10 +47,10 @@ final class Version20211021131800 extends AbstractMigration
         $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Doe','John','1945-12-20','28 rue de l\'amnesie 59000 Lille','pascal@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_LIBRAIRE\"]',1, 1, '123456', 999)");
 
         // Inserer un utilisateur autorisé
-        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Valjean','Jean','1769-3-14','28 rue du Bagne 83000 Toulon','user1@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_LIBRAIRE\"]',1, 1, '123456',5)");
+        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Valjean','Jean','1769-3-14','28 rue du Bagne 83000 Toulon','user1@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_USER\"]',1, 1, '123456',5)");
 
         // Inserer un utilisateur non autorisé
-        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Maurin','Pierre','1770-5-24','36 rue des voleurs de pains 83000 Toulon','user2@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_LIBRAIRE\"]',0, 0, '',5)");
+        $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Maurin','Pierre','1770-5-24','36 rue des voleurs de pains 83000 Toulon','user2@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK', '[\"ROLE_USER\"]',0, 0, '',5)");
 
         // Inserer un genre
         $this->addSql("INSERT INTO genre (nom) values('fiction')");

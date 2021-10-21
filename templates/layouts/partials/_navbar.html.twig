@@ -26,11 +26,12 @@
 							<a class="nav-link" href="#">Ajouter un livre</a>
 						</li>
 						<li class="nav-item">
-							<a class="nav-link btn btn-btn-sm btn-warning " href="libraire">Admin</a>
-						</li>
+						<a class="nav-link btn btn-btn-sm btn-warning " href="{{path('libraire')}}">Admin</a>
 
+						</li>
 					{% endif %}
-						{% if is_granted ("ROLE_ADMIN") %}
+
+					{% if is_granted ("ROLE_ADMIN") %}
 						<li class="nav-item">
 							<a class="nav-link btn btn-btn-sm btn-warning " href="admin">Admin</a>
 						</li>

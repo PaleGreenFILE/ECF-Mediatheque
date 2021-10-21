@@ -38,7 +38,9 @@ final class Version20211021131800 extends AbstractMigration
 
         $this->addSql('ALTER TABLE reservation_livre ADD CONSTRAINT FK_EF1C9F3E37D925CB FOREIGN KEY (livre_id) REFERENCES livre (id) ON DELETE CASCADE');
 
-                // Inserer un admin
+        $this->addSql('SET FOREIGN_KEY_CHECKS = 0');
+
+        // Inserer un admin
         $this->addSql("INSERT INTO users (nom, prenom, date_naissance, adresse, email, password, roles, is_verified, is_autorise, auth_code, emprunt_max) values('Briffard','Pascal','1985-02-20','7 rue du col blanc 59245 Recquignies','admin@email.fr','\$2y\$13\$TDoGH80tbKITua5pPWqSou.TyMSadWszqsQSnxO9W0/VSq5rC0cQK','[\"ROLE_ADMIN\"]','1', '1', '123456','999')");
 
         // Inserer un Employé
@@ -79,7 +81,10 @@ final class Version20211021131800 extends AbstractMigration
 
         // Inserer un livre
         $this->addSql("INSERT INTO livre (genre_id, titre, file, parution, description, auteur, quantite, isbn, pret, updated_at) values('1','Harry Potter et les Reliques de la Mort ', '7.jpg', '207-08-12', 'Harry, Ron et Hermione, âgés à présent de 17 ans, décident de ne pas retourner à Poudlard et de se consacrer entièrement à la recherche des horcruxes. Ils trouvent le médaillon de Serpentard au ministère de la Magie et apprennent que l\'épée de Gryffondor a permis à Dumbledore de briser la bague horcruxe des Gaunt l\'année précédente. Severus Rogue, par le biais de son patronus, guide Harry jusqu\'à la cachette de l\'épée et Ron s\'en sert pour détruire le médaillon. En parallèle, le trio apprend l\'existence de trois reliques très puissantes : la baguette de sureau (dont Voldemort serait déjà en possession), la pierre de Résurrection et la cape d\'invisibilité (dont Harry a hérité), faisant du sorcier qui les possède un « Maître de la mort ». Leur quête des horcruxes finit par les ramener à Poudlard où l\'un d\'eux est caché. Le trio retourne donc au château, très vite attaqué par Voldemort et ses partisans. Hermione détruit la Coupe horcruxe de Poufsouffle à l\'aide d\'un croc de Basilic et Harry trouve dans la Salle sur Demande le diadème horcruxe de Serdaigle, qui est également détruit. Remus Lupin, Tonks et Fred Weasley sont tués dans la bataille. En voulant s\'approcher du serpent de Voldemort (et dernier horcruxe), Harry, Ron et Hermione sont témoins de l\'attaque mortelle infligée à Severus Rogue. Avant de mourir, le professeur confie ses souvenirs à Harry, lui prouve son allégeance, son amour envers sa mère Lily Potter et lui montre la clé de sa victoire contre Voldemort : Harry doit mourir, car il constitue lui-même un horcruxe involontaire depuis le jour où Voldemort a tenté de le tuer alors qu\'il n\'était qu\'un bébé. Résigné, Harry se rend à Voldemort dans la forêt interdite. En utilisant la pierre de Résurrection qu\'il trouve à l\'intérieur du vif d\'or, il fait réapparaître brièvement ses parents, ainsi que Sirius Black et Remus Lupin, qui le soutiennent et le rassurent sur la perspective de la mort. Mais Harry, une nouvelle fois, survit au sortilège de Voldemort. En ayant utilisé le sang de Harry pour recréer son corps après le tournoi des Trois Sorciers, Voldemort aurait transféré en lui-même une partie du charme de protection que Lily Potter avait transmis à son fils. Par conséquent, tant que ce charme est présent dans le corps de Voldemort (tant qu\'il existe), Harry ne peut mourir. Neville Londubat tire l\'épée de Gryffondor du Choixpeau magique et s\'en sert pour décapiter le serpent. Tous les horcruxes à présent détruits, Voldemort redevient par conséquent un simple mortel. La rencontre des deux sortilèges de Harry et de Voldemort fait voler la baguette de sureau des mains du mage noir, la baguette refusant de tuer Harry, son maître légitime et le seul à avoir accepté la mort. Voldemort est tué par son propre maléfice. Un épilogue est consacré à l\'embarquement des enfants des trois héros, dix-neuf ans plus tard, à bord du Poudlard Expres', 'J. K. Rowling', '13', '2549200364784', '0', '2021-10-21')");
+
+        $this->addSql('SET FOREIGN_KEY_CHECKS = 1');
     }
+
 
     public function down(Schema $schema): void
     {

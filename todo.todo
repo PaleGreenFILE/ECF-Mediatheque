@@ -112,9 +112,3 @@ Déploiement:
                 return $query->getQuery()->getResult();
             Par
                 return $query->getQuery()->getSingleScalarResult();
-
-
-
-
-
-

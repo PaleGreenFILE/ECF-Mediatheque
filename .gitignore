@@ -26,3 +26,8 @@
 ###> vich/uplaod File ###
 /public/uploads/
 ###< vich/uplaod File ###
+
+###> Archive Migration ###
+ARCHIVE_MIGRATION.php
+###< Archive Migration ###
+

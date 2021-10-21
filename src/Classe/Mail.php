@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Services;
+namespace App\Classe;
 
 /*
 This call sends a message based on a template.

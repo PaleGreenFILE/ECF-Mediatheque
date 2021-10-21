@@ -33,6 +33,7 @@
         "symfony/http-client": "5.3.*",
         "symfony/intl": "5.3.*",
         "symfony/mailer": "5.3.*",
+        "symfony/mailjet-mailer": "5.3.*",
         "symfony/mime": "5.3.*",
         "symfony/monolog-bundle": "^3.1",
         "symfony/notifier": "5.3.*",

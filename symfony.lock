@@ -473,6 +473,15 @@
             "config/packages/mailer.yaml"
         ]
     },
+    "symfony/mailjet-mailer": {
+        "version": "5.3",
+        "recipe": {
+            "repo": "github.com/symfony/recipes",
+            "branch": "master",
+            "version": "5.2",
+            "ref": "037c3256baa3334fd4cc3092a63209ae523696ff"
+        }
+    },
     "symfony/maker-bundle": {
         "version": "1.0",
         "recipe": {

@@ -80,6 +80,8 @@ Emprunter un livre:
                 4.RETIRE => RENDU:
                     ☐ Livre restitué dans le temps impartis
 
+    ☐ Parler de la recherche sur erreur migrations migrate
+
 CDN :
     ☐ cdn.datatables
     ☐ cdn.select2

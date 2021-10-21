@@ -21,7 +21,7 @@ class Mail
             'Messages' => [
                 [
                     'From' => [
-                        'Email' => "pascal.briffard@gmail.com",
+                        'Email' => "ECF-Mediatheque@studi.fr",
                         'Name' => "Studi #ECF 12/2021",
                     ],
                     'To' => [
@@ -42,6 +42,22 @@ class Mail
         $response = $mj->post(Resources::$Email, ['body' => $body]);
         $response->success() && var_dump($response->getData());
     }
+
+    // public function sendMailRetard()
+    // {
+    //     $mail = new Mail();
+    //     $user = $this->getUser()->getFullName();
+    //     $mailTo = $this->getUser()->getEmail();
+
+    //     $mail->send($mailTo, 'bridevproject@gmail.com', "Retard ...", `
+    //         Bonjour $user vous n'avez pas restitué les livres empruntés dans le temps
+    //         impartis, veuillez prendre contact avec la médiathèque.
+    //     `);
+
+    //     $this->addFlash('success', 'Email envoyé.');
+
+    //     return $this->redirectToRoute('check_reservation');
+    // }
 
 
 }

@@ -4,6 +4,7 @@ namespace App\Controller\Libraire;
 
 use App\Entity\User;
 use App\Entity\Livre;
+use App\Services\Mail;
 use App\Entity\Libraire;
 use App\Entity\Reservation;
 use App\Repository\UserRepository;
@@ -13,17 +14,20 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
 use EasyCorp\Bundle\EasyAdminBundle\Config\Dashboard;
+use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class LibraireReservationController extends AbstractDashboardController
 {
     private $userRepository;
     private $reservationRepository;
+    private $session;
 
     public function __construct(
         UserRepository $userRepository,
         ReservationRepository $reservationRepository,
-        RequestStack $requestStack
+        RequestStack $requestStack,
+        SessionInterface $session
     )
     {
         $this->userRepository = $userRepository;
@@ -78,6 +82,25 @@ class LibraireReservationController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Reservation', 'fas fa-reservation', Reservation::class);
 
+    }
+
+
+    #[Route('/libraire/test', name:'test')]
+    public function sendMailRetard()
+    {
+        $mail = new Mail();
+        $user = $this->getUser()->getFullName();
+        $mailTo = $this->getUser()->getEmail();
+
+        $mail->send($mailTo, 'bridevproject@gmail.com', "Retard ...", `
+            Bonjour $user vous n'avez pas restitué les livres empruntés dans le temps
+            impartis, veuillez prendre contact avec la médiathèque.
+        `);
+
+        $this->addFlash('success', 'Email envoyé.');
+
+        // dd($user, $mailTo, $mail);
+        return $this->redirectToRoute('check_reservation');
     }
 
 }

@@ -19,18 +19,21 @@ class ConfirmationController extends AbstractController
     private $LivreRepository;
     private $UserRepository;
     private $ReservationService;
+    private $ReservationRepo;
 
     public function __construct(
         LivreRepository $LivreRepository,
         UserRepository $UserRepository,
         ReservationService $Service,
-        SessionInterface $Session
+        SessionInterface $Session,
+        ReservationRepository $ReservationRepo,
     )
     {
         $this->LivreRepository = $LivreRepository;
         $this->UserRepository = $UserRepository;
         $this->ReservationService = $Service;
         $this->SessionInterface = $Session;
+        $this->ReservationRepo = $ReservationRepo;
     }
 
     #[Route('/panier/confirmation', name: 'confirmation_reservation')]
@@ -62,6 +65,15 @@ class ConfirmationController extends AbstractController
             $this->addFlash('danger', 'Veuillez réserver au moins un livre.');
         }
 
-        return $this->redirectToRoute('app_home');
+        $curentUser = $this->getUser();
+
+        // ? Récupérer la réservation de l'utilisateur connecté
+        // dd($curentUser);
+        $ReservationUserCurent = $this->ReservationRepo->findBy(['user' => $curentUser]);
+
+        return $this->render('reservation/detail_reservation.html.twig', [
+            'reservations' => $ReservationUserCurent,
+        ]);
+
     }
 }

@@ -90,13 +90,13 @@ class LibraireReservationController extends AbstractDashboardController
     {
         // dd($reservation->getUser()->getEmail());
         // ! Remplacer par le nom
-        $user = $reservation->getUser()->getEmail();
-        $mailTo = 'bridevproject@gmail.com';
-        $content = 'Bonjour ' .$user. ' vous n\'avez pas restitué les livres empruntés dans le temps';
-        $mail->send($mailTo, $user, 'hello@parlonscode.com', "Retard ...", `
-        `);
+        // $user = $reservation->getUser()->getEmail();
+        // $mailTo = 'bridevproject@gmail.com';
+        // $content = 'Bonjour ' .$user. ' vous n\'avez pas restitué les livres empruntés dans le temps';
+        // $mail->send($mailTo, $user, 'hello@parlonscode.com', "Retard ...", `
+        // `);
 
-        $this->addFlash('success', 'Email envoyé.');
+        $this->addFlash('success', 'Email envoyé à ' .$reservation->getUser()->getFullName(). ' avec succès');
 
         // dd($user, $mailTo, $mail);
         return $this->redirectToRoute('check_reservation');

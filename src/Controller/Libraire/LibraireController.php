@@ -5,6 +5,7 @@ namespace App\Controller\Libraire;
 use App\Entity\User;
 use App\Entity\Livre;
 use App\Entity\Libraire;
+use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -48,6 +49,8 @@ class LibraireController extends AbstractDashboardController
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
 
         yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
+
+        yield MenuItem::linkToCrud('Gestion de l\'emprunt ', 'fas fa-eye', Reservation::class);
 
         yield MenuItem::linkToRoute('Réservation', 'fas fa-stamp', 'check_reservation');
 

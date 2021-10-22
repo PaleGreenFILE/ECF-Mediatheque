@@ -8,8 +8,20 @@
 
 {% block content %}
 	<section class="container">
-		<h1 class="text-center p-2">Réservations</h1>
-
+	<div class="row">
+		<div class="col-6">
+			<div class="alert alert-info">
+				<p>Lorsqu'une restitution n'est pas faites dans le temps imparti envoyé un mail en cliquant sur le boutton <b>Mail</b> un email sera envoyé.
+				</p>
+				<p>
+					Rendez-vous dans <b>Gestion de l'emprunt</b> pour effectuer la restitution.
+				</p>
+			</div>
+		</div>
+		<div class="col-6">
+			<h1 class="text-center p-2">Réservations</h1>
+		</div>
+	</div>
 		<table class="table text-center">
 			<thead>
 				<tr>
@@ -19,63 +31,78 @@
 					<th>Date d'emprunt</th>
 					<th>Date de restitution</th>
 					<th>Status</th>
-					<th colspan="2" class="text-center">Etat Réservation</th>
+					<th class="text-center">Etat Réservation</th>
+					<th>Rendu</th>
 				</tr>
 			</thead>
 			<tbody>
 				{% for reservation in reservations %}
-					<tr>
-						<td>
-							{{ reservation.id }}
-						</td>
-						<td>
-							{{ reservation.user.fullname }}
-						</td>
+					{% if reservation.isRestitue == false %}
+						<tr>
+							<td>
+								{{ reservation.id }}
+							</td>
 
-						{# <td> LIVRE </td> #}
-						<td>
-							<ul>
-								{% for livre in reservation.livre %}
-									<li>
-										{{ livre }}
-									</li>
-								{% endfor %}
-							</ul>
-						</td>
-						<td>
-							{{ reservation.empruntedAt|date('d-m-Y à H:i') }}
-						</td>
+							<td>
+								<ul>
+									{% for livre in reservation.livre %}
+										<li>
+											{{ livre }}
+										</li>
+									{% endfor %}
+								</ul>
+							</td>
 
-						<td>
-							{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
-						</td>
-						<td>
-							<a class="btn btn-sm btn-primary px-3 py-2 fw-bold rounded" href="">
-								{{ reservation.status }}
-							</a>
-						</td>
+							<td>
+								{{ reservation.user.fullname }}
+							</td>
 
-						{% set TODAY =  'now'|date("Y-m-d") %}
-						{% set RESTITUTION = reservation.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
+							<td>
+								{{ reservation.empruntedAt|date('d-m-Y à H:i') }}
+							</td>
 
-						<td class="mb-1">
-							{% if ( TODAY > RESTITUTION ) %}
-								<div class="d-flex justify-center justify-content-between">
-									<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:red">
-										RETARD
-									</span>
-										<a class="btn btn-sm btn-warning px-3 py-2 fw-bold"
-										href="{{path('mailing',{'id':reservation.id})}}">Mail</a>
+							<td>
+								{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
+							</td>
+
+							<td>
+							<div class="">
+							<span class="bg-primary text-white rounded px-1 py-1 fw-light">
+								{{reservation.status}}
+							</span>
+							</div>
+
+							</td>
+
+							{% set TODAY =  'now'|date("Y-m-d") %}
+							{% set RESTITUTION = reservation.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
+
+							<td class="mb-1">
+								{% if ( TODAY > RESTITUTION ) %}
+									<div class="d-flex justify-center justify-content-between">
+										<span class="text-white rounded px-1 py-1 fw-light" style="background-color:red">
+											RETARD
+										</span>
+										<a class="btn btn-sm btn-warning px-1 py-1 fw-bold" href="{{path('mailing',{'id':reservation.id})}}">Mail</a>
+									{% else %}
+										<span class="text-white label px-1 py-1 fw-bold rounded" style="background-color:green">
+											OKAY
+										</span>
+									</div>
+								{% endif %}
+							</td>
+
+							<td class="">
+								{% if (reservation.isRestitue) == false %}
+									<span id="restitution">Non</span>
 								{% else %}
-									<span class="text-white label px-3 py-2 fw-bold rounded" style="background-color:green">
-										OKAY
-									</span>
-								</div>
-
-							{% endif %}
-						</td>
-					</tr>
+									<span>Oui</span>
+								{% endif %}
+							</td>
+						</tr>
+					{% endif %}
 				{% endfor %}
+
 			</tbody>
 		</table>
 	</section>

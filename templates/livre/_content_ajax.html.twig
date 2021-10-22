@@ -2,9 +2,9 @@
 	<div class="col" id="livre-{{livre.id}}">
 		<div class="card shadow rounded border border-2 border-secondary mb-2" style="width-max: 15rem;">
 		<img src="{{ asset('uploads/illustrations/' ~ livre.file ) }} "
-			class=""
+			class="mx-auto mt-2"
 			alt="{{livre.file}}"
-			style="{{livre.file is not null ? 'border-radius: 7px; height: 250px; width: 250' : '' }}"
+			style="{{livre.file is not null ? 'height: 150px; width: 150px' : '' }}"
 		>
 
 			<div

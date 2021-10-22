@@ -13,7 +13,7 @@
 
 			<p id="categorie-{{genre.nom|lower}}">
 				<input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}" {{checked}}>
-				<label for="genre{{genre.id}}">{{genre.nom}}</label>
+				<label for="genre{{genre.id}}">{{genre.nom|capitalize}}</label>
 			</p>
 		{% endfor %}
 		<input type="hidden" name="page" value="{{page}}">

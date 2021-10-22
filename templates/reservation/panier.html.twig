@@ -27,16 +27,17 @@
             </thead>
             <tbody>
                 {% for item in items %}
-                    <tr class="text-center">
-                        <td> <img src="{{item.livre.file}}" height="50" width="50" alt="{{item.livre.titre}}"> </td>
-                        <td> {{item.livre.titre|capitalize}} </td>
-                        <td>
+                    <td>
+                        <img src="{{ asset('uploads/illustrations/' ~ item.livre.file ) }}" height="50" width="50" alt="{{item.livre.titre}}">
+                    </td>
+                    <td> {{item.livre.titre|capitalize}} </td>
+                    <td>
                         <div class="d-flex justify-content-around">
-                        {% if item.quantite > 1 %}
-                            <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
-                                <i class="fas fa-minus-square"></i>
-                            </a>
-                        {% endif %}
+                            {% if item.quantite > 1 %}
+                                <a href=" {{path('decrement_reservation', {'id': item.livre.id})}} "class="btn btn-sm btn-danger">
+                                    <i class="fas fa-minus-square"></i>
+                                </a>
+                            {% endif %}
                             <span class="text-center">{{item.quantite}}</span>
                         </div>
                         </td>

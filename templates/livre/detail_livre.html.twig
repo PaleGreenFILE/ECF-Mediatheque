@@ -5,7 +5,11 @@
 <section class="conatiner">
 	<div class="mt-5 d-flex justify-content-around">
 		<div class="justify-self-center">
-			<img class="mx-auto d-block rounded mt-5" src="{{livre.illustration}}" width="250" alt="">
+		<img class="mx-auto d-block rounded mt-5"
+		src="{{ asset('uploads/illustrations/' ~ livre.file ) }}"
+		width="250px" alt=""
+		>
+
 			{# <div id="image-right"> #}
 				<h1 class="text-center my-5">{{livre.titre|upper}}</h1>
 				<div class="info d-flex justify-content-around">

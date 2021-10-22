@@ -3,6 +3,7 @@
 namespace App\Services;
 
 use App\Entity\Livre;
+use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -138,8 +139,6 @@ class ReservationService
         $livre->setQuantite($livre->getQuantite() + 1);
         $livre->setPret($livre->getPret() - 1);
 
-
-
         $this->savePanier($reservation);
 
         $this->EntityManagerInterface->flush();
@@ -172,4 +171,6 @@ class ReservationService
         return $detailPanier;
 
     }
+
+    
 }

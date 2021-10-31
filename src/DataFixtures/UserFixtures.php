@@ -62,7 +62,7 @@ class UserFixtures extends Fixture
         $users[] = $user;
 
         // ? Création de 20 comptes utilisateurs
-        for ($i = 1; $i <= 20; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             $users = [];
             $user = new User();
             $user->setNom($faker->lastname());

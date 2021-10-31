@@ -13,6 +13,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\DateField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\ChoiceField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\BooleanField;
+use EasyCorp\Bundle\EasyAdminBundle\Field\DateTimeField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\AssociationField;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractCrudController;
 
@@ -38,7 +39,7 @@ class ReservationCrudController extends AbstractCrudController
 
             textField::new('status', 'Statut'),
 
-            DateField::new('empruntedAt', 'Date d\'emprunt'),
+            DateTimeField::new('empruntedAt', 'Date d\'emprunt'),
 
             AssociationField::new('user'),
 

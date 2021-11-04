@@ -1,0 +1,16 @@
+todo-urgent:
+    1. Règler les problèmes liés au bundle scheb_2fa
+    2. Meilleure gestion de la réservation
+    3. Meilleure gestion des alertes
+
+todo-important:
+    1. Retravailler le responsive design
+        a. Mobile : 1 carte livre
+        b. md : 2 cartes livres
+        c. lg : 3 cartes livres
+        d. xl : 4 cartes livres
+
+todo-option:
+    1. Annuler un livre directement depuis /livre
+    2. Création de fiche client
+

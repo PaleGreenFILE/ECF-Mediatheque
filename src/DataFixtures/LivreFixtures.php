@@ -14,13 +14,13 @@ class LivreFixtures extends Fixture
         $faker = Faker\Factory::create('fr_FR');
 
         // ? Le compte Livres
-        for ($i = 1; $i <= 50 ; $i++) {
+        for ($i = 8; $i <= 130 ; $i++) {
             $livres = [];
             $livre = new Livre();
             $livre->setTitre($faker->word(5));
             // $livre->setIllustration('https://picsum.photos/400/400');
             $livre->setParution($faker->dateTimeThisCentury());
-            $livre->setDescription($faker->paragraph(2, false));
+            $livre->setDescription($faker->paragraph(5, true));
             $livre->setAuteur($faker->firstname() . ' ' . $faker->lastname());
             $livre->setQuantite($faker->numberBetween(0,50));
             $livre->setIsbn($faker->isbn13());

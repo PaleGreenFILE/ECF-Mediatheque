@@ -44,7 +44,7 @@ class Reservation
     private $IsRestitue;
 
     /**
-     * @ORM\Column(type="datetime_immutable")
+     * @ORM\Column(type="datetime")
      */
     private $EmpruntedAt;
 
@@ -123,12 +123,12 @@ class Reservation
         return $this;
     }
 
-    public function getEmpruntedAt(): ?\DateTimeImmutable
+    public function getEmpruntedAt(): ?\DateTime
     {
         return $this->EmpruntedAt;
     }
 
-    public function setEmpruntedAt(\DateTimeImmutable $EmpruntedAt): self
+    public function setEmpruntedAt(\DateTime $EmpruntedAt): self
     {
         $this->EmpruntedAt = $EmpruntedAt;
 

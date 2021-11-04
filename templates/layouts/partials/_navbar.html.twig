@@ -24,25 +24,28 @@
 					{# <li class="nav-item">
 						<a class="nav-link" href="#">Rechercher un livre</a>
 					</li> #}
-					</li>
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('detail_reservation', {'id': app.user.id} ) }}">Mes réservations</a>
 					</li>
 					{% if is_granted ("ROLE_LIBRAIRE") %}
-						<li class="nav-item">
-							<a class="nav-link" href="#">Ajouter un livre</a>
-						</li>
-						<li class="nav-item">
-						<a class="nav-link btn btn-btn-sm btn-warning " href="{{path('libraire')}}">Admin</a>
+						{% if is_granted ("ROLE_ADMIN") and is_granted ("ROLE_LIBRAIRE") %}
+							<li class="nav-item">
+								<a class="nav-link btn btn-sm btn-outline-danger ms-1" href={{path('admin')}}>Admin</a>
+							</li>
+						{% else %}
+							<li class="nav-item">
+								<a class="nav-link" href="#">Ajouter un livre</a>
+							</li>
+							<li class="nav-item">
+								<a class="nav-link btn btn-sm btn-outline-warning me-1" href="{{path('libraire')}}">Gestion Libraire</a>
+							</li>
+						{% endif %}
 
-						</li>
+
+
 					{% endif %}
 
-					{% if is_granted ("ROLE_ADMIN") %}
-						<li class="nav-item">
-							<a class="nav-link btn btn-btn-sm btn-warning " href="admin">Admin</a>
-						</li>
-					{% endif %}
+
 				</ul>
 				<ul class="nav navbar-nav ms-auto">
 					<div class="d-flex justify-content-end">

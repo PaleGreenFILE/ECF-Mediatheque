@@ -88,7 +88,6 @@ class ReservationService
         // dd($curentUser);
 
         $this->EntityManagerInterface->flush();
-
     }
 
     public function remove(int $id)
@@ -172,5 +171,5 @@ class ReservationService
 
     }
 
-    
+
 }

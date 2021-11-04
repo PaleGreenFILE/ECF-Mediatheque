@@ -94,7 +94,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     {
         $this->isAutorise = false;
         $this->roles = ['ROLE_USER'];
-        $this->emprunt_max = 10;
+        $this->emprunt_max = 5;
         $this->reservations = new ArrayCollection();
     }
     /**

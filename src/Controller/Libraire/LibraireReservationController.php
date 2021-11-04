@@ -99,6 +99,6 @@ class LibraireReservationController extends AbstractDashboardController
         $this->addFlash('success', 'Email envoyé à ' .$reservation->getUser()->getFullName(). ' avec succès');
 
         // dd($user, $mailTo, $mail);
-        return $this->redirectToRoute('check_reservation');
+        return $this->redirectToRoute('libraire');
     }
 }

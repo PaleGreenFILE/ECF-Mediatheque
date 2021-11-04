@@ -38,7 +38,7 @@ Backlog:
     ☐ Comment faire une dataFixtures avec une relation (ajouter un genre aux datfixtures livre)
     ☐ Pagination queryStrings -- Ajax ...
 
-Emprunter un livre:
+Emprunter un livre                             :
         ✔ Création d'une entity Emprunt
         ✔ Définir combien de livre un utilisateur peut emprunter
         ✔ Faire comme un panier (pour voir les livres ajoutés)
@@ -66,8 +66,8 @@ Emprunter un livre:
         ☐ Si livre non restitué dans le temps impartis envoyé un Email de
 
     A Faire Vite:
-        ☐ Coder un envoie de mail quand RETARD apparait
-        ☐ Afficher dans le back réservation le User
+        ✔ Coder un envoie de mail quand RETARD apparait
+        ✔ Afficher dans le back réservation le User
         ☐ Modifier le status de la réservation grace a un selectCase
             Status:
                 1.ATTENTE => PRET:
@@ -87,13 +87,13 @@ CDN :
     ☐ cdn.select2
 
 Déploiement:
-    ☐ Heroku
-    ☐ ClearDB (pour une database mySql)
-    ☐ Travailler sur une copie de la database
+    ✔ Heroku
+    ✔ ClearDB (pour une database mySql)
+    ✔ Travailler sur une copie de la database
     Ajouter à la migration:
-        ☐ Un Admin
-        ☐ Un Libraire
-        ☐ Un User
+        ✔ Un Admin
+        ✔ Un Libraire
+        ✔ Un User
 
     @critical
     Sécurité:
@@ -102,7 +102,7 @@ Déploiement:
         ✔ Un user non autorisé ne peut pas taper /xxx et accèder à la route
         ✔ /admin réservé aux admin
         ✔ /libraire réservé au Libraire ou aux Admin
-        ☐ La décrémentation des livres ne fonctionne plus !
+        ✘ La décrémentation des livres ne fonctionne plus !
 
     @Problèmes:
         Pagination:
@@ -112,3 +112,6 @@ Déploiement:
                 return $query->getQuery()->getResult();
             Par
                 return $query->getQuery()->getSingleScalarResult();
+
+// TODO pour le jury
+☐ Commit le code ici pour utiliser sur le windows

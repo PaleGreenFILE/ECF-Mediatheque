@@ -1,7 +1,14 @@
 <nav class="navbar navbar-expand-lg navbar-light bg-light mb-5">
-    <span class="navbar-brand mb-0 h1 ms-3">
-        <a class="text-decoration-none text-success" href="{{path('app_home')}}">Médiathèque</a>
-    </span>
+	{% if app.user %}
+		<div id="user-connect mx-auto">
+		<span class="navbar-brand mb-0 h1 ms-3 d-block">
+			<a class="text-decoration-none text-success" href="{{path('app_home')}}">Médiathèque</a>
+		</span>
+		<span style="font-size:1.1em;" class="badge bg-primary ms-1 mx-auto d-block">{{ app.user.prenom|capitalize }} {{ app.user.nom|capitalize }}
+			<span class="badge bg-light text-success">{{ app.user.empruntMax }}</span>
+		</span>
+	</div>
+	{% endif %}
 
 	<button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
 		<span class="navbar-toggler-icon"></span>

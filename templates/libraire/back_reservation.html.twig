@@ -28,7 +28,7 @@
 					<th>Numéro</th>
 					<th>Livre</th>
 					<th>Emprunteur</th>
-					<th>Date d'emprunt</th>
+{#					<th>Date d'emprunt</th>#}
 					<th>Date de restitution</th>
 					<th class="text-center">Etat Réservation</th>
 					<th>Rendu</th>
@@ -56,9 +56,9 @@
 								{{ reservation.user.fullname }}
 							</td>
 
-							<td>
+					{#		<td>
 								{{ reservation.empruntedAt|date('d-m-Y à H:i') }}
-							</td>
+							</td>#}
 
 							<td>
 								{{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
@@ -94,9 +94,7 @@
 							{# Todo-1 : Bouton de restitituion d'emprunt #}
 							<td class="">
 								{% if (reservation.isRestitue) == false %}
-									<span id="restitution">Non</span>
-								{% else %}
-									<span>Oui</span>
+									<a class="btn btn-sm btn-primary">Enregistrer la restitution</a>
 								{% endif %}
 							</td>
 						</tr>

@@ -46,7 +46,7 @@ class UserCrudController extends AbstractCrudController
 
 
             ChoiceField::new ('roles')->setChoices([
-                'ROLE_USER' => 'ROLE_ADMIN',
+                'ROLE_ADMIN' => 'ROLE_ADMIN',
                 'ROLE_LIBRAIRE' => 'ROLE_LIBRAIRE',
                 'ROLE_USER' => 'ROLE_USER',
             ])->allowMultipleChoices()->setColumns('col-6')->hideOnIndex(),

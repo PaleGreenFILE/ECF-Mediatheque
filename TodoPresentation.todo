@@ -1,6 +1,18 @@
 todo-urgent:
     1. Règler les problèmes liés au bundle scheb_2fa
     2. Meilleure gestion de la réservation
+        a. La session panier s'efface trop vite
+        b. Front => Gestion dynamique du status de la réservation
+            Libraire :
+                - Supprimer le status pour ne garder que Etat Réservation
+                - Ajouter bouton de restitution
+                - Supprimer la div d'info
+        c. Back => Quand une réservation est passé cliqué sur un bouton pour :
+            - Change le status de ATTENTE à PRET ( + décelneche mail )
+            - Gerer la redirection après envoie mail (si je reste sur la même page je perd des lien de menu dans le dashboard)
+            - Afficher un notif visuel pour informer le libraire que des reservations sont en attente
+            - Coder un bouton de restitution ( fonction remove du panier ?? )
+            - Mettre a jour automatiquement en database le status
     3. Meilleure gestion des alertes
 
 todo-important:

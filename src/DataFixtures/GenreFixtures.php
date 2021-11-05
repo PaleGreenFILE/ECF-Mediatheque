@@ -15,7 +15,7 @@ class GenreFixtures extends Fixture
 
         // ? Création des genres
         $value = ['Fiction', 'Thriller', 'Horreur', 'Biographie', 'Roman', 'Theatre'];
-        for ($i = 1; $i <= count($value); $i++) {
+        for ($i = 1, $iMax = count($value); $i <= $iMax; $i++) {
         $genres = [];
         $genre = new Genre();
         $genre->setNom($value[$i -1]);

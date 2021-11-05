@@ -24,7 +24,7 @@ class ReservationController extends AbstractController
     }
 
     #[Route('/reservation/livre/{id<[0-9]+>}', name: 'add_reservation')]
-    public function add($id, Livre $livre, ReservationService $reservationService, Request $request): Response
+    public function add($id, ReservationService $reservationService, Request $request): Response
     {
         // ? Redirection de l'utilisateur si il n'est pas connecté
         if ($this->getUser() == null) {
@@ -37,9 +37,9 @@ class ReservationController extends AbstractController
         }
 
         // ? Vérifier si le livre existe
-        $livre = $this->LivreRepository->find($id);
+        $bookBorrow = $this->LivreRepository->find($id);
 
-        if (!$livre) {
+        if (!$bookBorrow) {
             throw $this->createNotFoundException("Le livre $id n'éxiste pas !...");
         }
 
@@ -62,7 +62,7 @@ class ReservationController extends AbstractController
         // dd($session->get('reservation'));
 
         return $this->redirectToRoute('app_detail_livre', [
-            'id' => $livre->getId()
+            'id' => $bookBorrow->getId()
         ]);
     }
 

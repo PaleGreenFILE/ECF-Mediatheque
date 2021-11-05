@@ -54,7 +54,7 @@ class ConfirmationController extends AbstractController
                 $reservation->addLivre($one['livre']);
             }
 
-            $reservation->setEmpruntedAt(new DateTimeImmutable());
+            $reservation->setEmpruntedAt(new \DateTime());
             $reservation->setIsValidate(false);
             $reservation->setIsRestitue(false);
             $entityManager->persist($reservation);

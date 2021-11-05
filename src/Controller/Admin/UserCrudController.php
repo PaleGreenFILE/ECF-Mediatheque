@@ -69,7 +69,7 @@ class UserCrudController extends AbstractCrudController
 
     public function configureActions(Actions $actions): Actions
     {
-        if ($this->IsGranted('ROLE_LIBRAIRE')) {
+        if (!$this->IsGranted('ROLE_ADMIN')) {
             return $actions
             ->remove(Crud::PAGE_INDEX, Action::NEW)
             ->remove(Crud::PAGE_INDEX, Action::EDIT)

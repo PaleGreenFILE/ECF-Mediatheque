@@ -17,9 +17,15 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class AdminController extends AbstractDashboardController
 {
-    private $userRepository;
+    /**
+     * @var UserRepository
+     */
+    private UserRepository $userRepository;
 
 
+    /**
+     * @param UserRepository $userRepository
+     */
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
@@ -38,12 +44,18 @@ class AdminController extends AbstractDashboardController
         ]);
     }
 
+    /**
+     * @return Dashboard
+     */
     public function configureDashboard(): Dashboard
     {
         return Dashboard::new()
             ->setTitle('Mediatheque Chapelle-Cureaux');
     }
 
+    /**
+     * @return iterable
+     */
     public function configureMenuItems(): iterable
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');

@@ -4,7 +4,7 @@
     "minimum-stability": "stable",
     "prefer-stable": true,
     "require": {
-        "php": ">=7.2.5",
+        "php": ">=7.2.5 || ^8.0.0",
         "ext-intl": "*",
         "ext-ctype": "*",
         "ext-iconv": "*",

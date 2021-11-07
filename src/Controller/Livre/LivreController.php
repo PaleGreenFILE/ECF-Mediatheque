@@ -31,13 +31,13 @@ class LivreController extends AbstractController
         // dd($livres = $this->LivreRepository->selectDateInterval("1980-01-01", "1995-01-01"));
 
        
-        if ($this->getUser() == null) {
+        if ($this->getUser() === null) {
             return $this->redirectToRoute('app_home');
-        } else {
-             $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
-                return $this->redirectToRoute('app_home');
-             }
+        }
+
+        $user_autorise = $this->getUser()->getIsAutorise();
+        if ($user_autorise === false) {
+           return $this->redirectToRoute('app_home');
         }
 
         // * Pagination

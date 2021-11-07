@@ -17,10 +17,11 @@
 			style="z-index: 999999999;"
 			class="mt-5 container alert alert-danger shadow"
 			style="height:10rem; position: fixed; top:50%; left:50%; transform: translate(-50%, -50%);">
-			<p class="lead text-center mt-5" style:"position:absolute; top:auto">
-                Vous n'êtes pas encore autorisé à accèder à l'application. Soyez patient, un administrateur va prochainement valider vos accès.
+			<p class="lead text-center mt-5" style="position:absolute; top:auto">
+                Vous n'êtes pas encore autorisé à accéder à l'application. Soyez patient, un administrateur va
+				prochainement valider vos accès.
             </p>
-            <a class="d-block text-center h4" href=" {{path('app_logout')}} ">Se déconnecter.</a>
+            <a class="d-block text-center h4" href="{{path('app_logout')}}">Se déconnecter.</a>
 		</div>
 	{% else %}
 
@@ -30,8 +31,6 @@
 				Nous sommes le {{ "now"|format_datetime('full', 'none') }}.
 			</h1>
         </section>
-		<section class="container-fluid mt-5 p-5">
-			<h2>Voici nos dernières oeuvres entrées :</h2>
-		</section>
+
     {% endif %}
 {% endblock %}

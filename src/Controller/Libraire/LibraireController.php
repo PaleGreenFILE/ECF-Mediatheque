@@ -15,17 +15,17 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class LibraireController extends AbstractDashboardController
 {
-    private $userRepository;
+    private UserRepository $userRepository;
 
     public function __construct(UserRepository $userRepository)
     {
         $this->userRepository = $userRepository;
     }
-    /**
-     * @Route("/libraire", name="libraire")
-     */
+
+    #[Route("/libraire", name:"libraire")]
     public function index(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_LIBRAIRE', 'Accès à Libraire', "Cette page est exclusivement réservée aux employés.");
         // return parent::index();
         $users = $this->userRepository->findAll();
 

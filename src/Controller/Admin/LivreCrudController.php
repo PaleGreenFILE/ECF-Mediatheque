@@ -41,6 +41,8 @@ class LivreCrudController extends AbstractCrudController
         $fields = [
             IdField::new('id', 'Id')->onlyOnIndex(),
 
+            ImageField::new('file', 'Image')->setBasePath('/uploads/illustrations/')->onlyOnIndex(),
+
             TextField::new('titre')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
@@ -65,9 +67,7 @@ class LivreCrudController extends AbstractCrudController
             IntegerField::new('quantite', 'Exemplaire')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
 
-            textField::new('imageFile')->setFormType(VichImageType::class)->onlyWhenCreating(),
-            
-            ImageField::new('file')->setBasePath('/uploads/illustrations/')->onlyOnIndex()
+            textField::new('imageFile')->setFormType(VichImageType::class)->onlyWhenCreating()
         ];
 
         // if ($pageName == Crud::PAGE_INDEX || $pageName == Crud::PAGE_DETAIL) {

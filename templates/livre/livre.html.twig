@@ -2,23 +2,25 @@
 
 {# ? Création des variables perso #}
 {% set queryParams = app.request.query.all %}
-
 {% block body %}
+{{ dump('Je suis sur la page Livre') }}
 	<div class="container">
 		<div class="row flex-nowrap">
-		{# ? Filtre par catégorie #}
+			{# ? Filtre par catégorie #}
 
-		<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
-			{% include 'livre/_filtre_genre.html.twig' %}
-		</div>
-
-		{# ? Afficher les cartes "Livre" #}
-			<div class="col py-3 card-deck" id="livres">
-				<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 bg-red" id="content">
-					{# {% include "livre/_content_ajax.html.twig" %}#}
-					{% include "livre/_test.html.twig" %}
-				</div>
+			<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">
+				{% include 'livre/_filtre_genre.html.twig' %}
 			</div>
+
+			{# ? Afficher les cartes "Livre" #}
+{#			<div class="col py-3 card-deck" id="livres">#}
+{#				<div id="content" class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3">#}
+					{# {% include "livre/_content_ajax.html.twig" %} #}
+			<div id="content">
+				{% include "livre/_table.html.twig" %}
+			</div>
+{#				</div>#}
+{#			</div>#}
 		</div>
 	</div>
 

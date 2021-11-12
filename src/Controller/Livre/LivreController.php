@@ -44,7 +44,7 @@ class LivreController extends AbstractController
         // * Pagination
 
         // ? Définir la limite de livre par page
-        $limit = 9;
+        $limit = 4;
 
         // ? Récupérer le numéro de ma page
         $page = (int)$request->query->get('page', 1);
@@ -63,8 +63,13 @@ class LivreController extends AbstractController
 
         // ? Vérifie si j'ai une requête ajax
         if ($request->get('ajax')) {
-            return new JsonResponse([
+            /*return new JsonResponse([
                 'content' => $this->renderView('livre/_content_ajax.html.twig', compact(
+                    'livres', 'genres', 'page', 'limit', 'total'
+                ))
+            ]);*/
+            return new JsonResponse([
+                'content' => $this->renderView('livre/_table.html.twig', compact(
                     'livres', 'genres', 'page', 'limit', 'total'
                 ))
             ]);
@@ -72,15 +77,7 @@ class LivreController extends AbstractController
         // ? Passer les livres
         $Books = $this->LivreRepository->findAll();
 
-        /*return $this->render('livre/livre.html.twig', [
-            'livres' => $livres,
-            'genres' => $genres,
-            'page'   => $page,
-            'limit'  => $limit,
-            'total'  => $total,
-            'books'  => $Books
-        ]);*/
-        return $this->render('livre/_table.html.twig', [
+        return $this->render('livre/livre.html.twig', [
             'livres' => $livres,
             'genres' => $genres,
             'page'   => $page,

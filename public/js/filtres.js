@@ -7,6 +7,7 @@ window.onload = () => {
             // Ici on intercepte les clics
             // On récupère les données du formulaire
             const Form = new FormData(FiltersForm);
+            console.log(Form)
 
             // On fabrique la "queryString"
             const Params = new URLSearchParams();

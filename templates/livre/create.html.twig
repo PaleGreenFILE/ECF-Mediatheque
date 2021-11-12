@@ -1,0 +1,16 @@
+{% extends "layouts/base.html.twig" %}
+
+{% block title 'Ajouter un livre' %}
+
+{% block body %}
+    <section id="ajout-livre">
+        <div class="mt-5 row">
+            <div class="col-md-8 mx-auto">
+                <h1 class="text-center"> Ajouter un Livre </h1>
+                <div class="container">
+                    {% include ('livre/_form.html.twig') %}
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}

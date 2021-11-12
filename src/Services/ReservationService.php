@@ -100,7 +100,6 @@ class ReservationService
         $curentUser = $this->security->getUser();
 
         $empruntActuel = $curentUser->getEmpruntMax();
-        // dump($empruntActuel);
 
         $updateEmpruntMax = $empruntActuel + $reservation[$id];
 

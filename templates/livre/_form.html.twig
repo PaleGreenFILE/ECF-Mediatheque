@@ -1,0 +1,58 @@
+{{ form_start(form) }}
+
+{% for type, messages in app.flashes %}
+    {% for message in app.flashes %}
+        <div class="alert alert-{{type}} alert-dismissible d-flex align-items-center" role="alert">
+            {{ message }}
+        </div>
+    {% endfor %}
+{% endfor %}
+
+<div class="row mb-4 mt-3">
+    <div class="col-sm-12 col-md-6 col-12">
+       {{ form_row(form.titre) }}
+    </div>
+
+    <div class="col-sm-12 col-md-6 col-12">
+        {{ form_row(form.auteur) }}
+    </div>
+</div>
+
+<div id="description" class="col-12">
+    {{ form_row(form.description) }}
+    <div class="form_errors">
+        {{ form_errors(form.description) }}
+    </div>
+</div>
+
+<div class="row mb-4 mt-3">
+    <div id="quantite" class="col-sm-12 col-md-4 col-12">
+        {{ form_row(form.quantite)}}
+    </div>
+
+    <div id="isbn" class="col-sm-12 col-md-4 col-12">
+        {{ form_row(form.isbn)}}
+    </div>
+
+    <div id="categorie" class="col-sm-12 col-md-4 col-12">
+        {{ form_row(form.genre)}}
+    </div>
+</div>
+<div class="col-sm-12 col-md-6 col-12">
+    {{ form_row(form.parution) }}
+</div>
+
+{#<div class="row">
+    <div class="col">
+        {{ form_row(form.file)}}
+    </div>
+</div>#}
+
+<div class="d-flex justify-content-between">
+    <button type="submit" class="btn btn-outline-success w-50 mb-5 me-1">
+        {{ submitButtonText ?? 'Insérer le livre' }}
+    </button>
+    <a href="{{path('app_livre')}}" class="btn btn-outline-danger w-50 mb-5 ms-1">Annuler</a>
+</div>
+
+{{form_end(form)}}

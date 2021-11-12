@@ -4,6 +4,7 @@ namespace App\Controller\Livre;
 
 use App\Entity\Livre;
 use App\Entity\User;
+use App\Form\LivreFormType;
 use App\Repository\GenreRepository;
 use App\Repository\LivreRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -88,5 +89,27 @@ class LivreController extends AbstractController
             'books'  => $Books
         ]);
     }
-    
+
+    #[IsGranted('ROLE_LIBRAIRE')]
+    #[Route('/livre/add', name: 'add_livre')]
+    public function add(Request $request, EntityManagerInterface $em): Response
+    {
+        $livre = new Livre();
+        $form = $this->createForm(LivreFormType::class, $livre);
+        $form->handleRequest($request);
+
+        if ($form->isSubmitted() && $form->isValid()) {
+            $em->persist($livre);
+            $em->flush();
+
+            $this->addFlash('success', 'Votre livre est ajouté en base de donnée.');
+
+            return $this->redirectToRoute('app_show_livre', ['id' => $livre->getId()]);
+        }
+
+        return $this->renderForm('livre/create.html.twig', [
+            'form' => $form
+        ]);
+
+    }
 }

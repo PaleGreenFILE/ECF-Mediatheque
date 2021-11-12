@@ -3,7 +3,7 @@
     <section id="livre-wrapper" class="container">
         {% for livre in livres  %}
             <div class="list-group">
-                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                <a href="{{ path('app_detail_livre', {'id': livre.id} ) }}" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
                     <img src="{{ asset('uploads/illustrations/' ~ livre.file ) }}" alt="{{ livre.titre }}" width="50" height="50" class="rounded-circle flex-shrink-0">
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div id="list-title">

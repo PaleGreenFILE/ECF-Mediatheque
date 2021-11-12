@@ -4,8 +4,7 @@
 {% set queryParams = app.request.query.all %}
 
 {% block body %}
-
-	<div class="container-fluid">
+	<div class="container">
 		<div class="row flex-nowrap">
 		{# ? Filtre par catégorie #}
 
@@ -14,9 +13,10 @@
 		</div>
 
 		{# ? Afficher les cartes "Livre" #}
-			<div class="col py-3" id="livres">
-				<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3" id="content">
-					{% include "livre/_content_ajax.html.twig" %}
+			<div class="col py-3 card-deck" id="livres">
+				<div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-3 bg-red" id="content">
+					{# {% include "livre/_content_ajax.html.twig" %}#}
+					{% include "livre/_test.html.twig" %}
 				</div>
 			</div>
 		</div>

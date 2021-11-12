@@ -6,8 +6,8 @@
 	<div class="mt-5 d-flex justify-content-around">
 		<div class="justify-self-center">
 		<img class="mx-auto d-block rounded mt-5"
-		src="{{ asset('uploads/illustrations/' ~ livre.file ) }}"
-		width="250px" alt=""
+			src="{{ asset('uploads/illustrations/' ~ livre.file ) }}"
+			width="250px" alt=""
 		>
 
 			{# <div id="image-right"> #}
@@ -19,12 +19,18 @@
 						{{livre.parution|date('Y')}}</h5>
 				</div>
 				<hr>
-				<p class="lead mb-5">{{livre.description|raw}}</p>
+			<div class="container">
+				<p class="lead mb-3">{{livre.description|raw}}</p>
+			</div>
 			{# </div> #}
 		</div>
 	</div>
 </section>
+
 	<br>
-	<a class="d-block mx-auto text-center mt-5 pt-5" href="{{ path('app_livre') }}">Revenir en arriere</a>
+	<div class="d-flex justify-content-center">
+		<a class="btn btn-outline-success mb-5 px-5" href="{{ path('app_livre') }}">Revenir en arriere</a>
+	</div>
+
 
 {% endblock %}

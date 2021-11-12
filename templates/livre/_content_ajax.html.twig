@@ -7,11 +7,13 @@
 			style="{{livre.file is not null ? 'height: 150px; width: 150px' : '' }}"
 		>
 
-			<div
-				class="card-body">
+			<div class="card-body">
 				<div class="d-flex justify-content-between">
 					<h5 class="card-title">
-						<a class="{{livre.quantite > 0 ? 'text-success' : 'text-danger'}} text-decoration-none h3" href="{{ path('app_detail_livre', {'id': livre.id} ) }}">{{livre.titre|capitalize}}</a>
+						<a class="{{livre.quantite > 0 ? 'text-success' : 'text-danger'}} text-decoration-none h3"
+						   href="{{ path('app_detail_livre', {'id': livre.id} ) }}">
+							{{livre.titre|capitalize}}
+						</a>
 					</h5>
 					{% if livre.quantite > 0 %}
 						<span>✅</span>

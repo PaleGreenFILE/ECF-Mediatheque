@@ -1,0 +1,34 @@
+{% extends 'layouts/base.html.twig' %}
+{% block body %}
+    <section id="livre-wrapper" class="container">
+        {% for livre in livres  %}
+            <div class="list-group">
+                <a href="#" class="list-group-item list-group-item-action d-flex gap-3 py-3" aria-current="true">
+                    <img src="{{ asset('uploads/illustrations/' ~ livre.file ) }}" alt="{{ livre.titre }}" width="50" height="50" class="rounded-circle flex-shrink-0">
+                    <div class="d-flex gap-2 w-100 justify-content-between">
+                        <div id="list-title">
+                            <h5 class="mb-0">{{ livre.titre }}</h5>
+                            <p class="mb-0 opacity-75">{{livre.description|u.truncate(150, '...')}}</p>
+                        </div>
+                        <small class="opacity-50 text-nowrap">{{ livre.auteur }} | {{ livre.parution|date('Y') }}</small>
+                    </div>
+                </a>
+                    <div class="py-2 mx-0 mb-2 bg-light d-flex justify-content-around">
+                        {% if livre.quantite %}
+                        <a href = "{{ path('add_reservation', {'id': livre.id} ) }}?returnToLivre=true"
+                           class="btn btn-outline-success position-relative mt-1">
+                           <i class="fas fa-cart-plus me-3"></i>Réserver
+                           <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-dark text-warning">
+                               {{ livre.quantite }}
+							   <span class="visually-hidden">exemplaire disponible</span>
+                           </span>
+                        </a>
+                        {% else %}
+                            <span class="w-100 m-0 py-2 bg-danger text-uppercase text-center fw-bold text-white">🔒 ce livre n'est plus disponible</span>
+                        {% endif %}
+                    </div>
+            </div>
+        {% endfor %}
+    </section>
+{% endblock %}
+

@@ -25,13 +25,12 @@ class ReservationListController extends AbstractController
     #[Route('/membre/{id}/reservation', name:'detail_reservation')]
     public function showOneReservationAction()
     {
-        if ($this->getUser() == null) {
+        if ($this->getUser() === null) {
             return $this->redirectToRoute('app_home');
-        } else {
-            $user_autorise = $this->getUser()->getIsAutorise();
-            if ($user_autorise == false) {
-                return $this->redirectToRoute('app_home');
-            }
+        }
+        $user_autorise = $this->getUser()->getIsAutorise();
+        if ($user_autorise === false) {
+            return $this->redirectToRoute('app_home');
         }
 
         $curentUser = $this->getUser();

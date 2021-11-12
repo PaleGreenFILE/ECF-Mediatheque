@@ -69,3 +69,14 @@ body {
     grid-template-columns: repeat(3, 1fr);
     grid-gap: 20px;
 }
+
+hr.new {
+    border: 7px solid green;
+    border-radius: 5px;
+}
+
+.title {
+    border-left: 7px solid #198754;
+    border-bottom: 7px solid #198754;
+}
+

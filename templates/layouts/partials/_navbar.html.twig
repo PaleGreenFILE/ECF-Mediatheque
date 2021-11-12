@@ -4,9 +4,12 @@
 		<span class="navbar-brand mb-0 h1 ms-3 d-block">
 			<a class="text-decoration-none text-success" href="{{path('app_home')}}">Médiathèque</a>
 		</span>
-		<span style="font-size:1.1em;" class="badge bg-primary ms-1 mx-auto d-block">{{ app.user.prenom|capitalize }} {{ app.user.nom|capitalize }}
-			<span class="badge bg-light text-success">{{ app.user.empruntMax }}</span>
-		</span>
+			{# Afficher le nom et la capacité d"emprunt	#}
+			{% if app.user.isAutorise%}
+				<span style="font-size:1.1em;" class="badge bg-primary ms-1 mx-auto d-block">{{ app.user.prenom|capitalize }} {{ app.user.nom|capitalize }}
+					<span class="badge bg-light text-success">{{ app.user.empruntMax }}</span>
+				</span>
+			{% endif %}
 	</div>
 	{% endif %}
 
@@ -21,9 +24,6 @@
 					<li class="nav-item">
 						<a class="nav-link" href="{{path('app_livre')}}">Catalogue</a>
 					</li>
-					{# <li class="nav-item">
-						<a class="nav-link" href="#">Rechercher un livre</a>
-					</li> #}
 					<li class="nav-item">
 						<a class="nav-link" href="{{ path('detail_reservation', {'id': app.user.id} ) }}">Mes réservations</a>
 					</li>

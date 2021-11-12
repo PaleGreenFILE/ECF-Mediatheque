@@ -7,7 +7,7 @@
                     <img src="{{ asset('uploads/illustrations/' ~ livre.file ) }}" alt="{{ livre.titre }}" width="50" height="50" class="rounded-circle flex-shrink-0">
                     <div class="d-flex gap-2 w-100 justify-content-between">
                         <div id="list-title">
-                            <h5 class="mb-0">{{ livre.titre }}</h5>
+                            <h5 class="{{livre.quantite > 0 ? 'text-success' : 'text-danger'}} mb-0">{{ livre.titre }}</h5>
                             <p class="mb-0 opacity-75">{{livre.description|u.truncate(150, '...')}}</p>
                         </div>
                         <small class="opacity-50 text-nowrap">{{ livre.auteur }} | {{ livre.parution|date('Y') }}</small>

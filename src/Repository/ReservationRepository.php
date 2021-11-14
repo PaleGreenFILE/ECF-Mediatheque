@@ -19,7 +19,7 @@ class ReservationRepository extends ServiceEntityRepository
         parent::__construct($registry, Reservation::class);
     }
 
-/*
+
     public function findReservations($user)
     {
         return $this->createQueryBuilder('r')
@@ -29,7 +29,7 @@ class ReservationRepository extends ServiceEntityRepository
             ->getQuery()
             ->getResult();
     }
-/*
+
     // /**
     //  * @return Reservation[] Returns an array of Reservation objects
     //  */

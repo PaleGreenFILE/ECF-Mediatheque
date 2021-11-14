@@ -7,51 +7,6 @@
 	<h1 class="text-center p-2">Mes réservations</h1>
 
     <section class="container" id="Réservation-en-cours">
-{#        <table class="table text-center">
-            <thead>
-                <tr>
-                    <th>Numéro</th>
-                    <th>Livre</th>
-                    <th>Date d'emprunt</th>
-                    <th>Date de restitution</th>
-                    <th>Status</th>
-                </tr>
-            </thead>
-
-            <tbody>
-                {% for reservation in reservations %}
-                    <tr>
-                        <td> {{ loop.index }} -  </td>
-                        <td>
-                            <ul class="text-start">
-                            {% for livre in reservation.livre %}
-                                <li class="text-decoration-none" style="
-                                    list-style: none;" > {{ livre|capitalize }} </li>
-                            {% endfor %}
-                            </ul>
-                        </td>
-                        <td> {{ reservation.empruntedAt|date('d-m-Y à H:i') }} </td>
-                        <td>
-                            {{ reservation.empruntedAt|date_modify("+21 day")|date("d-m-Y")}}
-                        </td>
-                        <td>
-                            {% set TODAY =  'now'|date("Y-m-d") %}
-                            {% set RESTITUTION = reservation.empruntedAt|date_modify("+210 day")|date("Y-m-d") %}
-
-                            {% if ( TODAY > RESTITUTION ) %}
-                                <span class="text-white rounded px-1 py-1 fw-light" style="background-color:red">
-                                    RETARD
-                                </span>
-                                {% else %}
-                                <span class="text-white rounded px-1 py-1 fw-light" style="background-color:green">
-                                    Okay
-                                </span>
-                            {% endif %}
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>#}
 
         {#  Début de test  #}
         {% for reservation in reservations %}

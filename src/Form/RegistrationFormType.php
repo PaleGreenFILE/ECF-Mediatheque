@@ -56,7 +56,12 @@ class RegistrationFormType extends AbstractType
                  'invalid_message' => "Les mots de passe doivent être identique",
                  'constraints' => [
                     new NotBlank(),
-                    new Length(['min' => 6])
+                    new Length([
+                        'min' => 6,
+                        'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
+                        'max' => 50,
+                        'maxMessage' => 'Votre mot de passe ne peut pas comporter plus de {{ limit }} caractères.'
+                    ])
                  ]
               ])
 

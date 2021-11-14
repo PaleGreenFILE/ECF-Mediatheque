@@ -56,6 +56,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     /**
      * @var string The hashed password
      * @ORM\Column(type="string")
+     * @Assert\Length(
+     *      min = 6,
+     *      max = 50,
+     *      minMessage = "Votre mot de passe doit comporter au moins {{ limite }} caractères.",
+     *      maxMessage = "Votre mot de passe ne peut pas comporter plus de {{ limite }} caractères."
+     * )
      */
     private $password;
 
@@ -102,7 +108,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
      *
      * @return string
      */
-    public function getFullName()
+    public function getFullName(): string
     {
         return $this->getPrenom().' '.$this->getNom();
     }
@@ -164,7 +170,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     /**
      * @see PasswordAuthenticatedUserInterface
      */
-    public function getPassword(): string
+    public function getPassword(): ?string
     {
         return $this->password;
     }

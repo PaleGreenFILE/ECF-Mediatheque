@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class RedirectController extends AbstractController
 {
-    #[Route('/access', name: "access", methods: 'GET')]
+/*    #[Route('/access', name: "access", methods: 'GET')]
     public function redirectAccordingRole(UserInterface $user): Response
     {
         // dd($userRoles = $user->getRoles());
@@ -25,5 +25,5 @@ class RedirectController extends AbstractController
         }
 
         return $this->redirectToRoute('app_livre');
-    }
+    }*/
 }

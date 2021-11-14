@@ -27,6 +27,12 @@ security:
 
             logout:
                 path: app_logout
+
+            remember_me:
+                secret: '%kernel.secret%'
+                #always_remember_me: true
+                signature_properties: [password]
+
                 # where to redirect after logout
                 # target: app_any_route
             # two_factor:
@@ -45,11 +51,11 @@ security:
     access_control:
 #        - { path: ^/, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/connexion, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
         - { path: ^/home, roles: ROLE_USER }
         - { path: ^/admin, roles: ROLE_ADMIN }
         - { path: ^/libraire, roles: ROLE_LIBRAIRE }
-        - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
-        - { path: ^/logout, roles: IS_AUTHENTICATED_ANONYMOUSLY }
+#        - { path: ^/2fa, roles: IS_AUTHENTICATED_2FA_IN_PROGRESS }
 
     role_hierarchy:
         ROLE_LIBRAIRE: ROLE_USER

@@ -9,6 +9,7 @@ use App\Entity\Libraire;
 use App\Entity\Reservation;
 use App\Repository\UserRepository;
 use App\Repository\ReservationRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\RequestStack;
@@ -19,8 +20,8 @@ use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 
 class LibraireReservationController extends AbstractDashboardController
 {
-    private $userRepository;
-    private $reservationRepository;
+    private UserRepository $userRepository;
+    private ReservationRepository $reservationRepository;
     private $session;
 
     public function __construct(
@@ -46,17 +47,12 @@ class LibraireReservationController extends AbstractDashboardController
                 return $this->redirectToRoute('app_home');
             }
         }
-        // ? Récupérer la réservation de l'utilisateur connecté
-
-        // dd($this->reservationRepository->findAll());
         $Reservations = $this->reservationRepository->findAll();
-
-        // $ReservationUserName = $this->reservation->getUser();
         $request = $this->requestStack->getCurrentRequest();
+
         if ($request->query->get('RestHereCoco')) {
             return $this->redirectToRoute('check_reservation');
         }
-
 
         return $this->render('libraire/back_reservation.html.twig', [
             'reservations' => $Reservations,
@@ -85,7 +81,7 @@ class LibraireReservationController extends AbstractDashboardController
     }
 
 
-    #[Route('/libraire/mailing/{id}', name:'mailing')]
+    #[Route('/libraire/mailing/{id<[0-9]+>}', name:'mailing')]
     public function sendMailRetard(Reservation $reservation, Mail $mail)
     {
         // dd($reservation->getUser()->getEmail());
@@ -101,4 +97,5 @@ class LibraireReservationController extends AbstractDashboardController
         // dd($user, $mailTo, $mail);
         return $this->redirectToRoute('libraire');
     }
+
 }

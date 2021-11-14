@@ -82,63 +82,72 @@ final class Version20211021131800 extends AbstractMigration
 
         // Insérer la réservation 1
         $this->addSql("INSERT INTO reservation (id, user_id, is_validate, is_restitue, emprunted_at, status) values(1, 1, 1, 0, '2021-10-21', 'PRET')");
-        $this->addSql("UPDATE users SET emprunt_max = '998' WHERE id = 1");
 
         // Insérer la réservation 2
         $this->addSql("INSERT INTO reservation (id, user_id, is_validate, is_restitue, emprunted_at, status) values(2, 3, 1, 0, '2006-06-2', 'RETARD')");
-        $this->addSql("UPDATE users SET emprunt_max = '4' WHERE id = 2");
 
         // Insérer la réservation 3
         $this->addSql("INSERT INTO reservation (id, user_id, is_validate, is_restitue, emprunted_at, status) values(3, 1, 0, 0, '2021-10-20', 'ATTENTE')");
-        $this->addSql("UPDATE users SET emprunt_max = '997' WHERE id = 1");
 
         // Affecter la réservation 1
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(1, 1)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 1");
+        $this->addSql("UPDATE users SET emprunt_max = '998' WHERE id = 1");
 
         // Affecter la réservation 1
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(1, 6)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 6");
+        $this->addSql("UPDATE users SET emprunt_max = '997' WHERE id = 1");
 
         // Affecter la réservation 1
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(1, 4)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 4");
+        $this->addSql("UPDATE users SET emprunt_max = '996' WHERE id = 1");
 
         // Affecter la réservation 2
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 1)");
         $this->addSql("UPDATE livre SET pret = '2', quantite = '8' WHERE id = 1");
+        $this->addSql("UPDATE users SET emprunt_max = '4' WHERE id = 3");
 
         // Affecter la réservation 2
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 2)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 2");
+        $this->addSql("UPDATE users SET emprunt_max = '3' WHERE id = 3");
 
         // Affecter la réservation 2
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 3)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 3");
+        $this->addSql("UPDATE users SET emprunt_max = '2' WHERE id = 3");
 
         // Affecter la réservation 2
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 4)");
         $this->addSql("UPDATE livre SET pret = '2', quantite = '8' WHERE id = 4");
+        $this->addSql("UPDATE users SET emprunt_max = '1' WHERE id = 3");
 
         // Affecter la réservation 2
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 5)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 5");
+        $this->addSql("UPDATE users SET emprunt_max = '0' WHERE id = 3");
 
-        // Affecter la réservation 2
-        $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 6)");
+        // Affecter la réservation 3
+        $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(3, 6)");
         $this->addSql("UPDATE livre SET pret = '2', quantite = '8' WHERE id = 6");
+        $this->addSql("UPDATE users SET emprunt_max = '995' WHERE id = 1");
 
-        // Affecter la réservation 2
-        $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(2, 7)");
+        // Affecter la réservation 3
+        $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(3, 7)");
         $this->addSql("UPDATE livre SET pret = '1', quantite = '9' WHERE id = 7");
+        $this->addSql("UPDATE users SET emprunt_max = '994' WHERE id = 1");
 
         // Affecter la réservation 3
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(3, 5)");
         $this->addSql("UPDATE livre SET pret = '2', quantite = '8' WHERE id = 5");
+        $this->addSql("UPDATE users SET emprunt_max = '993' WHERE id = 1");
 
         // Affecter la réservation 3
         $this->addSql("INSERT INTO reservation_livre (reservation_id, livre_id) values(3, 3)");
         $this->addSql("UPDATE livre SET pret = '2', quantite = '8' WHERE id = 3");
+        $this->addSql("UPDATE users SET emprunt_max = '992' WHERE id = 1");
 
         $this->addSql('SET FOREIGN_KEY_CHECKS = 1');
     }

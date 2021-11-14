@@ -2,17 +2,18 @@
 
 {% block body %}
 
-    <h1 class="text-center">Gestions des emprunts</h1>
+    <h1 class="text-center">Gestions des emprunts de {{ user|upper }}</h1>
 
     <section class="container" id="Restitution">
 
+{{ user.empruntMax }}
         {% for emprunts in emprunt %}
-            {% set TODAY =  'now'|date("d-m-Y") %}
-            {% set RESTITUTION = emprunts.empruntedAt|date_modify("+21 day")|date("d-m-Y") %}
+            {% set TODAY =  'now'|date("Y-m-d") %}
+            {% set RESTITUTION = emprunts.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
 
             <div class="mt-5 mb-2 d-flex justify-content-between">
                 <h3>Prêt n° {{ loop.index }}</h3>
-                <h5 class="{{TODAY > RESTITUTION ? 'text-danger fw-bold' : ''}}"> A rendre : {{ RESTITUTION }}</h5>
+                <h5 class="{{TODAY > RESTITUTION ? 'text-danger fw-bold' : ''}}"> A rendre : {{ RESTITUTION|date("d-m-Y") }}</h5>
                 <button class="btn btn-sm btn-danger">Rendre</button>
             </div>
 

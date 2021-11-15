@@ -6,11 +6,7 @@
 {% block body %}
 	<h1 class="ms-2 p-2 title d-inline">Mes réservations</h1>
     <section class="container" id="Réservation-en-cours">
-<<<<<<< HEAD
-=======
-
         {#  Début de test  #}
->>>>>>> feature/review
         {% for reservation in reservations %}
             <div class="mt-5 mb-2 d-flex justify-content-between">
                 <h3>{{ loop.index }} | {{ reservation.empruntedAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") |capitalize }}</h3>

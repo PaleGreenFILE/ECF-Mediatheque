@@ -18,17 +18,12 @@ class RestitutionController extends AbstractController
         $user = $em->getRepository(User::class);
 
         /** @var Reservation|null $emprunt*/
-//        $empruntUser = $reservation->findOneBy(array('user' => $id));
         $empruntUser = $reservation->findReservations($id);
         $targetUser = $user->findOneBy(['id' => $id]);
 
         if (!$empruntUser) {
             throw $this->createNotFoundException(sprintf('Pas de réservation trouvé pour " l\'utilisateur %s ".' ,$id));
         }
-
-/*        if (isset($empruntUser)) {
-            dd($empruntUser);
-        }*/
 
         return $this->render('restitution/index.html.twig', [
             'emprunt' => $empruntUser,

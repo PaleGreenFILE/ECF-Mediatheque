@@ -6,15 +6,20 @@
 
     <section class="container" id="Restitution">
 
-{{ user.empruntMax }}
         {% for emprunts in emprunt %}
             {% set TODAY =  'now'|date("Y-m-d") %}
             {% set RESTITUTION = emprunts.empruntedAt|date_modify("+21 day")|date("Y-m-d") %}
 
             <div class="mt-5 mb-2 d-flex justify-content-between">
-                <h3>Prêt n° {{ loop.index }}</h3>
-                <h5 class="{{TODAY > RESTITUTION ? 'text-danger fw-bold' : ''}}"> A rendre : {{ RESTITUTION|date("d-m-Y") }}</h5>
-                <button class="btn btn-sm btn-danger">Rendre</button>
+                    <h3>Prêt n° {{ loop.index }}</h3>
+                <div>
+                     <span class="badge bg-info text-dark m-0">
+                         {{ pluriel(emprunts.livre|length, 'Livre') }}
+                     </span>
+                </div>
+
+                <h5 class="{{TODAY > RESTITUTION ? 'text-danger' : 'text-success'}}"> A rendre : {{ RESTITUTION|date("d-m-Y") }}</h5>
+                <button class="{{TODAY > RESTITUTION ? 'btn-outline-danger' : 'btn-outline-success'}} btn btn-sm fw-bold fs-6 px-5">Rendre</button>
             </div>
 
             {% for livre in emprunts.livre %}
@@ -24,12 +29,6 @@
                     </span>
                 </div>
             {% endfor %}
-
-            {# Afficher le nombre de livre prêter #}
-            {% for livre in emprunts.livre %}
-                {{ livre.pret }}
-            {% endfor %}
-
 
         {% endfor %}
     </section>

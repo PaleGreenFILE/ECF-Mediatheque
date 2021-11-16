@@ -10,11 +10,27 @@ use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\Security\Core\Security;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
+/**
+ * Service de réservation
+ */
 class ReservationService
 {
+    /**
+     * @var SessionInterface
+     */
     protected $session;
+    /**
+     * @var LivreRepository
+     */
     protected $LivreRepository;
 
+    /**
+     * @param SessionInterface $session
+     * @param LivreRepository $LivreRepository
+     * @param EntityManagerInterface $EntityManagerInterface
+     * @param Security $security
+     * @param UserRepository $UserRepository
+     */
     public function __construct(
         SessionInterface $session,
         LivreRepository $LivreRepository,
@@ -29,17 +45,27 @@ class ReservationService
         $this->UserRepository  = $UserRepository;
     }
 
+    /**
+     * @return array
+     */
     public function getPanier() : array
     {
         return $this->session->get('reservation', []);
     }
 
+    /**
+     * @param array $reservation
+     * @return mixed
+     */
     protected function savePanier(array $reservation)
     {
         return $this->session->set('reservation', $reservation);
     }
 
-    public function add(int $id)
+    /**
+     * @param int $id
+     */
+    public function add(int $id): void
     {
         $livre = $this->LivreRepository->find($id);
         // 1. Retrouver le panier utilisateur
@@ -49,7 +75,12 @@ class ReservationService
         // ? 3. Voir si le livre ($id) est deja dans le tableau
         $curentUserId = $this->security->getUser()->getId();
 
-        if (array_key_exists($id, $reservation) && $this->UserRepository->find($curentUserId)->getEmpruntMax() > 0) {
+        if (array_key_exists(
+            $id, $reservation) &&
+            $this->UserRepository
+                ->find($curentUserId)
+                ->getEmpruntMax() > 0
+        ) {
             $reservation[$id]++;
         } else {
             $reservation[$id] = 1;
@@ -95,7 +126,10 @@ class ReservationService
         $this->EntityManagerInterface->flush();
     }
 
-    public function remove(int $id)
+    /**
+     * @param int $id
+     */
+    public function remove(int $id): void
     {
         $livre = $this->LivreRepository->find($id);
 
@@ -123,6 +157,9 @@ class ReservationService
 
     }
 
+    /**
+     * @param int $id
+     */
     public function decrement(int $id): void
     {
         $livre = $this->LivreRepository->find($id);
@@ -152,6 +189,9 @@ class ReservationService
 
     }
 
+    /**
+     * @return array
+     */
     public function getDetailReservations(): array
     {
         $detailPanier = [];

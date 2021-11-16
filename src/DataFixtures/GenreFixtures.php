@@ -16,15 +16,15 @@ class GenreFixtures extends Fixture
         // ? Création des genres
         $value = ['Fiction', 'Thriller', 'Horreur', 'Biographie', 'Roman', 'Theatre'];
         for ($i = 1, $iMax = count($value); $i <= $iMax; $i++) {
-        $genres = [];
-        $genre = new Genre();
-        $genre->setNom($value[$i -1]);
+            $genres = [];
+            $genre = new Genre();
+            $genre->setNom($value[$i -1]);
 
-        $manager->persist($genre);
-        $genres[] = $genre;
+            $manager->persist($genre);
+            $genres[] = $genre;
 
-        // ? Envoyer en base de donnée
-        $manager->flush();
+            // ? Envoyer en base de donnée
+            $manager->flush();
         }
     }
 }

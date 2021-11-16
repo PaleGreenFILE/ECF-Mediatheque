@@ -13,14 +13,15 @@ class ReservationFormType extends AbstractType
     {
         $builder
             ->add('IsRestitue')
-            ->add('status')
-        ;
+            ->add('status');
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => Reservation::class,
-        ]);
+            ]
+        );
     }
 }

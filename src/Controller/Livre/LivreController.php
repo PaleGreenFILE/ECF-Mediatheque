@@ -38,7 +38,7 @@ class LivreController extends AbstractController
 
         $user_autorise = $this->getUser()->getIsAutorise();
         if ($user_autorise === false) {
-           return $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_home');
         }
 
         // * Pagination
@@ -68,23 +68,29 @@ class LivreController extends AbstractController
                     'livres', 'genres', 'page', 'limit', 'total'
                 ))
             ]);*/
-            return new JsonResponse([
-                'content' => $this->renderView('livre/_table.html.twig', compact(
-                    'livres', 'genres', 'page', 'limit', 'total'
-                ))
-            ]);
+            return new JsonResponse(
+                [
+                'content' => $this->renderView(
+                    'livre/_table.html.twig', compact(
+                        'livres', 'genres', 'page', 'limit', 'total'
+                    )
+                )
+                ]
+            );
         }
         // ? Passer les livres
         $Books = $this->LivreRepository->findAll();
 
-        return $this->render('livre/livre.html.twig', [
+        return $this->render(
+            'livre/livre.html.twig', [
             'livres' => $livres,
             'genres' => $genres,
             'page'   => $page,
             'limit'  => $limit,
             'total'  => $total,
             'books'  => $Books
-        ]);
+            ]
+        );
     }
 
     #[IsGranted('ROLE_LIBRAIRE')]
@@ -104,9 +110,11 @@ class LivreController extends AbstractController
             return $this->redirectToRoute('app_show_livre', ['id' => $livre->getId()]);
         }
 
-        return $this->renderForm('livre/create.html.twig', [
+        return $this->renderForm(
+            'livre/create.html.twig', [
             'form' => $form
-        ]);
+            ]
+        );
 
     }
 }

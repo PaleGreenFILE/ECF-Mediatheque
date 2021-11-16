@@ -29,9 +29,11 @@ class LibraireController extends AbstractDashboardController
         // return parent::index();
         $users = $this->userRepository->findAll();
 
-        return $this->render('libraire/dashboard.html.twig', [
+        return $this->render(
+            'libraire/dashboard.html.twig', [
             'users' => $users
-        ]);
+            ]
+        );
     }
 
     public function configureDashboard(): Dashboard

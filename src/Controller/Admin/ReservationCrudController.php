@@ -52,8 +52,7 @@ class ReservationCrudController extends AbstractCrudController
     public function __construct(
         ReservationRepository $ReservationRepo,
         LivreRepository $LivreRepo,
-    )
-    {
+    ) {
         $this->LivreRepository = $LivreRepo;
         $this->ReservationRepository = $ReservationRepo;
     }
@@ -81,9 +80,11 @@ class ReservationCrudController extends AbstractCrudController
         // ? Récupérer la réservation de l'utilisateur connecté
         $ReservationUserCurent = $this->ReservationRepository->findBy(['user' => $curentUser]);
 
-        return $this->render('reservation/detail_reservation.html.twig', [
+        return $this->render(
+            'reservation/detail_reservation.html.twig', [
             'reservations' => $ReservationUserCurent
-        ]);
+            ]
+        );
 
     }
 

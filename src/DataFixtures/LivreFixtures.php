@@ -22,7 +22,7 @@ class LivreFixtures extends Fixture
             $livre->setParution($faker->dateTimeThisCentury());
             $livre->setDescription($faker->paragraph(5, true));
             $livre->setAuteur($faker->firstname() . ' ' . $faker->lastname());
-            $livre->setQuantite($faker->numberBetween(0,50));
+            $livre->setQuantite($faker->numberBetween(0, 50));
             $livre->setIsbn($faker->isbn13());
 
             $manager->persist($livre);

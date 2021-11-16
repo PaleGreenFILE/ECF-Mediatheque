@@ -13,7 +13,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity(repositoryClass=UserRepository::class)
- * @UniqueEntity(fields={"email"}, message="Il existe déjà un compte avec cette adresse e-mail,")
+ * @UniqueEntity(fields={"email"},                    message="Il existe déjà un compte avec cette adresse e-mail,")
  * @ORM\Table(name="users")
  */
 class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFactorInterface
@@ -54,7 +54,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     private $email;
 
     /**
-     * @var string The hashed password
+     * @var                       string The hashed password
      * @ORM\Column(type="string")
      * @Assert\Length(
      *      min = 6,

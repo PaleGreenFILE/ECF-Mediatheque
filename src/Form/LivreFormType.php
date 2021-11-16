@@ -19,33 +19,38 @@ class LivreFormType extends AbstractType
             ->add('titre')
 
             // Inserer une image ?
-//            ->add('file')
+        //            ->add('file')
 
-            ->add('parution', DateType::class, [
+            ->add(
+                'parution', DateType::class, [
                 "widget" => 'single_text',
                 "format" => 'yyyy-MM-dd',
                 "data" => new \DateTime()
-            ])
+                ]
+            )
 
             ->add('description')
             ->add('auteur')
             ->add('quantite')
             ->add('isbn')
-            ->add('genre', EntityType::class, [
+            ->add(
+                'genre', EntityType::class, [
                 'class' => Genre::class,
                 'choice_label' => 'nom',
                 'label' => 'Catégorie',
                 'attr' => [
                     'class' => 'text-capitalize'
                 ],
-            ])
-        ;
+                ]
+            );
     }
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => Livre::class,
-        ]);
+            ]
+        );
     }
 }

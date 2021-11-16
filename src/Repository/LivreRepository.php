@@ -22,12 +22,13 @@ class LivreRepository extends ServiceEntityRepository
     // public function selectDateInterval($from, $to, $genre = null)
     public function selectDateInterval($from, $to)
     {
-        $query = $this->getEntityManager()->createQuery("
+        $query = $this->getEntityManager()->createQuery(
+            "
             SELECT l FROM App\Entity\Livre l WHERE l.parution > :from AND l.parution < :to
-        ")
+        "
+        )
             ->setParameter(':from', $from)
-            ->setParameter(':to', $to)
-        ;
+            ->setParameter(':to', $to);
 
         return $query->getResult();
 
@@ -51,15 +52,14 @@ class LivreRepository extends ServiceEntityRepository
             // ->where('where', 'l.isDisponible = 1')
             ;
 
-            if ($filtres != null) {
-                $query->andWhere('l.genre IN(:genre)')
+        if ($filtres != null) {
+            $query->andWhere('l.genre IN(:genre)')
                 ->setParameter(':genre', array_values($filtres));
-            }
+        }
 
             $query->orderBy('l.id')
                 ->setFirstResult(($page * $limit) - $limit)
-                ->setMaxResults($limit)
-        ;
+                ->setMaxResults($limit);
 
         return $query->getQuery()->getResult();
     }
@@ -70,9 +70,9 @@ class LivreRepository extends ServiceEntityRepository
             ->select('COUNT(l)');
 
         if ($filtres != null) {
-        $query->andWhere('l.genre IN(:genre)')
-            ->setParameter(':genre', array_values($filtres));
-    }
+            $query->andWhere('l.genre IN(:genre)')
+                ->setParameter(':genre', array_values($filtres));
+        }
 
 
             return $query->getQuery()->getSingleScalarResult();

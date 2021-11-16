@@ -31,9 +31,9 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_home');
         } else {
              $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
+            if ($user_autorise == false) {
                 return $this->redirectToRoute('app_home');
-             }
+            }
         }
 
         // ? Vérifier si le livre existe
@@ -61,12 +61,14 @@ class ReservationController extends AbstractController
 
         // dd($session->get('reservation'));
 
-        return $this->redirectToRoute('app_detail_livre', [
+        return $this->redirectToRoute(
+            'app_detail_livre', [
             'id' => $bookBorrow->getId()
-        ]);
+            ]
+        );
     }
 
-    #[Route('/panier' , name: 'panier')]
+    #[Route('/panier', name: 'panier')]
     public function showPanier(SessionInterface $session, ReservationService $reservationService, LivreRepository $LivreRepository): Response
     {
         // ? Redirection de l'utilisateur si il n'est pas connecté
@@ -74,9 +76,9 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_home');
         } else {
              $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
+            if ($user_autorise == false) {
                 return $this->redirectToRoute('app_home');
-             }
+            }
         }
 
         $detailPanier = $reservationService->getDetailReservations();
@@ -88,10 +90,12 @@ class ReservationController extends AbstractController
         // dd($empruntRestant, $user, $detailPanier);
 
         // dd($detailPanier);
-        return $this->render('reservation/panier.html.twig', [
+        return $this->render(
+            'reservation/panier.html.twig', [
             'items' => $detailPanier,
             'empruntRestant' =>  $empruntRestant
-        ]);
+            ]
+        );
     }
 
     #[Route('/panier/supprimer/{id<[0-9]+>}', name: 'delete_reservation')]
@@ -102,9 +106,9 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_home');
         } else {
              $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
+            if ($user_autorise == false) {
                 return $this->redirectToRoute('app_home');
-             }
+            }
         }
 
         // ? Vérifier si le livre existe
@@ -130,9 +134,9 @@ class ReservationController extends AbstractController
             return $this->redirectToRoute('app_home');
         } else {
              $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
+            if ($user_autorise == false) {
                 return $this->redirectToRoute('app_home');
-             }
+            }
         }
 
         // ? Vérifier si le livre existe

@@ -38,18 +38,22 @@ class UserCrudController extends AbstractCrudController
 
             textField::new('adresse')->setColumns('col-12'),
 
-            EmailField::new('email', "Email",[
+            EmailField::new(
+                'email', "Email", [
                 'input' => 'fullname'
-            ])->setColumns('col-6'),
+                ]
+            )->setColumns('col-6'),
 
             TextField::new('password', 'Mot de passe')->onlyWhenCreating()->setColumns('col-6'),
 
 
-            ChoiceField::new ('roles')->setChoices([
+            ChoiceField::new('roles')->setChoices(
+                [
                 'ROLE_ADMIN' => 'ROLE_ADMIN',
                 'ROLE_LIBRAIRE' => 'ROLE_LIBRAIRE',
                 'ROLE_USER' => 'ROLE_USER',
-            ])->allowMultipleChoices()->setColumns('col-6')->hideOnIndex(),
+                ]
+            )->allowMultipleChoices()->setColumns('col-6')->hideOnIndex(),
 
             BooleanField::new('isAutorise', "Autoriser"),
 
@@ -62,7 +66,8 @@ class UserCrudController extends AbstractCrudController
             ->setDefaultSort(['isAutorise' => 'ASC'])
             ->setPageTitle('index', 'Liste des inscrits')
             ->setPageTitle('new', fn () => 'Inscription')
-            ->setPageTitle('detail',
+            ->setPageTitle(
+                'detail',
                 fn (User $user) => $user->getFullName()
             );
     }
@@ -71,11 +76,11 @@ class UserCrudController extends AbstractCrudController
     {
         if (!$this->IsGranted('ROLE_ADMIN')) {
             return $actions
-            ->remove(Crud::PAGE_INDEX, Action::NEW)
-            ->remove(Crud::PAGE_INDEX, Action::EDIT)
-            ->add(Crud::PAGE_INDEX, 'detail')
-            ->remove(Crud::PAGE_DETAIL, Action::EDIT)
-            ->disable(Action::NEW, Action::DELETE);
+                ->remove(Crud::PAGE_INDEX, Action::NEW)
+                ->remove(Crud::PAGE_INDEX, Action::EDIT)
+                ->add(Crud::PAGE_INDEX, 'detail')
+                ->remove(Crud::PAGE_DETAIL, Action::EDIT)
+                ->disable(Action::NEW, Action::DELETE);
         }
 
         return $actions

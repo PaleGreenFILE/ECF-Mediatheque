@@ -53,7 +53,8 @@ class LivreCrudController extends AbstractCrudController
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4')
                 ->setFormTypeOptions(
                     ['by_reference' => true
-                ]),
+                    ]
+                ),
 
             DateField::new('parution', 'Date de parution')
                 ->setColumns('col-sm-4 col-md-4 col-lg-4 col-xxl-4'),
@@ -89,12 +90,15 @@ class LivreCrudController extends AbstractCrudController
 
             ->setPageTitle('index', 'Liste des livres')
 
-            ->setPageTitle('edit',
-            fn (Livre $livre) => $livre->getTitre())
+            ->setPageTitle(
+                'edit',
+                fn (Livre $livre) => $livre->getTitre()
+            )
 
             ->setPageTitle('new', fn () => 'Ajouter un livre')
 
-            ->setPageTitle('detail',
+            ->setPageTitle(
+                'detail',
                 fn (Livre $livre) => $livre->getTitre()
             );
     }

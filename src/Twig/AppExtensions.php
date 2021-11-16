@@ -10,7 +10,8 @@ use Symfony\Component\Routing\Generator\UrlGeneratorInterface;
 class AppExtensions extends AbstractExtension
 {
     public function __construct(private UrlGeneratorInterface $urlGenerator)
-    {}
+    {
+    }
 
     public function getFunctions(): array
     {

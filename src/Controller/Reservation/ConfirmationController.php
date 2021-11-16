@@ -27,8 +27,7 @@ class ConfirmationController extends AbstractController
         ReservationService $Service,
         SessionInterface $Session,
         ReservationRepository $ReservationRepo,
-    )
-    {
+    ) {
         $this->LivreRepository = $LivreRepository;
         $this->UserRepository = $UserRepository;
         $this->ReservationService = $Service;
@@ -71,9 +70,11 @@ class ConfirmationController extends AbstractController
         // dd($curentUser);
         $ReservationUserCurent = $this->ReservationRepo->findBy(['user' => $curentUser]);
 
-        return $this->render('reservation/detail_reservation.html.twig', [
+        return $this->render(
+            'reservation/detail_reservation.html.twig', [
             'reservations' => $ReservationUserCurent,
-        ]);
+            ]
+        );
 
     }
 }

@@ -21,8 +21,7 @@ class ReservationService
         EntityManagerInterface $EntityManagerInterface,
         Security $security,
         UserRepository $UserRepository
-    )
-    {
+    ) {
         $this->session = $session;
         $this->LivreRepository = $LivreRepository;
         $this->EntityManagerInterface = $EntityManagerInterface;
@@ -63,16 +62,22 @@ class ReservationService
 
 
         $curentUserId = $this->security->getUser()->getId();
-        /** @var User*/
+        /**
+ * @var User
+*/
         $user = $this->UserRepository->find($curentUserId);
         $user_id = $user->getId();
 
         if ($user->getEmpruntMax() > 0) {
-            /** @var FlashBag */
+            /**
+ * @var FlashBag 
+*/
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('success', 'Livre réservé.');
         } elseif ($user->getEmpruntMax() === 0) {
-            /** @var FlashBag */
+            /**
+ * @var FlashBag 
+*/
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('danger', 'Vous ne pouvez pas réserver ce livre, votre limite de réservation est atteinte');
         }
@@ -96,7 +101,9 @@ class ReservationService
 
         $reservation = $this->getPanier();
 
-        /** @var User*/
+        /**
+ * @var User
+*/
         $curentUser = $this->security->getUser();
 
         $empruntActuel = $curentUser->getEmpruntMax();
@@ -121,7 +128,9 @@ class ReservationService
         $livre = $this->LivreRepository->find($id);
 
         $reservation = $this->getPanier();
-        /** @var User*/
+        /**
+ * @var User
+*/
         $curentUser = $this->security->getUser();
 
 
@@ -156,7 +165,7 @@ class ReservationService
             $livre = $this->LivreRepository->find($id);
 
             if (!$livre) {
-               continue;
+                continue;
             }
 
             $detailPanier[] = [

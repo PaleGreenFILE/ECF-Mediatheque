@@ -22,29 +22,38 @@ class RegistrationFormType extends AbstractType
         $builder
             ->add('nom')
             ->add('prenom')
-            ->add('date_naissance', BirthdayType::class, [
+            ->add(
+                'date_naissance', BirthdayType::class, [
                 'format' => 'dd-MMMM-yyyy',
                 'label' => 'Votre date de naissance'
-            ])
+                ]
+            )
             ->add('adresse')
-            ->add('email', EmailType::class, [
+            ->add(
+                'email', EmailType::class, [
                 'label' => 'Votre Email',
                 'attr' => [
                     'placeholder' => 'email@email.fr'
                 ]
-            ])
+                ]
+            )
 
-            ->add('agreeTerms', CheckboxType::class, [
+            ->add(
+                'agreeTerms', CheckboxType::class, [
                 'label' => 'Accepter nos conditions d\'utilisations.',
                 'mapped' => false,
                 'constraints' => [
-                    new IsTrue([
+                    new IsTrue(
+                        [
                         'message' => 'Vous devez accepter nos conditions.',
-                    ]),
+                        ]
+                    ),
                 ],
-            ])
+                ]
+            )
 
-            ->add('plainPassword', RepeatedType::class, [
+            ->add(
+                'plainPassword', RepeatedType::class, [
                 'mapped' => false,
                 'type' => PasswordType::class ,
                 'first_options' => [
@@ -56,14 +65,17 @@ class RegistrationFormType extends AbstractType
                  'invalid_message' => "Les mots de passe doivent être identique",
                  'constraints' => [
                     new NotBlank(),
-                    new Length([
+                    new Length(
+                        [
                         'min' => 6,
                         'minMessage' => 'Votre mot de passe doit comporter au moins {{ limit }} caractères.',
                         'max' => 50,
                         'maxMessage' => 'Votre mot de passe ne peut pas comporter plus de {{ limit }} caractères.'
-                    ])
+                        ]
+                    )
                  ]
-              ])
+                ]
+            )
 
             // ->add('plainPassword', PasswordType::class, [
             //     // instead of being set onto the object directly,
@@ -88,8 +100,10 @@ class RegistrationFormType extends AbstractType
 
     public function configureOptions(OptionsResolver $resolver): void
     {
-        $resolver->setDefaults([
+        $resolver->setDefaults(
+            [
             'data_class' => User::class,
-        ]);
+            ]
+        );
     }
 }

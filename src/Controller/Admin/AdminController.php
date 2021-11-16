@@ -38,9 +38,11 @@ class AdminController extends AbstractDashboardController
         // return parent::index();
         $users = $this->userRepository->findAll();
 
-        return $this->render('admin/dashboard.html.twig', [
+        return $this->render(
+            'admin/dashboard.html.twig', [
             'users' => $users
-        ]);
+            ]
+        );
     }
 
     /**

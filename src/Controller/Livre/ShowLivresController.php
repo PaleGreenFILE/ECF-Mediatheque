@@ -27,9 +27,9 @@ class ShowLivresController extends AbstractController
             return $this->redirectToRoute('app_home');
         } else {
              $user_autorise = $this->getUser()->getIsAutorise();
-             if ($user_autorise == false) {
+            if ($user_autorise == false) {
                 return $this->redirectToRoute('app_home');
-             }
+            }
         }
         
         // ? Tester si le N° de genre existe
@@ -43,11 +43,13 @@ class ShowLivresController extends AbstractController
 
         $genres = $this->GenreRepository->findAll();
 
-        return $this->render('livre/livreParGenre.html.twig', [
+        return $this->render(
+            'livre/livreParGenre.html.twig', [
             'livres' => $livres,
             'genreChoisis' => $genreChoisis,
             'genres' => $genres,
-        ]);
+            ]
+        );
     }
 
     #[Route('/livre/{id<[0-9]+>}', name: 'app_detail_livre')]
@@ -69,9 +71,11 @@ class ShowLivresController extends AbstractController
             throw $this->createNotFoundException("Le livre $id n'éxiste pas !...");
         }
 
-        return $this->render('livre/detail_livre.html.twig', [
+        return $this->render(
+            'livre/detail_livre.html.twig', [
             'livre' => $livre
-        ]);
+            ]
+        );
 
     }
 }

@@ -29,8 +29,7 @@ class LibraireReservationController extends AbstractDashboardController
         ReservationRepository $reservationRepository,
         RequestStack $requestStack,
         SessionInterface $session
-    )
-    {
+    ) {
         $this->userRepository = $userRepository;
         $this->reservationRepository = $reservationRepository;
         $this->requestStack = $requestStack;
@@ -54,14 +53,16 @@ class LibraireReservationController extends AbstractDashboardController
             return $this->redirectToRoute('check_reservation');
         }
 
-        return $this->render('libraire/back_reservation.html.twig', [
+        return $this->render(
+            'libraire/back_reservation.html.twig', [
             'reservations' => $Reservations,
-        ]);
+            ]
+        );
     }
 
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new ()
+        return Dashboard::new()
             ->setTitle('Mediatheque Chapelle-Cureaux')
             ->disableUrlSignatures();
     }

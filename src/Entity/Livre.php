@@ -36,7 +36,7 @@ class Livre
 
     /**
      * @Vich\UploadableField(mapping="livre_images", fileNameProperty="file")
-     * @var File
+     * @var                                          File
      */
     private $imageFile;
 
@@ -85,7 +85,7 @@ class Livre
 
     /**
      * @ORM\Column(type="datetime", nullable=true)
-     * @var \DateTimeInterface|null
+     * @var                         \DateTimeInterface|null
      */
     private $updatedAt;
 
@@ -136,7 +136,7 @@ class Livre
     {
         $this->imageFile = $file;
 
-         if (null !== $file) {
+        if (null !== $file) {
             // Il est nécessaire qu'au moins un champ change si vous utilisez la doctrine
             // sinon les écouteurs d'événements ne seront pas appelés et le fichier sera perdu.
             $this->updatedAt = new \DateTime();

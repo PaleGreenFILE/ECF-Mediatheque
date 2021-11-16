@@ -15,8 +15,7 @@ class ReservationListController extends AbstractController
     public function __construct(
         ReservationRepository $ReservationRepo,
         LivreRepository $LivreRepo,
-    )
-    {
+    ) {
         $this->LivreRepository = $LivreRepo;
         $this->ReservationRepository = $ReservationRepo;
     }
@@ -44,9 +43,11 @@ class ReservationListController extends AbstractController
         // dd($this->reservation->getLivre());
 
 
-        return $this->render('reservation/detail_reservation.html.twig', [
+        return $this->render(
+            'reservation/detail_reservation.html.twig', [
             'reservations' => $ReservationUserCurent
-        ]);
+            ]
+        );
 
     }
 }

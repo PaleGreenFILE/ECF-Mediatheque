@@ -25,11 +25,11 @@ class ReservationService
     protected $LivreRepository;
 
     /**
-     * @param SessionInterface $session
-     * @param LivreRepository $LivreRepository
+     * @param SessionInterface       $session
+     * @param LivreRepository        $LivreRepository
      * @param EntityManagerInterface $EntityManagerInterface
-     * @param Security $security
-     * @param UserRepository $UserRepository
+     * @param Security               $security
+     * @param UserRepository         $UserRepository
      */
     public function __construct(
         SessionInterface $session,
@@ -54,7 +54,7 @@ class ReservationService
     }
 
     /**
-     * @param array $reservation
+     * @param  array $reservation
      * @return mixed
      */
     protected function savePanier(array $reservation)
@@ -76,10 +76,9 @@ class ReservationService
         $curentUserId = $this->security->getUser()->getId();
 
         if (array_key_exists(
-            $id, $reservation) &&
-            $this->UserRepository
-                ->find($curentUserId)
-                ->getEmpruntMax() > 0
+            $id, $reservation
+        ) 
+            && $this->UserRepository->find($curentUserId)->getEmpruntMax() > 0
         ) {
             $reservation[$id]++;
         } else {

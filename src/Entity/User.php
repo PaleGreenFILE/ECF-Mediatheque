@@ -227,7 +227,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface, TwoFact
     public function getEmailAuthCode(): string
     {
         if (null === $this->authCode) {
-            throw new \LogicException('L\'email de vérification n\'a pas été envoyé.');
+            throw new \LogicException("L'email de vérification n'a pas été envoyé.");
         }
 
         return $this->authCode;

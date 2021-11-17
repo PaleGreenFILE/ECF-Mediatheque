@@ -4,16 +4,28 @@ namespace App\Controller\Restitution;
 
 use App\Entity\Reservation;
 use App\Entity\User;
-use DateTime;
 use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
 class RestitutionController extends AbstractController
 {
+    #[Route('/restitution', name: 'restitution_user_list')]
+    #[IsGranted("ROLE_LIBRAIRE")]
+    public function check(Request $request, EntityManagerInterface $em): Response
+    {
+        $users = $em->getRepository(User::class)->findAll();
+
+        return $this->render('restitution/user_list.html.twig',[
+            'users' => $users
+        ]);
+    }
+
     #[Route('/restitution/{id<[0-9]+>}', name: 'restitution_show')]
+    #[IsGranted("ROLE_LIBRAIRE")]
     public function show($id, EntityManagerInterface $em): Response
     {
         $reservation = $em->getRepository(Reservation::class);
@@ -38,7 +50,9 @@ class RestitutionController extends AbstractController
         );
     }
 
+
     #[Route('/restitution/delete/{id<[0-9]+>}', name: 'save_restitution')]
+    #[IsGranted("ROLE_LIBRAIRE")]
     public function recordReturn(Reservation $reservation, EntityManagerInterface $em): Response
     {
 //        $reservationRepository = $em->getRepository(Reservation::class);
@@ -62,10 +76,11 @@ class RestitutionController extends AbstractController
             // c. Livre - setQuantite() + 1
             // d. Livre - setUpdatedAt() = now()
             // e. User - setEmpruntMax() + 1
-            // f. Reservation - setIsRestitue() = true
+            // f. Reservation - Remove $id
             // g. Reservation - setStatus() = "RENDU"
 
         $collection = $reservation->getLivre()->getValues();
+        $user = $reservation->getUser();
 
     // a. Recupérer l'id
         foreach ($collection as $livre) {
@@ -74,12 +89,18 @@ class RestitutionController extends AbstractController
             $livre->setPret($livre->getPret() - 1);
             $livre->setUpdatedAt( new DateTimeImmutable() );
 
-            dump($livre);
+            $em->remove($reservation);
+
+            /** @var User $user */
+            $user->ajouterUnEmpruntMax();
         }
 
         $em->flush();
+        $this->addFlash('success', 'Livre restitué avec succès.');
 
-        die();
+        return $this->redirectToRoute('restitution_user_list', [
+            'id' => $user->getId()
+        ]);
 
     }
 }

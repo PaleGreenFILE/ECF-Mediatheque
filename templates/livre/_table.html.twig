@@ -3,12 +3,6 @@
 
 {% block body %}
     <section id="livre-wrapper" class="container">
-
-{#         Afficher le filtre par catégorie #}
-{#        <div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0">#}
-{#            {% include 'livre/_filtre_genre.html.twig' %}#}
-{#        </div>#}
-
         {# Afficher la liste des livres #}
         {% for livre in livres  %}
             <div class="list-group">

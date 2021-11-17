@@ -1,0 +1,51 @@
+{% extends "layouts/base.html.twig" %}
+{# Afficher la liste des utilisateurs #}
+{#{% block body %}#}
+
+{#    {% for user in user  %}#}
+    {% block title %}Tableau utilisateurs{% endblock %}
+{% block body %}
+    <div class="container p-5">
+    <h2>Tableau utilisateurs</h2>
+
+    <table class="table table-responsive">
+
+    <tr>
+        <th>Prénom</th>
+        <th>Nom</th>
+        <th>Date anniversaire</th>
+        <th>Description</th>
+        <th>Réservation</th>
+        
+    </tr>
+    {% for user in users %}
+        <tr>
+            <td>{{ user.nom }}</td>
+            <td>{{ user.prenom }}</td>
+            <td>{{ user.dateNaissance|date('d-m-Y') }}</td>
+            <td>{{ user.adresse }}</td>
+            {% if  (user.reservations.count) %}
+                <td>
+                    <a href="{{ path('restitution_show', {'id': user.id} ) }}">Voir ses réservations</a>
+                </td>
+            {% endif %}
+        </tr>
+    {% endfor %}
+    </table>
+    </div>
+
+{#        <div class="list-group">#}
+{#            <div class="d-flex gap-2 w-100 justify-content-between">#}
+{#                <div id="list-title">#}
+{#                    <h5 class="mb-0">{{ users.fullName }}</h5>#}
+{#                </div>#}
+{#            </div>#}
+{#            <div class="py-2 mx-0 mb-2 bg-light d-flex justify-content-around">#}
+{#                <a href = "{{ path('restitution_show', {'id': users.id} ) }}"#}
+{#                   class="btn btn-outline-success position-relative mt-1">#}
+{#                    <i class="fas fa-cart-plus me-3"></i>Voir les réservations#}
+{#                </a>#}
+{#            </div>#}
+{#        </div>#}
+{#    {% endfor %}#}
+{% endblock %}

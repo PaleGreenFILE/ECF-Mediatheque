@@ -36,7 +36,7 @@ class Livre
 
     /**
      * @Vich\UploadableField(mapping="livre_images", fileNameProperty="file")
-     * @var                                          File
+     * @var File
      */
     private $imageFile;
 
@@ -59,7 +59,7 @@ class Livre
 
     /**
      * @ORM\Column(type="integer")
-     * @Assert\Positive
+     * @Assert\PositiveOrZero
      */
     private $quantite;
 
@@ -75,12 +75,12 @@ class Livre
 
     /**
      * @ORM\Column(type="integer", nullable=true)
+     * @Assert\PositiveOrZero
      */
     private $pret;
 
     /**
      * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="livre")
-     * @Assert\Positive
      */
     private $reservations;
 

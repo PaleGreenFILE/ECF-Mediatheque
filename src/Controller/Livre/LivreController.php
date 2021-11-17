@@ -3,7 +3,6 @@
 namespace App\Controller\Livre;
 
 use App\Entity\Livre;
-use App\Entity\User;
 use App\Form\LivreFormType;
 use App\Repository\GenreRepository;
 use App\Repository\LivreRepository;

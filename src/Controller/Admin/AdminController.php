@@ -69,5 +69,7 @@ class AdminController extends AbstractDashboardController
 
         yield MenuItem::linkToCrud('Genres', 'fas fa-box', Genre::class);
 
+        yield MenuItem::linkToRoute('Liste des emprunts', 'fas fa-journal-whills', 'restitution_user_list');
+
     }
 }

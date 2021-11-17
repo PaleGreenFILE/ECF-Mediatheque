@@ -30,6 +30,9 @@
 					{% if is_granted ("ROLE_LIBRAIRE") %}
 						{% if is_granted ("ROLE_ADMIN") and is_granted ("ROLE_LIBRAIRE") %}
 							<li class="nav-item">
+								<a class="nav-link" href={{path('restitution_user_list')}}>Gérer la restitution</a>
+							</li>
+							<li class="nav-item">
 								<a class="nav-link btn btn-sm btn-outline-danger ms-1" href={{path('admin')}}>Admin</a>
 							</li>
 						{% else %}

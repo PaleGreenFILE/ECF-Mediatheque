@@ -80,6 +80,7 @@ class Livre
 
     /**
      * @ORM\ManyToMany(targetEntity=Reservation::class, mappedBy="livre")
+     * @Assert\Positive
      */
     private $reservations;
 

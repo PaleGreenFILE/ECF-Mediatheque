@@ -4,6 +4,8 @@ namespace App\Controller\Restitution;
 
 use App\Entity\Reservation;
 use App\Entity\User;
+use DateTime;
+use DateTimeImmutable;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -47,7 +49,7 @@ class RestitutionController extends AbstractController
 //        dump($reservation);
 
         // 2. J'affiche l'emprunteur d'une réservation ciblée (par ParamConverter)
-            // dump( $reservation->getUser()->getId() );
+//             dump( $reservation->getUser()->getFullName() );
         // 3. Afficher sa capacité d'emprunt actuel
             // dump( $reservation->getUser()->getEmpruntMax() );
         // Action - 4. Calculer sa nouvelle capacité d'emprunt
@@ -68,9 +70,14 @@ class RestitutionController extends AbstractController
     // a. Recupérer l'id
         foreach ($collection as $livre) {
             $livreId = $livre->getId();
-            dump($livreId);
+            $livre->setQuantite($livre->getQuantite() + 1);
+            $livre->setPret($livre->getPret() - 1);
+            $livre->setUpdatedAt( new DateTimeImmutable() );
+
+            dump($livre);
         }
-        dump($livreId);
+
+        $em->flush();
 
         die();
 

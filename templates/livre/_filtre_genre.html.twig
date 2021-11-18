@@ -1,4 +1,4 @@
-<div class="p-5 mt-3 text-dark bg-light">
+<div class="p-5 mt-3 text-dark bg-light d-block-inline">
 	<p class="lead fw-bold text-primary text-uppercase" style="letter-spacing:2px">
 		Filtrer
 	</p>
@@ -10,11 +10,12 @@
 			{% else %}
 				{% set checked = "" %}
 			{% endif %}
-
-			<p id="categorie-{{genre.nom|lower}}">
-				<input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}" {{checked}}>
-				<label for="genre{{genre.id}}">{{genre.nom|capitalize}}</label>
-			</p>
+			<div class="d-inline-block">
+				<span id="categorie-{{genre.nom|lower}}">
+					<input type="checkbox" name="genre[]" id="genre{{genre.id}}" value="{{genre.id}}" {{checked}}>
+					<label for="genre{{genre.id}}">{{genre.nom|capitalize}}</label>
+				</span>
+			</div>
 		{% endfor %}
 		<input type="hidden" name="page" value="{{page}}">
 	</form>

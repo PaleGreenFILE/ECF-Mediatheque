@@ -83,7 +83,7 @@ class LibraireReservationController extends AbstractDashboardController
 
 
     #[Route('/libraire/mailing/{id<[0-9]+>}', name:'mailing')]
-    public function sendMailRetard(Reservation $reservation, Mail $mail)
+    public function sendMailRetard(User $user, Mail $mail)
     {
         // dd($reservation->getUser()->getEmail());
         // ! Remplacer par le nom
@@ -93,10 +93,10 @@ class LibraireReservationController extends AbstractDashboardController
         // $mail->send($mailTo, $user, 'hello@parlonscode.com', "Retard ...", `
         // `);
 
-        $this->addFlash('success', 'Email envoyé à ' .$reservation->getUser()->getFullName(). ' avec succès');
+        $this->addFlash('success', 'Email de rappel envoyé à ' .$user->getFullName(). ' avec succès');
 
         // dd($user, $mailTo, $mail);
-        return $this->redirectToRoute('libraire');
+        return $this->redirectToRoute('restitution_user_list');
     }
 
 }

@@ -15,12 +15,12 @@ class RestitutionController extends AbstractController
 {
     #[Route('/restitution', name: 'restitution_user_list')]
     #[IsGranted("ROLE_LIBRAIRE")]
-    public function check(Request $request, EntityManagerInterface $em): Response
+    public function check(EntityManagerInterface $em): Response
     {
         $users = $em->getRepository(User::class)->findAll();
 
         return $this->render('restitution/user_list.html.twig',[
-            'users' => $users
+            'users' => $users,
         ]);
     }
 

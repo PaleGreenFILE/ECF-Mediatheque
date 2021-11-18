@@ -46,15 +46,15 @@ class LibraireController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::linkToRoute('Aller sur le site', 'fas fa-jedi', 'app_home');
+        yield MenuItem::linkToRoute('Naviguer vers le site', 'fa fa-chalkboard-teacher', 'app_livre');
 
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
 
         yield MenuItem::linkToCrud('Liste des livres', 'fas fa-book', Livre::class);
 
-        yield MenuItem::linkToCrud('Gestion de l\'emprunt ', 'fas fa-eye', Reservation::class);
+        yield MenuItem::linkToRoute('Liste des emprunts', 'fas fa-journal-whills', 'restitution_user_list');
 
-        yield MenuItem::linkToRoute('Réservation', 'fas fa-stamp', 'check_reservation');
+//        yield MenuItem::linkToRoute('Réservation', 'fas fa-stamp', 'check_reservation');
 
     }
 

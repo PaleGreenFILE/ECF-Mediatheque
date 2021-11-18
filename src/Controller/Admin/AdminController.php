@@ -5,10 +5,7 @@ namespace App\Controller\Admin;
 use App\Entity\User;
 use App\Entity\Genre;
 use App\Entity\Livre;
-use App\Entity\Emprunt;
 use App\Repository\UserRepository;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use EasyCorp\Bundle\EasyAdminBundle\Config\MenuItem;
@@ -61,7 +58,7 @@ class AdminController extends AbstractDashboardController
     {
         yield MenuItem::linktoDashboard('Dashboard', 'fa fa-home');
 
-        yield MenuItem::linkToRoute('Site - Home Page', 'fa fa-jedi', 'app_home');
+        yield MenuItem::linkToRoute('Naviguer vers le site', 'fa fa-chalkboard-teacher', 'app_livre');
 
         yield MenuItem::linkToCrud('Liste des inscrits', 'fas fa-users', User::class);
 

@@ -24,11 +24,11 @@
             <td>{{ user.prenom }}</td>
             <td>{{ user.dateNaissance|date('d-m-Y') }}</td>
             <td>{{ user.adresse }}</td>
-            {% if  (user.reservations.count) %}
-                <td>
+            <td>
+                {% if  (user.reservations.count) %}
                     <a href="{{ path('restitution_show', {'id': user.id} ) }}">Voir ses réservations</a>
-                </td>
-            {% endif %}
+                {% endif %}
+            </td>
         </tr>
     {% endfor %}
     </table>

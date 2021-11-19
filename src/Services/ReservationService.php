@@ -93,8 +93,8 @@ class ReservationService
 
         $curentUserId = $this->security->getUser()->getId();
         /**
- * @var User
-*/
+         * @var User
+        */
         $user = $this->UserRepository->find($curentUserId);
         $user_id = $user->getId();
 
@@ -135,8 +135,8 @@ class ReservationService
         $reservation = $this->getPanier();
 
         /**
- * @var User
-*/
+         * @var User
+        */
         $curentUser = $this->security->getUser();
 
         $empruntActuel = $curentUser->getEmpruntMax();

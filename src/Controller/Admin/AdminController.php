@@ -31,7 +31,7 @@ class AdminController extends AbstractDashboardController
     #[Route('/admin', name: 'admin')]
     public function index(): Response
     {
-        $this->denyAccessUnlessGranted('ROLE_ADMIN', 'Accès à Admin', 'L\'utilisateur a essayé d\'accéder à une page sans avoir le ROLE_ADMIN');
+        $this->denyAccessUnlessGranted('ROLE_ADMIN', "Accès à la section d'admistration",  "Désolé, votre rôle ne vous donne pas accès a cette section.");
         // return parent::index();
         $users = $this->userRepository->findAll();
 

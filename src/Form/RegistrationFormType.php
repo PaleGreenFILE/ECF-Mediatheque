@@ -4,6 +4,7 @@ namespace App\Form;
 
 use App\Entity\User;
 use Symfony\Component\Form\AbstractType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Validator\Constraints\IsTrue;
 use Symfony\Component\Validator\Constraints\Length;
@@ -21,7 +22,11 @@ class RegistrationFormType extends AbstractType
     {
         $builder
             ->add('nom')
-            ->add('prenom')
+            ->add('prenom', TextType::class, [
+                'attr' => [
+                    'autofocus' => true
+                ]
+            ])
             ->add(
                 'date_naissance', BirthdayType::class, [
                 'format' => 'dd-MMMM-yyyy',

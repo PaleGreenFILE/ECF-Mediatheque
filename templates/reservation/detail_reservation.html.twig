@@ -24,7 +24,7 @@
                     {% endif %}
                 </span>
             </div>
-                <hr class="new">
+                <hr class={{TODAY > RESTITUTION ? 'expired' : 'not-expired'}} >
             {% for livre in reservation.livre %}
                     <div class = "list-group mb-2">
                         <a href = "{{ path('app_detail_livre', {'id': livre.id} ) }}" class = "{{TODAY > RESTITUTION ? 'bg-danger text-white fw-bold' : ''}} list-group-item" style="--bs-bg-opacity: .75;">

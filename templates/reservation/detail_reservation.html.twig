@@ -8,7 +8,7 @@
     <section class="container" id="Réservation-en-cours">
         {#  Début de test  #}
         {% for reservation in reservations %}
-            <div class="mt-5 mb-2 d-flex justify-content-between">
+            <div id='reservation-{{ reservation.id }}' class="mt-5 mb-2 d-flex justify-content-between">
                 <h3>{{ loop.index }} | {{ reservation.empruntedAt|format_datetime(locale='fr',pattern="EEEE dd MMMM YYYY") |capitalize }}</h3>
                 <span class="fw-bold">Statut :
                     {% set TODAY =  'now'|date("Y-m-d") %}

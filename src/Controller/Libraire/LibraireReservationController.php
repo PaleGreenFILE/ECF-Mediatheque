@@ -93,7 +93,9 @@ class LibraireReservationController extends AbstractDashboardController
         // $mail->send($mailTo, $user, 'hello@parlonscode.com', "Retard ...", `
         // `);
 
-        $this->addFlash('success', 'Email de rappel envoyé à ' .$user->getFullName(). ' avec succès');
+        $this->addFlash(
+            'success',
+            'Email de rappel envoyé à ' .$user->getFullName(). ' avec succès');
 
         // dd($user, $mailTo, $mail);
         return $this->redirectToRoute('restitution_user_list');

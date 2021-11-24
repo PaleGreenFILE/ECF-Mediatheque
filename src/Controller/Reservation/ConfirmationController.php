@@ -70,6 +70,8 @@ class ConfirmationController extends AbstractController
         // dd($curentUser);
         $ReservationUserCurent = $this->ReservationRepo->findBy(['user' => $curentUser]);
 
+        return $this->redirectToRoute('panier');
+
         return $this->render(
             'reservation/detail_reservation.html.twig', [
             'reservations' => $ReservationUserCurent,

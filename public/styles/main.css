@@ -70,8 +70,13 @@ body {
     grid-gap: 20px;
 }
 
-hr.new {
+hr.not-expired {
     border: 7px solid green;
+    border-radius: 5px;
+}
+
+hr.expired {
+    border: 7px solid crimson;
     border-radius: 5px;
 }
 

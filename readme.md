@@ -66,7 +66,8 @@ Puis exécuter Mailhog en tapant dans le navigateur:
 > [INFO]
 > Si vous n'utilisez pas le CLI de Symfony toutes les commandes commençant par **<i>symfony console</i>** peuvent être remplacées dans votre terminal par **<i>php bin/console</i>**.
 
-## Se connecter à l'application
+## [Se connecter à l'application](http://papoel-mediatheque.herokuapp.com/)
+
 
 Trois Cas de connexion sont possible dans cette application :
  - Un administrateur (admin)

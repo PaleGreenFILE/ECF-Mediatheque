@@ -114,4 +114,4 @@ Déploiement:
                 return $query->getQuery()->getSingleScalarResult();
 
 // TODO pour le jury
-☐ Commit le code ici pour utiliser sur le windows
+☐ Rediriger vers la page de catalgue lorsque je supprime un livre du panier et que le panoier est vide.

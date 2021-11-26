@@ -15,7 +15,7 @@
     </section>
 
     <section class="container mt-5" id="detail-reservation">
-        <table class="table">
+        <table class="table align-middle">
             <thead>
                 <tr class="text-center">
                     <th></th>
@@ -28,7 +28,11 @@
             <tbody>
                 {% for item in items %}
                     <td>
-                        <img src="{{ asset('uploads/illustrations/' ~ item.livre.file ) }}" height="50" width="50" alt="{{item.livre.titre}}">
+                        {% if (item.livre.file is null) %}
+                            <img src="{{ asset('assets/images/book-default.jpg') }}" alt="{{ item.livre.titre }}" width="75" height="auto" class="rounded">
+                        {% else %}
+                            <img src="{{ asset('uploads/illustrations/' ~ item.livre.file ) }}" alt="{{ item.livre.titre }}" width="100" height="100" class="rounded">
+                        {% endif %}
                     </td>
                     <td> {{item.livre.titre|capitalize}} </td>
                     <td>

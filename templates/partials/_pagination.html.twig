@@ -18,7 +18,7 @@
         </li>
 
         <li class="{{ (page == 1) ? 'disabled page-item' : 'page-item'}}">
-            <a  class="page-link"
+            <a  class="page-link bg-info"
                 href="{{ (page > 1) ? '?page=' ~ (page - 1) : ''}}&{{queryStrings}}">
                 <span aria-hidden="true">&laquo;</span>  Précédente
             </a>
@@ -28,7 +28,7 @@
         {% for item in 1..pages %}
             <li class="{{ (page == item) ? 'page-item active' : 'page-item' }}">
                 <a  class="page-link"
-                    href="?page={{item}}&{{queryStrings}}" > 
+                    href="?page={{item}} & {{queryStrings}}" >
                     {{item}} 
                 </a>
             </li>
@@ -38,7 +38,7 @@
             <li class="{{ (page == pages) ? 'disabled page-item' : 'page-item'}}">
                 <a
                     class="page-link"
-                    href="{{ (page < pages) ? '?page=' ~ (page + 1) : ''}}&{{queryStrings}}">
+                    href="{{ (page < pages) ? '?page=' ~ (page + 1) : ''}} & {{queryStrings}}">
                     Suivante
                     <span aria-hidden="true">&raquo;</span>
                 </a>
@@ -52,7 +52,6 @@
                 </a>
             </li>
         {% endif %}
-
 
 	</ul>
 </nav>

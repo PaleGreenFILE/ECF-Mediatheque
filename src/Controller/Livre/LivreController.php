@@ -43,7 +43,7 @@ class LivreController extends AbstractController
         // * Pagination
 
         // ? Définir la limite de livre par page
-        $limit = 4;
+        $limit = 10;
 
         // ? Récupérer le numéro de ma page
         $page = (int)$request->query->get('page', 1);

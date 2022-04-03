@@ -100,14 +100,14 @@ class ReservationService
 
         if ($user->getEmpruntMax() > 0) {
             /**
- * @var FlashBag 
-*/
+             * @var FlashBag 
+            */
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('success', 'Livre réservé.');
         } elseif ($user->getEmpruntMax() === 0) {
             /**
- * @var FlashBag 
-*/
+             * @var FlashBag 
+            */
             $flashBag = $this->session->getBag('flashes');
             $flashBag->add('danger', 'Vous ne pouvez pas réserver ce livre, votre limite de réservation est atteinte');
         }
